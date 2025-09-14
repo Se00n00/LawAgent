@@ -13,7 +13,7 @@ def _():
 @app.cell
 def _():
     import os
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = ""
 
     # ✅ Get the environment variable
     value = os.getenv("OPENAI_API_KEY")
