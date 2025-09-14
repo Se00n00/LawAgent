@@ -1,1 +1,14 @@
-<p>chart-card works!</p>
+<div class="p-0.5 relative bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    <div class="p-2 bg-black/[0.1] border border-black/[0.2] rounded-xl">
+        <div class="flex gap-3 items-center">
+            <img src="Icons/chart.svg" class="h-9">
+            <p class="text-sm">Ask More about it</p>
+        </div>
+        <div class="aspect-square flex justify-center items-center">
+            <canvas id="MyChart">
+                {{chart}}
+            </canvas>
+        </div>
+    </div>
+    
+</div>

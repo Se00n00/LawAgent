@@ -13,22 +13,29 @@ def _():
 @app.cell
 def _():
     import os
-    os.environ["OPENAI_API_KEY"] = ""
+    os.environ["OPENAI_API_KEY"] = "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"
 
     # ✅ Get the environment variable
     value = os.getenv("OPENAI_API_KEY")
+    return (value,)
+
+
+@app.cell
+def _(value):
+    value
     return
 
 
 @app.cell
-def _():
+def _(value):
     from langchain_openai import ChatOpenAI
 
     llm = ChatOpenAI(
         model = "openrouter/sonoma-sky-alpha",
+        api_key=value,
         base_url = "https://openrouter.ai/api/v1",
-            streaming=True
-    
+        streaming=True
+
     )
     return (llm,)
 

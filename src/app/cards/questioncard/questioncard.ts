@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './questioncard.css'
 })
 export class Questioncard {
-  askQuestion = signal(false)
+  askQuestion = signal(true)
 
   running_status_text = "This would take a least time "
 

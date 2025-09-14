@@ -8,15 +8,14 @@ from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-# --- Setup ---
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENROUTER_API_KEY", "")
-
+# --- Setup : Agent---
 llm = ChatOpenAI(
     model="openrouter/sonoma-sky-alpha",
-    api_key=os.environ["OPENAI_API_KEY"],
-    base_url="https://openrouter.ai/api/v1",
-    streaming=True
+    streaming=True,
+    api_key=os.environ["OPENROUTER_API_KEY"],
+    base_url="https://openrouter.ai/api/v1"
 )
+
 
 def model(state: MessagesState):
     response = llm.invoke(state['messages'])
@@ -30,6 +29,7 @@ bot = (
     .compile(checkpointer=memory)
 )
 
+# --- Setup: FAST API ---
 app = FastAPI()
 
 class ChatRequest(BaseModel):

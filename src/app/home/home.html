@@ -1,8 +1,10 @@
 <div class="w-screen h-screen relative">
     <!-- Background Dots  + Faded -->
-    <div class="absolute -z-10 inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] [background-size:6px_6px]"></div>
+    <div class="absolute -z-10 inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] [background-size:3px_3px]"></div>
     <div class="absolute -z-10 inset-0 bg-gradient-to-b from-white/30 to-white"></div>
-    <div class="flex h-full">
+    <div class="relative flex h-full">\
+
+        <!-- Right Settings -->
         <div class="flex flex-col h-full justify-end p-5 sm:p-10">
             <div class="h-max shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
                 <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
@@ -12,57 +14,81 @@
                 
             </div>
         </div>
-        <div class="absolute flex-1 p-10 grid grid-rows-4 gap-5 ">
 
-            <!-- Card: Ask Card  -->
-            <app-questioncard />
-            <app-news-cards/>
-            <app-summary-card/>
-
-
-        </div>
-        <div class="flex-1 flex flex-col justify-end items-center gap-5">
+        <!-- Central DashBorad  -->
+        <div class="flex-1 flex justify-center">
             
-
+            
             @if (removeIntro()) {
-                <div class="w-6/12 flex flex-col p-2 text-center mb-10">
-                    <h2 class="font-semibold text-3xl mb-1 px-2">Lorem, ipsum dolor.</h2>
-                    <p class="text-gray-700 text-sm px-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae, beatae! Numquam quis eius dicta, alias reprehenderit doloremque enim possimus perspiciatis atque temporibus quibusdam quas, nostrum impedit dignissimos blanditiis labore quidem.And one more feature to complete the picture.</p>
+                <div class="flex flex-col justify-center items-center">
+                    <div class="w-6/12 relative flex flex-col p-2 text-center mb-10">
+                        <h2 class="font-semibold text-3xl mb-1 px-2">Ask anything</h2>
+                        <p class="text-gray-700 text-sm px-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae, beatae! Numquam quis eius dicta, alias reprehenderit doloremque enim possimus perspiciatis atque temporibus quibusdam quas, nostrum impedit dignissimos blanditiis labore quidem.And one more feature to complete the picture.</p>
+                        
+                    </div>
                     
+                    <div class="w-6/12 grid grid-cols-2 grid-rows-2 gap-4">
+                        <!-- Left Card -->
+                        <div class="row-span-2 bg-white rounded-lg p-2 flex flex-col border-black border-2">
+                            <img src="images/base.jpg" alt="Card Image" class="aspect-video rounded-lg mb-2 object-cover">
+                            <h2 class="font-semibold mb-1 px-2">Main Feature</h2>
+                            <p class="text-gray-700 text-sm px-2">Discover our main feature, designed to provide the best experience.</p>
+                        </div>
+                        <!-- Right Top Card -->
+                        <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
+                            <img src="images/wall.jpg" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
+                            <div class="flex flex-col p-2">
+                                <h2 class="font-semibold mb-1 px-2">Side Feature 1</h2>
+                                <p class="text-gray-700 text-sm px-2">A brief look at another great feature.</p>
+                                
+                            </div>
+                        </div>
+                        <!-- Right Bottom Card -->
+                        <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
+                            <img src="images/errorwallpaper.jpg" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
+                            <div class="flex flex-col p-2">
+                                <h2 class="font-semibold mb-1 px-2">Side Feature 2</h2>
+                                <p class="text-gray-700 text-sm px-2">And one more feature to complete the picture.</p>
+                        
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="w-6/12 grid grid-cols-2 grid-rows-2 gap-4">
-                    <!-- Left Card -->
-                    <div class="row-span-2 bg-white rounded-lg p-2 flex flex-col border-black border-2">
-                        <img src="images/base.jpg" alt="Card Image" class="aspect-video rounded-lg mb-2 object-cover">
-                        <h2 class="font-semibold mb-1 px-2">Main Feature</h2>
-                        <p class="text-gray-700 text-sm px-2">Discover our main feature, designed to provide the best experience.</p>
-                    </div>
-                    <!-- Right Top Card -->
-                    <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
-                        <img src="images/wall.jpg" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
-                        <div class="flex flex-col p-2">
-                            <h2 class="font-semibold mb-1 px-2">Side Feature 1</h2>
-                            <p class="text-gray-700 text-sm px-2">A brief look at another great feature.</p>
-                            
+            }
+            @else {
+                <div class="flex flex-col justify-center items-center overflow-scroll">
+                    <div class="flex-1 w-10/12 grid grid-cols-3 gap-5 p-10">
+                        <app-news-cards class="col-span-3 "/>
+                        <app-main-answer-card/>
+                        <div class="flex flex-col gap-5">
+                            <app-summary-card/>
+                            <app-questioncard />
                         </div>
-                    </div>
-                    <!-- Right Bottom Card -->
-                    <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
-                        <img src="images/errorwallpaper.jpg" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
-                        <div class="flex flex-col p-2">
-                            <h2 class="font-semibold mb-1 px-2">Side Feature 2</h2>
-                            <p class="text-gray-700 text-sm px-2">And one more feature to complete the picture.</p>
-                    
-                        </div>
+                        <app-error-card/>
+                        <app-link-images-card/>
+                        <app-chart-card/>
                     </div>
                 </div>
+                
             }
             
+            
 
-            <div class="relative w-6/12 flex justify-center items-center mb-10">
+            <!-- <div class="relative w-6/12 flex justify-center items-center mb-10">
                 <input type="text" class=" p-5 h-10 w-full rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" [placeholder]="placeholder">
                 <img src="Icons/search.svg" class="absolute z-10 right-2 h-9 w-9 hover:scale-[0.95] transition-all">
+            </div> -->
+        </div>
+        
+
+        <!-- Left Menu  -->
+        <div class="relative flex flex-col h-full justify-end p-5 sm:p-10 ">
+            @if (Searching()) {
+                <input type="text" class="absolute right-25 w-[50vw] p-5 h-10 rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" [placeholder]="placeholder">
+            }
+            <div class=" shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
+                <img [src]="Searching() === false ? 'Icons/add.svg' : 'Icons/search.svg'" class="h-8 hover:scale-[0.95] transition-all" (click)="showMainSearchInput()">
             </div>
         </div>
     </div>

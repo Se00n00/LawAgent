@@ -18,8 +18,8 @@
       "console": []
     },
     {
-      "id": "TRkX",
-      "code_hash": "8db99740b8e838f97bcf0a7fb3236f88",
+      "id": "MJUe",
+      "code_hash": "71eb96c3a24974fcc6f09115f95e9699",
       "outputs": [
         {
           "type": "data",
@@ -31,13 +31,13 @@
       "console": []
     },
     {
-      "id": "MJUe",
-      "code_hash": "62e9880aa18cb27bc3a0e9c233eeccc4",
+      "id": "TSUk",
+      "code_hash": "2063c1608d6e0baf80249c42e2be5804",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/html": "<pre style='font-size: 12px'>&#x27;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&#x27;</pre>"
           }
         }
       ],
@@ -45,7 +45,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "54d97b456875d4ccecbaed290ae50ec4",
+      "code_hash": "954664f3aeffb0298858a10ab1c3f278",
       "outputs": [
         {
           "type": "data",
@@ -58,6 +58,19 @@
     },
     {
       "id": "bkHC",
+      "code_hash": "54d97b456875d4ccecbaed290ae50ec4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
       "code_hash": "8158352a86a2945574c6c408b0b68809",
       "outputs": [
         {
@@ -70,7 +83,7 @@
       "console": []
     },
     {
-      "id": "lEQa",
+      "id": "PKri",
       "code_hash": "2cd82deb23b5318cc648170dba24f229",
       "outputs": [
         {
@@ -83,7 +96,7 @@
       "console": []
     },
     {
-      "id": "PKri",
+      "id": "Xref",
       "code_hash": "09c9b19e5a00652161ccc478391c89d0",
       "outputs": [
         {
@@ -97,7 +110,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Ask Anything hi\n"
+          "text": "Ask Anything HIi\n"
         },
         {
           "type": "stream",
@@ -127,37 +140,22 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
+          "text": "Hi! How's it"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " going? What can I help you"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " with today? \ud83d\ude0a"
         },
         {
           "type": "stream",
           "name": "stdout",
           "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "Hi! I'm Sonoma, built by Oak AI. What's on your mind today"
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "?"
         },
         {
           "type": "stream",
@@ -307,57 +305,27 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
+          "text": "Hey"
         },
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
+          "text": "! Did you mean to"
         },
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
+          "text": " ask a question, or is"
         },
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
+          "text": " there something specific on your mind"
         },
         {
           "type": "stream",
           "name": "stdout",
-          "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": ""
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "Q? That's a"
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": " bit cryptic\u2014got"
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": " a question, or is this the"
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": " start of something fun? Spill"
-        },
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": " the beans! \ud83d\ude0a"
+          "text": "? I'm here to help! \ud83d\ude04"
         },
         {
           "type": "stream",
@@ -367,7 +335,7 @@
       ]
     },
     {
-      "id": "Ryvu",
+      "id": "SFPL",
       "code_hash": null,
       "outputs": [],
       "console": []
