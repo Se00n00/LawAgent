@@ -8,5 +8,8 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('A');
+  background = signal(false);
+  removeBackground(){
+    this.background.set(false)
+  }
 }

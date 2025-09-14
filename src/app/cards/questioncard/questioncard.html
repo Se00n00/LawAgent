@@ -1,0 +1,36 @@
+<div id="ask_next" class="w-96 bg-white border p-3 rounded-xl relative flex flex-col justify-center gap-3 shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    @if (askQuestion()) {
+        <div class="flex gap-3">
+            <img src="Icons/arrowDown.svg" class="h-10">
+            <div class="flex flex-col">
+                <p class="text-sm">Ask More about it</p>
+                <p class="text-xs font-light">Ask any relevent questions from results</p>
+            </div>
+        </div>
+        
+        <div class="flex relative w-full items-center">
+            <input type="text" class="text-xs pr-10 font-light p-3 h-10 w-full rounded-xl bg-gray-200 focus:outline-0 " placeholder="so, what you have next in your mind ?">
+            <img src="Icons/send.svg" class="absolute z-10 right-3 h-6 w-6 hover:scale-[0.95] transition-all">
+            
+        </div>
+    }@else {
+        <div class="flex gap-3 items-center">
+            <span class="relative flex size-5 justify-center items-center cursor-pointer" (click)="stopAnswering()">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-sm bg-black/[0.8] opacity-75"></span>
+                <span class="relative inline-flex size-4 rounded-sm bg-black"></span>
+            </span>
+            <div class="flex flex-col">
+                <p class="text-sm">Completing Your Request</p>
+                <p class="text-xs font-light">{{running_status_text.slice(-50)}}</p>
+            </div>
+        </div>
+        <div class="flex gap-1 mt-3">
+            <div *ngFor="let step of steps; let i = index"
+            class="h-8 w-1 flex-1 rounded-[2px]"
+            [ngStyle]="{
+                'background': i < filledSteps ? stepColor(i) : '#e5e7eb'
+            }"
+            ></div>
+        </div>
+    }
+</div>

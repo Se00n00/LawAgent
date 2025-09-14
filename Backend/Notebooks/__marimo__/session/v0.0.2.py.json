@@ -1,0 +1,376 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.14.8"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TRkX",
+      "code_hash": "8db99740b8e838f97bcf0a7fb3236f88",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "62e9880aa18cb27bc3a0e9c233eeccc4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "54d97b456875d4ccecbaed290ae50ec4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "8158352a86a2945574c6c408b0b68809",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><span class=\"paragraph\">MessagesState: {\"messages\":AIMessage}  ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "2cd82deb23b5318cc648170dba24f229",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "09c9b19e5a00652161ccc478391c89d0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Ask Anything hi\n"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Hi! I'm Sonoma, built by Oak AI. What's on your mind today"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "?"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Ask Anything Q\n"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Q? That's a"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " bit cryptic\u2014got"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " a question, or is this the"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " start of something fun? Spill"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": " the beans! \ud83d\ude0a"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "Ryvu",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

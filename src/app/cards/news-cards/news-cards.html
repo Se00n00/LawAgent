@@ -1,0 +1,36 @@
+<div class="p-1 relative bg-white rounded-xl flex gap-3 border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    <div class="flex gap-3">
+        <img [src]="NewscardItem.article_head_image_url" alt="nothing.jpg" class="h-40 rounded-lg">
+        <div class="flex flex-col text-xl justify-between">
+            <div class="flex flex-col">
+                <p class="font-light max-w-sm">{{NewscardItem.article_head.slice(-30)}}</p>
+                <p class="text-sm max-w-sm font-light text-black/[0.8]">{{ NewscardItem.article_summerized_content.slice(-220)}}</p>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                @if (NewscardItem.article_author !=null) {
+                    <div class="flex gap-1 p-1 pr-2 rounded-lg items-center">
+                        <img [src]="NewscardItem.article_author_icon" class="h-6">
+                        <p class="text-sm">{{NewscardItem.article_author}}</p>
+                    </div>
+                }@else {
+                    <div></div>
+                }
+                
+                <a hre [href]="NewscardItem.article_origin_web_url" class="self-end p-1">
+                    <img [src]="NewscardItem.article_orign_web_icon" class="h-6 opacity-60 hover:opacity-80 transition-all">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col justify-start items-center gap-2 overflow-hidden ml-5 py-5 pr-3">
+        @for (item of NewscardItems; track $index) {    
+            @if ($index === this.CurrentCardIndex()) {
+                <span (click)="changeCardIndex($index)" class="cursor-pointer m-0 p-0 h-0.5 w-4 rounded-full font-bold bg-black"></span>
+            }@else {
+                <span (click)="changeCardIndex($index)" class="cursor-pointer m-0 p-0 h-0.5 w-2 text-xs bg-black/[0.3]"></span>
+            }
+        }
+    </div>
+</div>
