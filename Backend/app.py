@@ -13,6 +13,7 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENROUTER_API_KEY", "")
 
 llm = ChatOpenAI(
     model="openrouter/sonoma-sky-alpha",
+    api_key=os.environ["OPENAI_API_KEY"],
     base_url="https://openrouter.ai/api/v1",
     streaming=True
 )
