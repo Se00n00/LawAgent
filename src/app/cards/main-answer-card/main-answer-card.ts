@@ -21,7 +21,12 @@ export class MainAnswerCard {
   }
 
   async queryLLM(prompt: string) {
-    const res = await fetch('https://lawagent-6r30.onrender.com/chat', { method: 'POST', body: JSON.stringify({ prompt }) });
+    let res = await fetch("https://lawagent-6r30.onrender.com/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: "Hello" })
+    });
+
     const reader = res.body?.getReader();
     const decoder = new TextDecoder();
 
