@@ -9,8 +9,15 @@
         </div>
         
         <div class="flex relative w-full items-center">
-            <input type="text" class="text-xs pr-10 font-light p-3 h-10 w-full rounded-xl bg-gray-200 focus:outline-0 " placeholder="so, what you have next in your mind ?">
-            <img src="Icons/send.svg" class="absolute z-10 right-3 h-6 w-6 hover:scale-[0.95] transition-all">
+            <input 
+            [ngModel]="Question()" 
+            (ngModelChange)="Question.set($event)" type="text" 
+            (keydown.enter)="Ask()"
+            class="text-xs pr-10 font-light p-3 h-10 w-full rounded-xl bg-gray-200 focus:outline-0 "
+            [placeholder]="IsAskQuestionValid() && isTouched() ? 'Input can\'t be blank !' : 'What you have next in your mind ?'"
+            (blur)="isTouched.set(true)"
+            [ngClass]="{'bg-red-300 text-white border-red-400 border': IsAskQuestionValid() && isTouched()}">
+            <img src="Icons/send.svg" class="absolute z-10 right-3 h-6 w-6 hover:scale-[0.95] transition-all" (click)="Ask()">
             
         </div>
     }@else {

@@ -1,6 +1,9 @@
 <div class="realtive grid grid-cols-4 gap-2">
     @for (item of ImageWithLinks(); track $index) {
-        <div class="realtive group p-0.5 h-fit bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all" [ngClass]="{ 'col-span-2': $index < 2 }">
+        <div 
+        class="realtive group p-0.5 h-fit bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all" 
+        [ngClass]="{ 'col-span-2': item.relevance === 1}"
+        >
             <a [href]="item.link" class="relative">
                 <img [src]="item.ImageUrl" class="rounded-xl">
                 
