@@ -5,6 +5,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 import os
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
@@ -31,6 +32,19 @@ bot = (
 
 # --- Setup: FAST API ---
 app = FastAPI()
+
+origins = [
+    "http://localhost:4200",   # Angular dev server
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],        # or ["*"] for open access
+    allow_credentials=True,
+    allow_methods=["*"],          # very important: allows OPTIONS
+    allow_headers=["*"],
+)
 
 class ChatRequest(BaseModel):
     message: str
