@@ -1,19 +1,18 @@
 <div class="p-3 pb-5 relative bg-white rounded-xl flex-col gap-3 border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
     <div class="flex gap-2 items-center">
         <img src="Icons/summary.svg" class="h-9">
-        <p>Summary</p>
+        <p>{{SummaryTitle()}}</p>
     </div>
     <div class="relative flex flex-col gap-5 w-sm px-4">
         <div id="Line" class="absolute w-0.5 bg-black/[0.6] h-auto"></div>
             
         <div id="summaryContent" class="flex flex-col gap-5 overflow-y-scroll">
-            @for (item of Summaries; track $index) {
+            @for (item of Summaries(); track $index) {
                 <div class="summaryItem flex flex-col pl-4">
                     <div class="text-sm">{{item.heading}}</div>
                     <div class="text-xs font-light text-black/[0.6]">{{item.content}}</div>
-
                     <div class="absolute left-[12px] border rounded-full w-2.5 h-2.5" 
-                    [ngClass]="{'bg-black':$index===this.Summaries.length-1,'bg-white':$index !== this.Summaries.length-1}"
+                    [ngClass]="{'bg-black':$index===this.Summaries().length-1,'bg-white':$index !== this.Summaries().length-1}"
                     ></div>
                 </div>
                 

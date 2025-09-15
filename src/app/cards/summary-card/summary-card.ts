@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface summary{
@@ -12,10 +12,20 @@ interface summary{
   styleUrl: './summary-card.css'
 })
 export class SummaryCard implements OnInit, AfterViewInit {
-  Summaries:summary[] = [
-    {heading:"2025", content:"Explosive growth of delhi which underwent a huge success for the  people of this country"},
-    {heading:"2025", content:"Explosive growth of delhi"}
-  ]
+
+  // Input Data to Summary Card
+  SummaryTitle: WritableSignal<string> = signal("Summary");
+  Summaries: WritableSignal<summary[]> = signal([
+    {
+      heading: "2025",
+      content: "Explosive growth of Delhi which underwent a huge success for the people of this country"
+    },
+    {
+      heading: "2025",
+      content: "Explosive growth of Delhi which underwent a huge success for the people of this country"
+    }
+  ]);
+
   setHeight() {
     const sourceDiv = document.getElementById("summaryContent");
     const targetDiv = document.getElementById("Line");

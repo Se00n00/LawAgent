@@ -38,4 +38,10 @@ export class Home {
   showMainSearchInput(){
     this.Searching.update((val)=>val = !val)
   }
+
+
+  // Card: Description + Parameters
+  // Main Answer Card : Markdown
+  // Card Showing + Map ??? : All Screen Setting
+  // Converstation History
 }
