@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 # --- Setup : Agent---
 llm = ChatOpenAI(
-    model="openrouter/sonoma-sky-alpha",
+    model="x-ai/grok-4-fast:free",
     streaming=True,
     api_key=os.environ["OPENROUTER_API_KEY"],
     base_url="https://openrouter.ai/api/v1"
