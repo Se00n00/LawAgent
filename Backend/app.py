@@ -51,6 +51,10 @@ class ChatRequest(BaseModel):
 
 config = {"configurable": {"thread_id": "abc123"}}
 
+@app.get("/")
+def home():
+    return {"Ok":"Yay XD"}
+
 @app.post("/chat")
 async def chat(req: ChatRequest):
     input_message = [HumanMessage(content=req.message)]
