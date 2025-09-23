@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, WritableSignal, signal, computed } from '@angular/core';
+import { single } from 'rxjs';
 
 interface Newscard{
   article_id: number
@@ -21,46 +22,25 @@ interface Newscard{
 export class NewsCards {
   
 
-  card_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et laudantium, impedit illum, excepturi hic aut possimus esse sapiente quas inventore itaque eligendi magni repellendus rem aperiam atque fugiat quod ducimus."
-  NewscardItems: Newscard[] = [
-    {article_id:1,
-      article_head:this.card_content,
-      article_head_image_url:"images/nothing.jpg",
-      article_summerized_content:this.card_content,
-      article_origin_web_url:"www.google.com",
-      article_orign_web_icon:"www.google.com",
-      article_author: null,
-      article_author_icon: null
-    },
-    {article_id:2,
-      article_head:this.card_content,
-      article_head_image_url:"images/nothing.jpg",
-      article_summerized_content:this.card_content,
-      article_origin_web_url:"www.google.com",
-      article_orign_web_icon:"www.google.com",
-      article_author:"Arthur wu rote",
-      article_author_icon:"as"
-    },
-    {article_id:3,
-      article_head:this.card_content,
-      article_head_image_url:"images/nothing.jpg",
-      article_summerized_content:"sfdsfd",
-      article_origin_web_url:"www.google.com",
-      article_orign_web_icon:"Icons/logo.svg",
-      article_author:"Arthur wu rote",
-      article_author_icon:"as"
-    }
-  ]
+  @Input() NewscardItems: Newscard[] = []
   CurrentCardIndex = signal(0)
-  NewscardItem: Newscard
   
-  constructor(){
-    this.NewscardItem = this.NewscardItems[this.CurrentCardIndex()]
-  }
-  
-  changeCardIndex(cardIndex:number){
-    this.CurrentCardIndex.update((val)=>(cardIndex)%this.NewscardItems.length)
-    this.NewscardItem = this.NewscardItems[this.CurrentCardIndex()]
+  NewscardItem = computed(() => {
+    const items = this.NewscardItems
+    const index = this.CurrentCardIndex()
+    return items.length ? items[index] : null
+  })
+
+  changeCardIndex(cardIndex: number) {
+    if (this.NewscardItems.length) {
+      this.CurrentCardIndex.set(cardIndex % this.NewscardItems.length)
+    }
   }
 
+  incrementCardIndex(increment: number) {
+    if (this.NewscardItems.length) {
+      const length = this.NewscardItems.length
+      this.CurrentCardIndex.update(val => (val + increment + length) % length)
+    }
+  }
 }

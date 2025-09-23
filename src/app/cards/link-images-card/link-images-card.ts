@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ImageWithLink{
@@ -16,11 +16,5 @@ interface ImageWithLink{
 
 
 export class LinkImagesCard {
-  ImageWithLinks: WritableSignal<ImageWithLink[]> = signal([
-    {ImageUrl:"background.jpg", link:"https://in.pinterest.com/pin/37436240649728416/", relevance:1},
-    {ImageUrl:"background.jpg", link:"https://in.pinterest.com/pin/37436240649728416/", relevance:0},
-    {ImageUrl:"background.jpg", link:"https://in.pinterest.com/pin/37436240649728416/", relevance:0},
-    {ImageUrl:"background.jpg", link:"https://in.pinterest.com/pin/37436240649728416/", relevance:0},
-    {ImageUrl:"background.jpg", link:"https://in.pinterest.com/pin/37436240649728416/", relevance:1}
-  ])
+  @Input() ImageWithLinks: ImageWithLink[] = []
 }

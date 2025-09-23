@@ -1,0 +1,177 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.14.8"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "a148750c948ad153c32a43577d90d011",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"setting-up-llm\">Setting Up LLM</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "ab4b4dd52c80591c662f0c213ad41cc5",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
+          "traceback": []
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/marimo/_runtime/executor.py&quot;</span>, line <span class=\"m\">138</span>, in <span class=\"n\">execute_cell</span>\n<span class=\"w\">    </span><span class=\"n\">exec</span><span class=\"p\">(</span><span class=\"n\">cell</span><span class=\"o\">.</span><span class=\"n\">body</span><span class=\"p\">,</span> <span class=\"n\">glbls</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/tmp/marimo_111437/__marimo__cell_vblA_.py&quot;</span>, line <span class=\"m\">3</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">llm</span> <span class=\"o\">=</span> <span class=\"n\">ChatOpenAI</span><span class=\"p\">(</span>\n<span class=\"w\">          </span><span class=\"pm\">^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/load/serializable.py&quot;</span>, line <span class=\"m\">130</span>, in <span class=\"n\">__init__</span>\n<span class=\"w\">    </span><span class=\"nb\">super</span><span class=\"p\">()</span><span class=\"o\">.</span><span class=\"fm\">__init__</span><span class=\"p\">(</span><span class=\"o\">*</span><span class=\"n\">args</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/pydantic/main.py&quot;</span>, line <span class=\"m\">253</span>, in <span class=\"n\">__init__</span>\n<span class=\"w\">    </span><span class=\"n\">validated_self</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">__pydantic_validator__</span><span class=\"o\">.</span><span class=\"n\">validate_python</span><span class=\"p\">(</span><span class=\"n\">data</span><span class=\"p\">,</span> <span class=\"n\">self_instance</span><span class=\"o\">=</span><span class=\"bp\">self</span><span class=\"p\">)</span>\n<span class=\"w\">                     </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_openai/chat_models/base.py&quot;</span>, line <span class=\"m\">792</span>, in <span class=\"n\">validate_environment</span>\n<span class=\"w\">    </span><span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">root_client</span> <span class=\"o\">=</span> <span class=\"n\">openai</span><span class=\"o\">.</span><span class=\"n\">OpenAI</span><span class=\"p\">(</span><span class=\"o\">**</span><span class=\"n\">client_params</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">sync_specific</span><span class=\"p\">)</span>  <span class=\"c1\"># type: ignore[arg-type]</span>\n<span class=\"w\">                       </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/openai/_client.py&quot;</span>, line <span class=\"m\">130</span>, in <span class=\"n\">__init__</span>\n<span class=\"w\">    </span><span class=\"k\">raise</span> <span class=\"n\">OpenAIError</span><span class=\"p\">(</span>\n<span class=\"gr\">openai.OpenAIError</span>: <span class=\"n\">The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable</span>\n</pre></div>\n</span>"
+        }
+      ]
+    },
+    {
+      "id": "xaff",
+      "code_hash": "551d6988810419a2a3f6b5a56caeac68",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre style='font-size: 12px'>AIMessage(content=&quot;Hi! What&#x27;s up? How can I help today?&quot;, additional_kwargs={}, response_metadata={&#x27;finish_reason&#x27;: &#x27;stop&#x27;, &#x27;model_name&#x27;: &#x27;x-ai/grok-4-fast:free&#x27;, &#x27;system_fingerprint&#x27;: &#x27;fp_9362061f30&#x27;}, id=&#x27;run--4090ff0e-b9af-4bd8-b30d-577930838fe3-0&#x27;, usage_metadata={&#x27;input_tokens&#x27;: 119, &#x27;output_tokens&#x27;: 147, &#x27;total_tokens&#x27;: 266, &#x27;input_token_details&#x27;: {&#x27;audio&#x27;: 0, &#x27;cache_read&#x27;: 112}, &#x27;output_token_details&#x27;: {&#x27;reasoning&#x27;: 136}})</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "31ba6bbd136b4e7a88933c27ce25816f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"global\">Global</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "34ec0666c6647f1f3ee214aa3a3ebbba",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "fe6c1c0d065acddca619f25646533b12",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "0466fb50337adc78d342461380d19460",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "65068f3688c1beb1e465c899322d2931",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"orchestrator\">Orchestrator</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "8ed9e5968b4af7538fa5dbdd10ac4a59",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "7603ad379f9ed152678b7290adbadd9c",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "0cdddf601b29e1ebf8861573d50668db",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "a363b8d13575101a0226e8d0d054f2e7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "c85604d1a680c256adb0a26b04c5030e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"workers\">Workers</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "4b3b3aff2b940faac9b29c4d2349b639",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "eeb7303367a8757f397f8e5bc832ac51",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "41ad4b4c0821760205f823e2b094d183",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "552f422b55c367cfa4535cfe7d7027b0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "68f686e9398cdeabb4958cce0285da81",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

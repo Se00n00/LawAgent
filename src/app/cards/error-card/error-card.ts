@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, Input, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-error-card',
@@ -14,7 +14,7 @@ export class ErrorCard {
     2: Strict Dead Ends (High Severity) - User asks for unsafe, harmful, or inappropriate content. <Block>
     3: Extreme Dead Ends (Very High Severity) - User brings up dangerous or crisis-related content (e.g., self-harm, violence) <Block>
   */
-  ErrorIndex:WritableSignal<number> = signal(0)
+  @Input() ErrorIndex:number|null = null
   ErrorList = [
     {"path":"images/DeadEnd/NothingFound.jpg","text":"Seems likes, I have found nothing", "redirection":true, "followUpQuestion":"What could be the reason for such ?"}
   ]

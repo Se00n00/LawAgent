@@ -1,0 +1,271 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.14.8"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "a1c545c9ba3d111040be03fc9d4acaf7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "bedabcdd16c7ac9876c1adcce7ea4820",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"media-node\">Media Node</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "afea6cea528b49f14ec96ef8720dfc7a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><span class=\"paragraph\">Filter Out Relvent and remove dedundant results</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "8a07441319155b6fbdaf3258d5a38243",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "749796660203b2f4605206f2e97a7101",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[{\"title\": \"Want a Career in Law Enforcement? 3 Federal Jobs to Consider\", \"article_url\": \"https://onlinedegrees.sandiego.edu/a-career-in-law-enforcement-3-federal-jobs/\", \"image_url\": \"https://onlinedegrees.sandiego.edu/wp-content/uploads/2016/08/us-marshal.jpg\"}, {\"title\": \"Building Federal Law Enforcement for the 21st Century \\u2014 FEDagent\", \"article_url\": \"https://www.fedagent.com/news/building-federal-law-enforcement-for-the-21st-century\", \"image_url\": \"https://images.squarespace-cdn.com/content/v1/66140083ebc5ba3f6579eaab/1712595586751-MC9LRY49K8KP80SUC8VD/shutterstock_1801253875.jpg\"}, {\"title\": \"History of Law Enforcement\", \"article_url\": \"https://www.slideshare.net/scottbernsteinbountyhunter/history-of-law-enforcement-68901063\", \"image_url\": \"https://image.slidesharecdn.com/historyoflawenforcement-scottbernstein-161114132138/95/history-of-law-enforcement-26-638.jpg?cb=1479130121\"}, {\"title\": \"2.1 Federalism | Criminal Law\", \"article_url\": \"https://courses.lumenlearning.com/suny-criminallaw/chapter/2-1-federalism/\", \"image_url\": \"https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/2479/2017/09/26202926/083e47b8ffb61654d7d78b775396b24b.jpg\"}, {\"title\": \"Chart: Who Has the Power Over Federal Law Enforcement? | Statista\", \"article_url\": \"https://www.statista.com/chart/23025/us-federal-law-enforcement-agencies-under-branches-of-federal-government/\", \"image_url\": \"http://cdn.statcdn.com/Infographic/images/normal/23025.jpeg\"}, {\"title\": \"Facial Recognition Technology: Federal Law Enforcement Agencies Should ...\", \"article_url\": \"https://www.gao.gov/products/gao-21-105309\", \"image_url\": \"https://www.gao.gov/assets/extracts/8c998fc8d7ce5374e6085987d216d18b/rId14_image2.png\"}, {\"title\": \"The Top 10 Best-Looking Law Enforcement Uniforms in the United States ...\", \"article_url\": \"https://www.herospride.com/blog/best-law-enforcement-uniforms-in-america/\", \"image_url\": \"https://www.herospride.com/wp-content/uploads/2024/03/best-police-uniforms-in-the-united-states.jpg\"}, {\"title\": \"History \\u2014 Coast Guard Tactical Law Enforcement Association\", \"article_url\": \"https://www.cgtle.org/history/\", \"image_url\": \"https://images.squarespace-cdn.com/content/v1/52f639cae4b05d1230c12b1f/1391894055533-E0QTM19MAD0XNBK8RUVQ/110816-G-AW789-090.JPG\"}, {\"title\": \"2.1 Federalism | Criminal Law\", \"article_url\": \"https://courses.lumenlearning.com/suny-criminallaw/chapter/2-1-federalism/\", \"image_url\": \"https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/2479/2017/09/26202917/189beffec311111907b851fd052b8178.jpg\"}, {\"title\": \"Law Enforcement Resources | Overview | Office of Justice Programs\", \"article_url\": \"https://www.ojp.gov/program/lawenforcement/overview\", \"image_url\": \"https://www.ojp.gov/sites/g/files/xyckuh241/files/styles/card/public/images/2020-01/le2019-reports.jpg?itok=W2hhjmpb\"}]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "fcc29775f406ddc8bf55754c1ce30cb6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"retreiver\">Retreiver</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "d7c2437264358d3620f4b7cca9b116a6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "facd0e9d5f3879205c0d9530b12962db",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[{\"title\": \"Bihar 2025: From Nitish's twilight to a new political dawn\", \"date\": \"2025-09-21T14:43:00+00:00\", \"article_url\": \"https://timesofindia.indiatimes.com/blogs/voice-of-plebs/bihar-2025-from-nitishs-twilight-to-a-new-political-dawn/\", \"image_url\": \"https://static.toiimg.com/imagenext/toiblogs/photo/blogs/wp-content/uploads/2022/09/Saurabh-Raj.png\", \"source\": \"The Times of India\"}, {\"title\": \"Bihar Assembly election dates likely to be announced soon, CEC Gyanesh Kumar to visit state\", \"date\": \"2025-09-22T06:13:00+00:00\", \"article_url\": \"https://www.cnbctv18.com/india/politics/bihar-assembly-election-dates-likely-to-be-announced-soon-cec-gyanesh-kumar-to-visit-state-19682835.htm\", \"image_url\": \"https://images.cnbctv18.com/uploads/2025/02/delhi-election-reuters-2025-02-b7fecacd617f3a1b390d05088b712ec8.jpg?im=FitAndFill,width=500,height=300\", \"source\": \"CNBCTV18\"}, {\"title\": \"Bihar elections likely in 3 phases from November 5-15: Report\", \"date\": \"2025-09-22T06:29:00+00:00\", \"article_url\": \"https://www.newsbytesapp.com/news/politics/bihar-polls-after-chhath-puja-voting-in-three-phases-november/story\", \"image_url\": \"https://i.cdn.newsbytesapp.com/images/l99220250922112933.png\", \"source\": \"NewsBytes\"}, {\"title\": \"BJP Alleges Abuses Hurled At PM Modi's Mother Again During Tejashwi Yadav's 'Bihar Adhikar Yatra'\", \"date\": \"2025-09-21T17:50:00+00:00\", \"article_url\": \"https://www.msn.com/en-in/news/India/bjp-alleges-abuses-hurled-at-pm-modi-s-mother-again-during-tejashwi-yadav-s-bihar-adhikar-yatra/ar-AA1MZ7Kb\", \"image_url\": \"https://feeds.abplive.com/onecms/images/uploaded-images/2025/09/21/f6b1780040cb117135de97557ce522bb17584337656181163_original.jpg?impolicy=abp_cdn&imwidth=1200\", \"source\": \"ABP News\"}, {\"title\": \"Assembly polls in Bihar to be held in three phases\", \"date\": \"2025-09-22T09:34:00+00:00\", \"article_url\": \"https://newstodaynet.com/2025/09/22/assembly-polls-in-bihar-to-be-held-in-three-phases/\", \"image_url\": \"https://newstodaynet.com/wp-content/uploads/2025/09/qrn58m6_election-commission_625x300_26_March_24.jpeg\", \"source\": \"News Today\"}, {\"title\": \"Lalu Yadav's Daughter's Post Sparks Fresh Family Feud Rumours Ahead Of Bihar Polls\", \"date\": \"2025-09-21T19:30:00+00:00\", \"article_url\": \"https://www.msn.com/en-in/autos/photos/lalu-yadavs-daughters-post-sparks-fresh-family-feud-rumours-ahead-of-bihar-polls/ar-AA1MZdwJ\", \"image_url\": \"https://feeds.abplive.com/onecms/images/uploaded-images/2025/09/21/4653f49e927431724ef199fe15e7ecfe17584397867321163_original.jpg?impolicy=abp_cdn&imwidth=1200\", \"source\": \"ABP News\"}, {\"title\": \"Bihar elections likely to be held after Chhath Puja in 3 phases from November 5-15\", \"date\": \"2025-09-22T05:40:00+00:00\", \"article_url\": \"https://www.indiatoday.in/elections/assembly/video/bihar-elections-likely-to-be-held-after-chhath-puja-in-3-phases-from-november-5-15-2791198-2025-09-22\", \"image_url\": null, \"source\": \"India Today\"}, {\"title\": \"Bihar Poll Dates 2025 Likely Set Between Nov 5-15: What Voters Should Know\", \"date\": \"2025-09-22T08:28:00+00:00\", \"article_url\": \"https://www.oneindia.com/india/bihar-poll-dates-2025-likely-set-between-nov-5-15-what-voters-should-know-7867515.html\", \"image_url\": \"https://imagesvs.oneindia.com/img/2025/09/bihar-polls-1758529678.jpg\", \"source\": \"Oneindia\"}, {\"title\": \"Bihar polls likely in 3 phases from Nov 5\", \"date\": \"2025-09-22T06:51:26+00:00\", \"article_url\": \"https://www.msn.com/en-in/politics/government/bihar-polls-likely-in-3-phases-from-nov-5/ar-AA1N2pNb\", \"image_url\": \"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1N2hQZ.img?w=1500&h=800&m=4&q=79\", \"source\": \"Khabargaon\"}, {\"title\": \"Bihar Election Likely After Chhath Puja, Diwali, Dates Out After Dussehra\", \"date\": \"2025-09-22T06:41:43+00:00\", \"article_url\": \"https://www.msn.com/en-in/politics/government/bihar-election-likely-after-chhath-puja-diwali-dates-out-after-dussehra/ar-AA1N2DpZ\", \"image_url\": null, \"source\": \"NDTV\"}]"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "{'date': '2025-09-21T14:43:00+00:00', 'title': \"Bihar 2025: From Nitish's twilight to a new political dawn\", 'body': 'On an evening in a village dalan, an old uncle, who proudly says he has voted in more than seven or eight Bihar assembly elections, smiled and said with quiet certainty: \"Ye Chanakya nahi,', 'url': 'https://timesofindia.indiatimes.com/blogs/voice-of-plebs/bihar-2025-from-nitishs-twilight-to-a-new-political-dawn/', 'image': 'https://static.toiimg.com/imagenext/toiblogs/photo/blogs/wp-content/uploads/2022/09/Saurabh-Raj.png', 'source': 'The Times of India'}\n{'date': '2025-09-22T06:13:00+00:00', 'title': 'Bihar Assembly election dates likely to be announced soon, CEC Gyanesh Kumar to visit state', 'body': 'The Election Commission is planning to hold the Bihar Assembly elections between Durga Puja and Diwali, with voting likely to take place between October 2 and October 29. This time, elections are expected to be conducted in two to three phases,', 'url': 'https://www.cnbctv18.com/india/politics/bihar-assembly-election-dates-likely-to-be-announced-soon-cec-gyanesh-kumar-to-visit-state-19682835.htm', 'image': 'https://images.cnbctv18.com/uploads/2025/02/delhi-election-reuters-2025-02-b7fecacd617f3a1b390d05088b712ec8.jpg?im=FitAndFill,width=500,height=300', 'source': 'CNBCTV18'}\n{'date': '2025-09-22T06:29:00+00:00', 'title': 'Bihar elections likely in 3 phases from November 5-15: Report', 'body': 'The Bihar Assembly elections are expected to take place in three phases from November 5 to 15, following the Chhath Puja festival.', 'url': 'https://www.newsbytesapp.com/news/politics/bihar-polls-after-chhath-puja-voting-in-three-phases-november/story', 'image': 'https://i.cdn.newsbytesapp.com/images/l99220250922112933.png', 'source': 'NewsBytes'}\n{'date': '2025-09-21T17:50:00+00:00', 'title': \"BJP Alleges Abuses Hurled At PM Modi's Mother Again During Tejashwi Yadav's 'Bihar Adhikar Yatra'\", 'body': \"BJP alleges RJD workers abused PM Modi's late mother during Tejashwi Yadav's 'Bihar Adhikar Yatra', sparking outrage as Bihar heads toward crucial assembly elections.\", 'url': 'https://www.msn.com/en-in/news/India/bjp-alleges-abuses-hurled-at-pm-modi-s-mother-again-during-tejashwi-yadav-s-bihar-adhikar-yatra/ar-AA1MZ7Kb', 'image': 'https://feeds.abplive.com/onecms/images/uploaded-images/2025/09/21/f6b1780040cb117135de97557ce522bb17584337656181163_original.jpg?impolicy=abp_cdn&imwidth=1200', 'source': 'ABP News'}\n{'date': '2025-09-22T09:34:00+00:00', 'title': 'Assembly polls in Bihar to be held in three phases', 'body': 'The Bihar Assembly elections 2025 are scheduled to take place after Chhath Puja, with voting expected to be held in three phases from November 5 to November 15, according to sources familiar with the matter.', 'url': 'https://newstodaynet.com/2025/09/22/assembly-polls-in-bihar-to-be-held-in-three-phases/', 'image': 'https://newstodaynet.com/wp-content/uploads/2025/09/qrn58m6_election-commission_625x300_26_March_24.jpeg', 'source': 'News Today'}\n{'date': '2025-09-21T19:30:00+00:00', 'title': \"Lalu Yadav's Daughter's Post Sparks Fresh Family Feud Rumours Ahead Of Bihar Polls\", 'body': \"Rohini Acharya's posts on Sanjay Yadav's growing clout spark fresh rift in Lalu Prasad Yadav's family, weeks before Bihar polls, putting RJD's unity under spotlight amid rising political tension.\", 'url': 'https://www.msn.com/en-in/autos/photos/lalu-yadavs-daughters-post-sparks-fresh-family-feud-rumours-ahead-of-bihar-polls/ar-AA1MZdwJ', 'image': 'https://feeds.abplive.com/onecms/images/uploaded-images/2025/09/21/4653f49e927431724ef199fe15e7ecfe17584397867321163_original.jpg?impolicy=abp_cdn&imwidth=1200', 'source': 'ABP News'}\n{'date': '2025-09-22T05:40:00+00:00', 'title': 'Bihar elections likely to be held after Chhath Puja in 3 phases from November 5-15', 'body': 'A big election scoop from Bihar suggests voting for the new assembly is likely to happen in three phases after Chhat Pooja, between the 5th and 15th of November. The new assembly must be formed before the 22nd of November.', 'url': 'https://www.indiatoday.in/elections/assembly/video/bihar-elections-likely-to-be-held-after-chhath-puja-in-3-phases-from-november-5-15-2791198-2025-09-22', 'image': None, 'source': 'India Today'}\n{'date': '2025-09-22T08:28:00+00:00', 'title': 'Bihar Poll Dates 2025 Likely Set Between Nov 5-15: What Voters Should Know', 'body': 'Bihar Assembly elections 2025 are scheduled between November 5-15. Check key dates, political alliances, voter list updates, and NDA vs INDIA bloc seat details.', 'url': 'https://www.oneindia.com/india/bihar-poll-dates-2025-likely-set-between-nov-5-15-what-voters-should-know-7867515.html', 'image': 'https://imagesvs.oneindia.com/img/2025/09/bihar-polls-1758529678.jpg', 'source': 'Oneindia'}\n{'date': '2025-09-22T06:51:26+00:00', 'title': 'Bihar polls likely in 3 phases from Nov 5', 'body': 'Bihar is likely to go to polls in three phases from November 5 to 15, sources said, as the term of the current Assembly is set to end on November 22, 2025. The Election Commission is required to complete the election process before that date.', 'url': 'https://www.msn.com/en-in/politics/government/bihar-polls-likely-in-3-phases-from-nov-5/ar-AA1N2pNb', 'image': 'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1N2hQZ.img?w=1500&h=800&m=4&q=79', 'source': 'Khabargaon'}\n{'date': '2025-09-22T06:41:43+00:00', 'title': 'Bihar Election Likely After Chhath Puja, Diwali, Dates Out After Dussehra', 'body': 'Dates for the 2025 Bihar Assembly election will likely be announced after Dussehra (on October 2, this year) with the voting itself spread across two phases in the first and second weeks of November,', 'url': 'https://www.msn.com/en-in/politics/government/bihar-election-likely-after-chhath-puja-diwali-dates-out-after-dussehra/ar-AA1N2DpZ', 'image': None, 'source': 'NDTV'}\n"
+        }
+      ]
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "840582eb6b91357318460857cbd43727",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "5ede9998747d504ce1b61d152cd993da",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "f98757d134e99a7c04e5130fec32a64d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "cb8467217ab48351b88610b6b6da2825",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "4ff310d5a68b390469dc49836b02a897",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "055f1a1d08741397405a0ea430285e7f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre style='font-size: 12px'>&#x27;The Social Justice Myth: How Lalu\\&#x27;s Legacy Narrowed Bihar\\&#x27;s Politics\\n\\nWritten By :\\n\\nNews18.com\\n\\nLast Updated: September 19, 2025, 11:31 IST\\n\\nPolitical empowerment of disadvantaged groups in Bihar did not begin with Lalu - it was a reality long before he emerged on the scene.\\n\\nThe critical change under Lalu was the consolidation of political power around one sub-group: the Yadavs. (Image: X/@TejYadav14)\\n\\nTHE MYTH OF \u2018SAVIOUR\u2019 LALU\\n\\nRecommended Stories\\n\\nFor three decades, Bihar\u2019s political folklore has been dominated by a single claim: that Lalu Prasad Yadav gave voice to the state\u2019s backward classes, Dalits, and minorities. His dramatic rise in the early 1990s, in the wake of the Mandal Commission and the Ram Mandir movement, has often been portrayed as the defining moment when the \u201cmarginalised&quot; finally found their representation.\\n\\nBut a closer look at Bihar\u2019s political history reveals that this belief is more myth than fact. Political empowerment of disadvantaged groups in Bihar did not begin with Lalu \u2013 it was a reality long before he emerged on the scene.\\n\\nA DEEPER HISTORY OF REPRESENTATION\\n\\nThe story of Bihar\u2019s leadership is filled with examples of disadvantaged communities reaching the top. BP Mandal, who gave his name to the Mandal Commission, was an OBC chief minister. Bhola Paswan Shastri and Ram Sundar Das \u2013 both Dalits, led the state. Daroga Prasad Rai, another OBC, occupied the chair. Abdul Ghafoor, a Muslim, served as state chief minister. Karpoori Thakur, from the Nai (barber) community, is remembered as the first to implement OBC reservations in Bihar.\\n\\nEven nationally, Bihar\u2019s Jagjivan Ram was one of India\u2019s tallest Dalit leaders, serving in multiple Union governments and coming close to becoming Prime Minister. This history shows that marginalised communities were neither silent nor absent in Bihar\u2019s political leadership before Lalu. Their voices were already part of the state\u2019s democratic churn.\\n\\nSOCIAL JUSTICE WAVE BEFORE LALU\\n\\nThe 1960s and 1970s were marked by churns that set the stage for backward empowerment. Old-timers in Patna still recall how Karpoori Thakur\u2019s reservation move split college campuses in the 1970s, but he emerged as a Bihari leader fighting for OBC cause gained national prominence. The Mandal Commission, chaired by BP Mandal in the late 1970s, laid the groundwork for a nationwide reconfiguration of politics. By 1990, when Lalu Prasad Yadav became chief minister, Bihar was already primed for a politics of social justice.\\n\\nLalu did not invent backward representation; what he did was reframe it. His politics brought energy, symbolism, and rhetoric, but also concentrated benefits in narrower channels.\\n\\nTHE YADAV-CENTRIC CONSOLIDATION\\n\\nThe critical change under Lalu was the consolidation of political power around one sub-group: the Yadavs. With about 14 per cent of Bihar\u2019s population, Yadavs became the backbone of the Rashtriya Janata Dal (RJD). Over time, the party\u2019s identity fused with theirs.\\n\\nFor non-Yadav OBCs (who, along with EBCs, make up 52-55 per cent of Bihar\u2019s population), Dalits (15 per cent), and Muslims (14 per cent), the RJD offered political rhetoric but limited leadership opportunities. The irony was clear: while invoking the language of empowerment, Lalu\u2019s model restricted the scope of who could rise to the top. Nearly 84 per cent of Bihar\u2019s society was effectively locked out of the chief minister\u2019s chair under RJD\u2019s structure.\\n\\nMuslims, though crucial as a loyal vote bloc, saw little elevation to chief ministerial or deputy chief ministerial roles. The RJD\u2019s model of representation was therefore less inclusive than its slogans suggested.\\n\\nTHE NDA\u2019S COUNTER-EXAMPLE\\n\\nContrast this with the NDA\u2019s record. While the BJP-JD(U) alliance has been no stranger to caste arithmetic, it has experimented more broadly with leadership. When Nitish Kumar stepped aside in 2014, Jitan Ram Manjhi, a Mahadalit from the Musahar community, was elevated as chief minister. Symbolic as it was, such a move would have been inconceivable under RJD.\\n\\nNitish Kumar\u2019s own political career also reflects coalition-building across caste lines-Kurmis, EBCs, Mahadalits, and even women have been drawn into his schemes of governance and welfare. While the NDA has its limitations, its leadership experiments have ensured that Bihar\u2019s top post is not permanently tied to one caste identity.\\n\\nWHY THIS MATTERS IN 2025\\n\\nAs Bihar heads into the 2025 assembly elections, the debate over representation is central once again. RJD projects itself as the authentic voice of the marginalised. Yet its leadership remains tightly controlled by one family and one caste bloc.\\n\\nTejashwi Yadav, inheriting his father\u2019s mantle, embodies both continuity and constraint. His appeal to youth and his promise of jobs have made him a powerful challenger, but he has shown little inclination to broaden RJD\u2019s leadership beyond Yadav dominance. For Muslims, Dalits, and non-Yadav OBCs, RJD remains more a platform for participation as voters than as power-holders.\\n\\nOn the other hand, Nitish Kumar, despite his many shifts in alliances, has cultivated a politics of accommodation. His elevation of Manjhi, his outreach to EBCs and Mahadalits through welfare schemes, and his reliance on coalition governance suggest a willingness \u2013 however tactical \u2013 to share representation. For the BJP, the emphasis has been on consolidating non-Yadav OBCs and Dalits, positioning itself as the counter to RJD\u2019s Yadav-Muslim base.\\n\\nTHE REAL CHOICE FOR BIHAR\\n\\ntop videos View all Swipe Left For Next Video View all\\n\\nThe upcoming election, therefore, is not just about which leader delivers jobs or welfare. It is about which model of representation Bihar chooses. Will it remain bound to the myth of Lalu as the singular voice of the marginalised-a myth that has in practice narrowed representation? Or will it move toward a more pluralistic distribution of leadership, reflecting the full diversity of Bihar\u2019s society?\\n\\nBihar\u2019s politics has always been about more than arithmetic. It is about aspiration \u2013 the desire of every community to see itself at the centre of power. That aspiration began long before Lalu and will continue long after him. The 2025 verdict will decide whether Bihar remains trapped in the politics of one bloc\u2019s dominance or takes a step toward genuinely inclusive leadership.\\n\\nAbout the Author Anindya Banerjee Anindya Banerjee, Associate Editor brings over fifteen years of journalistic courage to the forefront. With a keen focus on politics and policy, Anindya has garnered a wealth of experience, with deep throat in ... Read More Anindya Banerjee, Associate Editor brings over fifteen years of journalistic courage to the forefront. With a keen focus on politics and policy, Anindya has garnered a wealth of experience, with deep throat in ... Read More\\n\\nFirst Published: September 19, 2025, 11:31 IST\\n\\nNews opinion The Social Justice Myth: How Lalu\\&#x27;s Legacy Narrowed Bihar\\&#x27;s Politics\\n\\nDisclaimer: Comments reflect users\u2019 views, not News18\u2019s. Please keep discussions respectful and constructive. Abusive, defamatory, or illegal comments will be removed. News18 may disable any comment at its discretion. By posting, you agree to our Terms of Use and Privacy Policy Loading comments...&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "UuSJ",
+      "code_hash": "3d4d0b330decbc2ad9d8c8020f323383",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "rtIF",
+      "code_hash": "7347b95a16c504f0454b669f09201eed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre style='font-size: 12px'>&#x27;https://www.linkedin.com&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "c61b6c729b26cb6d8a2d4bae48ce68f5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "CXhq",
+      "code_hash": "44dbf93be65cfd70fe4d728319598644",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[{\"Title\": \"A Competitive Alternate Fuel NITI Aayog Government of India\", \"URL\": \"https://www.niti.gov.in/sites/default/files/2021-09/EconomicAnalysis-of-Methanol_020929021.pdf\", \"Snippet\": \"2.1. Ethanol Production: Ethanol Blending Program (EBP ) has been a priority of the Government, especially since 2014. The National Biofuels Policy of India in ...\"}, {\"Title\": \"Government of India Raises Procurement Price of Fuel ...\", \"URL\": \"https://agriexchange.apeda.gov.in/MarketReport/Government+of+India+Raises+Procurement+Price+of+Fuel+Ethanol+_New+Delhi_India_12-22-2014.pdf\", \"Snippet\": \"22 Dec 2014 \\u2014 A five-percent increase in the ethanol blending rate would, by some estimates, help India save foreign exchange by upwards of $750 million ...\"}, {\"Title\": \"Report Name:Indian Government Approves Interest ...\", \"URL\": \"https://agriexchange.apeda.gov.in/MarketReport/Indian_Government_Approves_Interest_Subvention_Scheme_for_Ethanol_Distilleries_New_Delhi_India_01-03-2021.pdf\", \"Snippet\": \"7 Jan 2021 \\u2014 The government also continues to encourage 1-G ethanol production and promoting fuel-grade ethanol as an indigenous, non-polluting fuel that ...\"}, {\"Title\": \"REFINING - ETHANOL BLENDED PETROL | Ministry of Petroleum and ...\", \"URL\": \"https://mopng.gov.in/en/refining/ethanol-blended-petrol\", \"Snippet\": \"Government has been implementing Ethanol Blended Petrol (EBP) Programme throughout the country except Union Territories of Andaman Nicobar and Lakshadweep islands, wherein OMCs sell petrol blended with 10% ethanol.\"}, {\"Title\": \"ETHANOL BLENDING IN INDIA 2020-25 - NITI Aayog\", \"URL\": \"https://www.niti.gov.in/sites/default/files/2021-06/EthanolBlendingInIndia_compressed.pdf\", \"Snippet\": \"The projected requirement of ethanol based on petrol (gasoline) consumption and estimated average ethanol blending targets for the period ESY 2020-21 to ESY 2025-26 are calculated below:\"}, {\"Title\": \"GOVERNMENT SPEED UP ETHANOL BLENDING WITH EXPANDED PRODUCTION ...\", \"URL\": \"https://pib.gov.in/PressReleaseIframePage.aspx?PRID=2155110\", \"Snippet\": \"Aug 11, 2025 \\u00b7 The Government has been promoting blending of ethanol in petrol under the Ethanol Blended Petrol (EBP) Programme wherein Public Sector Oil Marketing Companies (OMCs) sell ethanol blended with petrol.\"}, {\"Title\": \"India hits 20% ethanol blending in petrol 5 years ahead of ...\", \"URL\": \"https://www.newsonair.gov.in/india-hits-20-ethanol-blending-in-petrol-5-years-ahead-of-target-union-minister-hardeep-singh-puri/\", \"Snippet\": \"Jul 24, 2025 \\u00b7 Petroleum and Natural Gas Minister Hardeep Singh Puri has said that India has successfully achieved 20 per cent ethanol blending in petrol in 2025, five years ahead of its original target set for 2030.\"}, {\"Title\": \"Government measures to increase Ethanol Blending beyond 20%\", \"URL\": \"https://pib.gov.in/PressReleasePage.aspx?PRID=2113234\", \"Snippet\": \"Mar 20, 2025 \\u00b7 According to the Roadmap for Ethanol Blending in India 2020-25, prepared by an inter-ministerial committee, using 20% ethanol-blended petrol (E20) results in marginal reduction in fuel efficiency for four-wheelers designed for E10 and calibrated for E20.\"}]"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Ethanol Blending  site:.gov.in\n"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "https://www.niti.gov.in/sites/default/files/2021-09/EconomicAnalysis-of-Methanol_020929021.pdf\nhttps://agriexchange.apeda.gov.in/MarketReport/Government+of+India+Raises+Procurement+Price+of+Fuel+Ethanol+_New+Delhi_India_12-22-2014.pdf\nhttps://agriexchange.apeda.gov.in/MarketReport/Indian_Government_Approves_Interest_Subvention_Scheme_for_Ethanol_Distilleries_New_Delhi_India_01-03-2021.pdf\nhttps://mopng.gov.in/en/refining/ethanol-blended-petrol\nhttps://www.niti.gov.in/sites/default/files/2021-06/EthanolBlendingInIndia_compressed.pdf\nhttps://pib.gov.in/PressReleaseIframePage.aspx?PRID=2155110\nhttps://www.newsonair.gov.in/india-hits-20-ethanol-blending-in-petrol-5-years-ahead-of-target-union-minister-hardeep-singh-puri/\nhttps://pib.gov.in/PressReleasePage.aspx?PRID=2113234\nhttps://www.thestudyias.com/blogs/ethanol-blending-indias-mixed-blessing/\nhttps://www.linkedin.com/pulse/beyond-mileage-myths-why-ethanol-blending-makes-sense-thiagarajan-gimcf\nhttps://www.team-bhp.com/news/ethanol-blending-petrol-other-side-coin\nhttps://uccindia.org/ethanol-blending-in-india-promise-pitfalls-and-the-road-ahead/\nhttps://spiritz.in/stories/govt-debunks-claims-of-27-ethanol-blending-in-petrol-9523901\nhttps://energy.economictimes.indiatimes.com/news/oil-and-gas/ethanol-blending-with-petrol-nearing-20-pc-target-minister/123236822\nhttps://bioenergytimes.com/ethanol-drive-gains-momentum-online-as-indias-digital-influencers-back-ethanol-blended-fuel/\nhttps://timeskuwait.com/from-farms-to-fuel-india-nears-ethanol-blending-milestone/\nhttps://greenberg.news/current-trends-and-future-of-ethanol-blending-in-india/\nhttps://www.downtoearth.org.in/energy/indias-ambitious-push-for-27-ethanol-blending-a-step-toward-energy-security-or-a-risky-bet\nhttps://www.thehindu.com/videos/watch-breaking-down-indias-ethanol-blending-programme/article69925984.ece\nhttps://www.outlookbusiness.com/planet/climate/ethanol-blending-programme-india-pricing-challenges-sugar-mills\n"
+        }
+      ]
+    },
+    {
+      "id": "xfwa",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

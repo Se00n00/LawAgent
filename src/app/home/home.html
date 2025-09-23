@@ -1,11 +1,11 @@
-<div class="w-screen h-screen relative">
+<div class="min-w-screen min-h-screen relative">
     <!-- Background Dots  + Faded -->
     <div class="absolute -z-10 inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] [background-size:3px_3px]"></div>
     <div class="absolute -z-10 inset-0 bg-gradient-to-b from-white/30 to-white"></div>
     <div class="relative flex h-full">\
 
         <!-- Right Settings -->
-        <div class="flex flex-col h-full justify-end p-5 sm:p-10">
+        <div class="fixed left-0 bottom-0 flex flex-col h-full justify-end p-5 sm:p-10">
             <div class="h-max shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
                 <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
                 <div class="h-30 w-9 hover:scale-[0.95] transition-all"></div>
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Central DashBorad  -->
-        <div class="flex-1 flex justify-center">
+        <!-- <div class="flex-1 flex justify-center"> -->
             
             
             @if (removeIntro()) {
@@ -57,17 +57,24 @@
                 
             }
             @else {
-                <div class="flex flex-col justify-center items-center overflow-scroll">
+                <div class="flex flex-col justify-center items-center">
                     <div class="flex-1 w-10/12 grid grid-cols-3 gap-5 p-10">
-                        <app-chart-card/>
-                        <app-news-cards class="col-span-3 "/>
-                        <app-main-answer-card/>
-                        <div class="flex flex-col gap-5">
+                        @for (item of Components(); track $index) {
+                            @switch (item.type) {
+                                @case ("MainAnswer") {
+                                    <app-main-answer-card [Content]="item.content"/>
+                                }
+                            }
+                            <app-news-cards class="col-span-3 "/>
+                           
                             <app-summary-card/>
-                            <app-questioncard />
-                        </div>
-                        <app-error-card/>
-                        <app-link-images-card/>
+                            <app-error-card/>
+                            <app-link-images-card/>
+                        }
+                        <!-- <app-chart-card/> -->
+                        
+                        <app-questioncard (messageEvent)="receiveMessage($event)" />
+                        
                         
                     </div>
                 </div>
@@ -80,13 +87,16 @@
                 <input type="text" class=" p-5 h-10 w-full rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" [placeholder]="placeholder">
                 <img src="Icons/search.svg" class="absolute z-10 right-2 h-9 w-9 hover:scale-[0.95] transition-all">
             </div> -->
-        </div>
-        
-
+            
+        <!-- </div> -->
         <!-- Left Menu  -->
-        <div class="relative flex flex-col h-full justify-end p-5 sm:p-10 ">
+        <div class="fixed right-0 bottom-0 flex flex-col h-full justify-end p-5 sm:p-10 ">
             @if (Searching()) {
-                <input type="text" class="absolute right-25 w-[50vw] p-5 h-10 rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" [placeholder]="placeholder">
+                <input 
+                [ngModel]="MasterQuestion()" 
+                (ngModelChange)="MasterQuestion.set($event)"
+                (keydown.enter)="showMainSearchInput()"
+                type="text" class="absolute font-light right-25 w-[50vw] p-5 h-10 rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" placeholder="Ask Anything !">
             }
             <div class=" shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
                 <img [src]="Searching() === false ? 'Icons/add.svg' : 'Icons/search.svg'" class="h-8 hover:scale-[0.95] transition-all" (click)="showMainSearchInput()">

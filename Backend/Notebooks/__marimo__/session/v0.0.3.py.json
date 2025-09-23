@@ -1,0 +1,268 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.14.8"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "765178bbd6442877799370e7b9489fbb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "cf3b3f48e70b6f5806418affc5595456",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "c41c07205765bd25c31190106b19f627",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "8dac2adb760c4e1704917957b0470b7d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "76fd1da97272e674b164f584287815d0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "de49c3d39e2a8c443139e2e8d670ee36",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "b93a8d2bb7c91e542183b6be3f15c7b9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"gaurd-rail-node\"><code>Gaurd-Rail Node</code></h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "f07def1fd506f6231932c3c8b735affe",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "45b17f7355306b7a1e78b12eefcd562a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "d47c9872ed0c3b5bf844d488075170e1",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "57d98390b7672d81f46ffdb1fd3a926e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "93a55e96b5686901454ed257026cb053",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"follow-up-questions\"><code>Follow Up Questions</code></h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "b2b6311e1e1d19b298c9ee2cd5403a83",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "e8305c43a08ff998a7c0cff0597a4a74",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "5100329d22ad310faf0ad0618e0260b6",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "25c39831ed0bad886afe0c19284e5250",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "c515457e996f5663cbb03ec72d653726",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"orchestrator-workders\"><code>Orchestrator - Workders</code></h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "77b460ee14ec12eb952da69461935851",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><span class=\"paragraph\">?? Operator, <br>\npydantic_BaseModel<br>\ntyping_Annotated + typing_TypedDict <br></span>\n<span class=\"paragraph\">How to design the schema for Agenti Output + State <br>\nSend API ? <br>\nHow does graph maintain state, how does they able to get paramter values into the state</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "68213cfe4326d2ee59defe92da7d89db",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "4c111ad5417a6a57c242034416fdb2e2",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "cf939ea6b9cd12b33d5bfb4d3351a1c8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "8aade0ee977e8e82cc6eabfdc95fe3b5",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "cd7119a9beb12792e4fc34bc5a6fc386",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "a7032c3f2d075e475ff2cfc4d9a66bb9",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "7ee2f386e992f5ad50bad74c5f02b312",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "969e44d095bcf5575746c7c4d91be579",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "a363b8d13575101a0226e8d0d054f2e7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "face04e42cb696918c35bbebd7016504",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<span class=\"markdown prose dark:prose-invert\"><h3 id=\"guides-to-design-schemas\">Guides to design schemas</h3>\n<span class=\"paragraph\">1 <code>Define Every Node/ What Each would do</code><br>\n2 <code>Ensure if LLMs are required to present infromation (generation) in Structured Output. then Create that schema using BaseModel </code><br>\n3 <code>What would be the Input and Output Schema for Each Node + Whole Agentic System &gt; Reduce into single if mergable</code></span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "fb52fe6c5d796d5a05bbc70d406dd2bf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "fe2441d5e6051107511034ae5b8ff658",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "1c54c1d82c4be9d22c1aefd7e6dd044e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": "39cc6c4d03d1a0eead98dbaa81b5a607",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

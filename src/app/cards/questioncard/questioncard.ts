@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -12,9 +12,9 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './questioncard.css'
 })
 export class Questioncard {
+  @Output() messageEvent = new EventEmitter<string>();
   askQuestion = signal(true)
   Question: WritableSignal<string> = signal("");
-
 
   isTouched: WritableSignal<boolean> = signal(false);
   IsAskQuestionValid(): boolean {
@@ -53,7 +53,9 @@ export class Questioncard {
     if (!this.IsAskQuestionValid()) {
       console.log('User asked:', this.Question());
       this.askQuestion.update(val=>false)
+
       // LLM Call
+      this.messageEvent.emit(this.Question());
       this.Question.set('')
       this.isTouched.set(false)
     }

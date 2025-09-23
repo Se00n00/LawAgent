@@ -3,3 +3,7 @@ uvicorn
 langchain
 langgraph
 langchain-openai
+
+ddgs
+semanticscholar
+python-dotenv

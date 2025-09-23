@@ -1,0 +1,36 @@
+from utils.utils import get_text
+from state import State, GaurdRailState
+
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+
+import os
+from dotenv import load_dotenv
+
+# LLM
+load_dotenv()
+primary_llm = os.getenv("PRIMARY_LLM")
+secondary_llm = os.getenv("SECONDARY_LLM")
+openrouter_api = os.getenv("OPENROUTER_APIKEY")
+
+llm = ChatOpenAI(
+    model = primary_llm,
+    api_key=openrouter_api,
+    base_url = "https://openrouter.ai/api/v1",
+    streaming=True
+)
+
+
+# Prompt
+gaurd_prompt_path = 'prompts/gaurd.txt'
+prompt_template = ChatPromptTemplate([
+    ("system", get_text(gaurd_prompt_path)),
+    ("user", "{prompt}")
+])
+
+# Node
+structured_llm = llm.with_structured_output(GaurdRailState)
+def gaurdrail(state:State):
+    gaurd_rail_prompt = prompt_template.invoke({"prompt": state['user_query']})
+    msg = structured_llm.invoke(gaurd_rail_prompt)
+    return {"gaurd_index":msg.content}

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Questioncard } from '../cards/questioncard/questioncard';
@@ -8,11 +8,12 @@ import { MainAnswerCard } from '../cards/main-answer-card/main-answer-card';
 import { ErrorCard } from '../cards/error-card/error-card';
 import { LinkImagesCard } from '../cards/link-images-card/link-images-card';
 import { ChartCard } from '../cards/chart-card/chart-card';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-home',
   imports: [
-    CommonModule, 
+    CommonModule,
+    FormsModule,
     RouterLink, 
     Questioncard, 
     NewsCards,
@@ -27,7 +28,13 @@ import { ChartCard } from '../cards/chart-card/chart-card';
   styleUrl: './home.css'
 })
 export class Home {
-  placeholder="Discuss about new case !"
+  Components = signal([
+    {"type":"MainAnswer","content":"Nic"}
+  ])
+  MasterQuestion: WritableSignal<string> = signal("")
+  Answer: WritableSignal<string> = signal("")
+
+
   removeIntro = signal(false)
   askNext = signal(false)
 
@@ -35,8 +42,51 @@ export class Home {
 
   SearchIcon="Icons/add.svg"
 
+  async queryLLM(prompt: string) {
+    let res = await fetch("https://lawagent-6r30.onrender.com/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: prompt })
+    });
+
+    const reader = res.body?.getReader();
+    const decoder = new TextDecoder();
+    this.Components.update(prev => [
+      ...prev, { type: 'MainAnswer', content: '' }
+    ]);
+    while (true) {
+      const { done, value } = await reader!.read();
+      if (done) break;
+      const chunk = decoder.decode(value, { stream: true });
+      
+      this.Components.update(prev => {
+        const last = prev[prev.length - 1];
+        if (last?.type === 'MainAnswer') {
+          last.content += chunk;
+          return [...prev.slice(0, -1), last];
+        }
+        return [...prev, { type: 'MainAnswer', content: chunk }];
+      });
+    }
+  }
+
   showMainSearchInput(){
+    if(this.Searching() === true){
+      if(this.MasterQuestion().length > 0){
+        
+
+        // LLM Call
+        this.queryLLM(this.MasterQuestion())
+        
+
+        this.MasterQuestion.set("")
+      }
+    }
     this.Searching.update((val)=>val = !val)
+  }
+  receiveMessage(msg: string){
+    console.log(msg)
+    this.queryLLM(msg)
   }
 
 
