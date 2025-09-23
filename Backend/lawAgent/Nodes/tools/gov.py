@@ -1,6 +1,6 @@
 import urllib.parse
 from ddgs import DDGS
-from state import WorkerState
+from lawAgent.Nodes.state import WorkerState
 
 def get_original_link(url: str) -> str:
     try:
@@ -13,7 +13,7 @@ def get_original_link(url: str) -> str:
         return ""
 
 def get_articles(state:WorkerState):
-    query = state['worker'].description
+    query = state['worker_query']
     query += " site:.gov.in"
     results = []
     try:

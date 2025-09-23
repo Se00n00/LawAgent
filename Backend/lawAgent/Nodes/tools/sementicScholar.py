@@ -1,10 +1,16 @@
-from state import WorkerState
+from lawAgent.Nodes.state import WorkerState
+
+import asyncio
+import uvloop
+
+# Set default loop to asyncio's default instead of uvloop
+asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
 
 from semanticscholar import SemanticScholar
 sch = SemanticScholar()
 
 def get_papers(state:WorkerState):
-    query = state["worker"].description
+    query = state["worker_query"]
     result = []
     try:
         response = sch.search_paper(query=query,limit=100)

@@ -1,5 +1,5 @@
-from utils.utils import get_text
-from state import RedirectionState, State, GaurdRailState
+from lawAgent.Nodes.utils.utils import get_text
+from lawAgent.Nodes.state import State, RedirectionState, GaurdRailState
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -21,7 +21,7 @@ llm = ChatOpenAI(
 )
 
 # Prompt
-redirect_prompt_path = 'prompts/redirection.txt'
+redirect_prompt_path = 'lawAgent/Nodes/prompts/redirection.txt'
 prompt_template = ChatPromptTemplate([
     ("system", get_text(redirect_prompt_path)),
     ("user", "{prompt}")
@@ -29,7 +29,7 @@ prompt_template = ChatPromptTemplate([
 
 # Node
 structured_llm = llm.with_structured_output(RedirectionState)
-def redirection(conv_state:State, index_state:GaurdRailState):
-    redirect_prompt = prompt_template.invoke({"prompt": conv_state['user_query']+"Index of user's loss: "+str(index_state["gaurdrail_index"])})
+def redirection(state:State):
+    redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Index of user's loss: {str(state["gaurd_index"])}"})
     msg = structured_llm.invoke(redirect_prompt)
-    return {"redirection":msg.content}
+    return {"redirection":msg.follow_up_Question}

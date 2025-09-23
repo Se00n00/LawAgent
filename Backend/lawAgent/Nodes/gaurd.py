@@ -1,5 +1,5 @@
-from utils.utils import get_text
-from state import State, GaurdRailState
+from lawAgent.Nodes.utils.utils import get_text
+from lawAgent.Nodes.state import State, GaurdRailState
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -22,7 +22,7 @@ llm = ChatOpenAI(
 
 
 # Prompt
-gaurd_prompt_path = 'prompts/gaurd.txt'
+gaurd_prompt_path = 'lawAgent/Nodes/prompts/gaurd.txt'
 prompt_template = ChatPromptTemplate([
     ("system", get_text(gaurd_prompt_path)),
     ("user", "{prompt}")
@@ -33,4 +33,4 @@ structured_llm = llm.with_structured_output(GaurdRailState)
 def gaurdrail(state:State):
     gaurd_rail_prompt = prompt_template.invoke({"prompt": state['user_query']})
     msg = structured_llm.invoke(gaurd_rail_prompt)
-    return {"gaurd_index":msg.content}
+    return {"gaurd_index":msg.gaurdrail_index}

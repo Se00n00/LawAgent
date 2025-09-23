@@ -1,0 +1,1 @@
+Write an efficient query to search in goduckgo for laws, regulations, or images related to:

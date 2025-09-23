@@ -3,16 +3,21 @@ from typing import TypedDict,List, Dict, Any, Annotated
 import operator
 
 # NODE: Conversation
-# class ConverstationState(TypedDict):
-#     conversation:str
+class ConverstationOutput(BaseModel):
+    proceed2Orchestration:bool
+    conversation:str
 
 # NODE: Gaurd 
-class GaurdRailState(TypedDict):
+class GaurdRailState(BaseModel):
     gaurdrail_index:int
 
 # NODE: Redirector
-class RedirectionState(TypedDict):
+class RedirectionState(BaseModel):
     follow_up_Question:str
+
+# NODE: Worker: Gov_articles
+class refine_query(BaseModel):
+    query:str
 
 # Node: Summerizer
 class SummerizerOutput(BaseModel):
@@ -38,40 +43,17 @@ class State(TypedDict):
     user_query:str
     gaurd_index:int
     redirection:str
-    initialized:bool
+    proceed2Orchestration:bool
+    conversation:str
     works: List[Worker_Output]
-    researcher: SearchState
-    images: SearchState
-    gov: SearchState
-    retreiver: SearchState
-    research_content: str
-    retreival_content: str
-    gov_content:str
-    final_answer:str
-
-    complete_section:str
-
-# subGraph State  ??
-class OrchestratorState(TypedDict):
-    user_query:str
-    initialized:bool
-    works: List[Worker_Output]
-    researcher: SearchState
-    images: SearchState
-    gov: SearchState
-    retreiver: SearchState
-    research_content: str
-    retreival_content: str
-    gov_content:str
-    final_answer:str
-
-    complete_section:str
-    
     extracted_content: Annotated[List[str], operator.add]
+    complete_section:str
+    final_answer:str
+    Summeries: List[Dict[str, Any]]
 
 # Worker State
 class WorkerState(TypedDict):
-    worker:Worker_Output
+    worker_query:str
     search_results: List[Dict[str, Any]]
     curated_results: List[Dict[str, Any]]
     extracted_content: Annotated[List[str], operator.add]

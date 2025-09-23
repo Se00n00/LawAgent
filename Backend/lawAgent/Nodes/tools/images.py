@@ -1,9 +1,9 @@
-from state import WorkerState
+from lawAgent.Nodes.state import WorkerState
 
 from ddgs import DDGS
 
 def get_images(state:WorkerState):
-    query = state['worker'].description
+    query = state['worker_query']
 
     try:
         results = DDGS().images(

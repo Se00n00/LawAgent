@@ -1,7 +1,7 @@
-from utils.utils import get_text
+from .utils.utils import get_text
+from .state import SummerizerOutput, State
 
 from langchain_openai import ChatOpenAI
-from state import SummerizerOutput, State
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
 
@@ -22,7 +22,7 @@ llm = ChatOpenAI(
 )
 
 # Prompt
-finalanswer_prompt_path = 'prompts/finalanswer.text'
+finalanswer_prompt_path = 'lawAgent/Nodes/prompts/finalanswer.txt'
 answer_prompt = ChatPromptTemplate([
     SystemMessage(content=get_text(finalanswer_prompt_path)),
     MessagesPlaceholder("msg")

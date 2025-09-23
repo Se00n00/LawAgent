@@ -1,0 +1,1 @@
+Write an efficient query to search in sementicscholar for laws, regulations research paper related to:
