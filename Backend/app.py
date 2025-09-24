@@ -59,7 +59,7 @@ def home():
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
-    input_message = [HumanMessage(content=req.message)]
+    input_message = req.message
 
     
     def event_generator():

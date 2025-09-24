@@ -25,7 +25,7 @@ def _(value):
     from langchain_openai import ChatOpenAI
 
     llm = ChatOpenAI(
-        model = "openrouter/sonoma-sky-alpha",
+        model = "nvidia/nemotron-nano-9b-v2:free",
         api_key=value,
         base_url = "https://openrouter.ai/api/v1",
         streaming=True

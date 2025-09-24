@@ -38,7 +38,7 @@ orchestraor_prompt = ChatPromptTemplate([
 orchestrator = llm.with_structured_output(Orchestrator_Output)
 def OrchestratorNode(state:State):
     res = orchestrator.invoke(
-        orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["conversation"])]})
+        orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
     )
     print(res.works)
     return {"works": res.works}

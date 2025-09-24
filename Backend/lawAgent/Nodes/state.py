@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import TypedDict,List, Dict, Any, Annotated
 import operator
+from langgraph.graph import MessagesState
 
 # NODE: Conversation
 class ConverstationOutput(BaseModel):
@@ -44,7 +45,7 @@ class State(TypedDict):
     gaurd_index:int
     redirection:str
     proceed2Orchestration:bool
-    conversation:str
+    conversation:list[MessagesState]
     works: List[Worker_Output]
     extracted_content: Annotated[List[str], operator.add]
     complete_section:str

@@ -40,11 +40,18 @@ conversation_prompt = ChatPromptTemplate([
 # Node
 chatbot = llm.with_structured_output(ConverstationOutput)
 def ChatNode(state:State):
+    if not state.get("conversation"):
+        state["conversation"] = []
+        
+    state["conversation"].append({"role": "user", "content": state["user_query"]})
+    print("CONVERSTAION: ", state['conversation'])
     res = chatbot.invoke(
-        conversation_prompt.invoke({"msg":state["user_query"]})
+        conversation_prompt.invoke({"msg":state["conversation"]})
     )
+    print("RES",res)
+    state["conversation"].append({"role": "assistant", "content": res.conversation})
 
-    state['conversation'], state['proceed2Orchestration'] = res.conversation, res.proceed2Orchestration
+    state['user_query'], state['proceed2Orchestration'] = res.conversation, res.proceed2Orchestration
     return state
 
 
@@ -61,7 +68,6 @@ def orchestrationOrEnd(state:State):
     if(state['proceed2Orchestration'] == False):
         return "END"
     else:
-        state['user_query'] = state['conversation']
         return "ORCHESTRATION"
 
 # Optional
