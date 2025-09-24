@@ -8,3 +8,4 @@ ddgs
 semanticscholar
 python-dotenv
 pydantic
+uvloop

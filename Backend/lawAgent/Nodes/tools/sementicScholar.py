@@ -1,10 +1,10 @@
 from lawAgent.Nodes.state import WorkerState
 
-import asyncio
-import uvloop
+# import asyncio
+# import uvloop
 
-# Set default loop to asyncio's default instead of uvloop
-asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
+# # Set default loop to asyncio's default instead of uvloop
+# asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
 
 from semanticscholar import SemanticScholar
 sch = SemanticScholar()
