@@ -9,6 +9,8 @@ import { ErrorCard } from '../cards/error-card/error-card';
 import { LinkImagesCard } from '../cards/link-images-card/link-images-card';
 import { ChartCard } from '../cards/chart-card/chart-card';
 import { FormsModule } from '@angular/forms';
+import { Supabase } from '../service/supabase';
+
 @Component({
   selector: 'app-home',
   imports: [
@@ -28,6 +30,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home.css'
 })
 export class Home {
+  constructor(public auth:Supabase){}
   Components = signal([
     {"type":"MainAnswer","content":"Nic"}
   ])
@@ -35,7 +38,7 @@ export class Home {
   Answer: WritableSignal<string> = signal("")
 
 
-  removeIntro = signal(false)
+  removeIntro = signal(true)
   askNext = signal(false)
 
   Searching = signal(false)
@@ -71,18 +74,17 @@ export class Home {
   }
 
   showMainSearchInput(){
-    if(this.Searching() === true){
-      if(this.MasterQuestion().length > 0){
+    
+    if(this.MasterQuestion().length > 0){
         
 
-        // LLM Call
-        this.queryLLM(this.MasterQuestion())
-        
+      // LLM Call
+      this.queryLLM(this.MasterQuestion())
+      
 
-        this.MasterQuestion.set("")
-      }
+      this.MasterQuestion.set("")
     }
-    this.Searching.update((val)=>val = !val)
+    this.removeIntro.update((val)=>val = !val)
   }
   receiveMessage(msg: string){
     console.log(msg)

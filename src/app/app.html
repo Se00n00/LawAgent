@@ -1,22 +1,21 @@
 @if (background()) {
   <div class="relative flex justify-center items-center w-screen h-screen overflow-hidden">
-    <img src="background.jpg" class=" opacity-95 [mask-image:radial-gradient(circle,rgba(0,0,0,1)_70%,rgba(0,0,0,0)_100%)] [-webkit-mask-image:radial-gradient(circle,rgba(0,0,0,1)_70%,rgba(0,0,0,0)_100%)]">
+    <img src="background.jpg" class="saturate-150 opacity-95 [mask-image:radial-gradient(circle,rgba(0,0,0,1)_70%,rgba(0,0,0,0)_100%)] [-webkit-mask-image:radial-gradient(circle,rgba(0,0,0,1)_70%,rgba(0,0,0,0)_100%)]">
     <img src="white.png" class="absolute">
     
-    <div class="absolute flex flex-col gap-2">
-      <div class="p-2 flex flex-col gap-2 rounded-2xl border-black/[0.2] backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.2]">
-        <img src="images/base.jpg" class="w-[30vw] rounded-xl" >
-        <div class="p-3 px-5 flex justify-between items-center rounded-xl backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.9]">
+    
+    <div class="absolute flex flex-col gap-2 items-center">
+      <div class="p-2 w-max flex flex-col items-center justify-center gap-2 rounded-2xl border-black/[0.2] backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.2]">
+        <img src="images/base.jpg" class="w-[70vw] md:w-[60vw] lg:w-[30vw] rounded-xl" >
+        <button class="absolute top-5 right-5 rounded-full text-white bg-black p-1 px-3 cursor-pointer" (click)="removeBackground()">Continue</button>
+      </div>
+      <div class="p-2 w-max flex flex-col items-center justify-center gap-2 rounded-2xl border-black/[0.2] backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.2]">
+        <div class="w-[70vw] md:w-[60vw] lg:w-[30vw] p-3 px-5 text-wrap flex justify-between items-center rounded-xl backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.7]">
           An agentic app to ask anything related to indian law, cases and regulations
         </div>
-      </div>
-      <div class="p-2 rounded-2xl backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.2]">
-        <div class="p-3 px-5 flex justify-between items-center rounded-xl backdrop-blur-sm text-sm text-neutral-800/[0.6] bg-white/[0.5]">
-          This project is in developement phase
-          <button class=" rounded-full text-white bg-black p-1 px-3 cursor-pointer" (click)="removeBackground()">Continue</button>
-        </div>
-      </div>        
+      </div> 
     </div>
+       
     
   </div>
 }

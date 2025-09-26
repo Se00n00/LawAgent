@@ -61,12 +61,14 @@ def home():
 async def chat(req: ChatRequest):
     input_message = req.message
 
-    
-    def event_generator():
-        for chunk, metadata in agent.stream(
-        {"user_query": input_message},config, stream_mode="messages",):
-            if isinstance(chunk, AIMessage):
-                yield chunk.content
+    try:
+        def event_generator():
+            for chunk, metadata in agent.stream(
+            {"user_query": input_message},config, stream_mode="messages",):
+                if isinstance(chunk, AIMessage):
+                    yield chunk.content
 
 
-    return StreamingResponse(event_generator(), media_type="text/plain")
+        return StreamingResponse(event_generator(), media_type="text/plain")
+    except Exception as e:
+        return {"error":f"Exception: {e}"}

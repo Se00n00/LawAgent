@@ -89,6 +89,33 @@ def _(bot):
 
 @app.cell
 def _():
+    print("HII")
+    return
+
+
+@app.cell
+def _():
+    from pinecone import Pinecone
+    return (Pinecone,)
+
+
+@app.cell
+def _(Pinecone):
+    pc = Pinecone(api_key="")
+
+    index = pc.Index(host="https://paper1-4votq7i.svc.aped-4627-b74a.pinecone.io")
+    return (index,)
+
+
+@app.cell
+def _(index):
+    for namespace in index.list_namespaces():
+        print(namespace.name, ":", namespace.record_count)
+    return
+
+
+@app.cell
+def _():
     return
 
 
