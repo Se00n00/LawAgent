@@ -21,18 +21,24 @@ llm = ChatOpenAI(
     streaming=True
 )
 
-# Prompt
-finalanswer_prompt_path = 'lawAgent/Nodes/prompts/finalanswer.txt'
-answer_prompt = ChatPromptTemplate([
-    SystemMessage(content=get_text(finalanswer_prompt_path)),
-    MessagesPlaceholder("msg")
-])
+# # Prompt
+# finalanswer_prompt_path = 'lawAgent/Nodes/prompts/finalanswer.txt'
+# answer_prompt = ChatPromptTemplate([
+#     SystemMessage(content=get_text(finalanswer_prompt_path)),
+#     MessagesPlaceholder("msg")
+# ])
 
 # Node
 def FinalNode(state:State):
     text = state["complete_section"]
-    res = llm.invoke(
-        answer_prompt.invoke({"msg":[HumanMessage(content=text)]})
-    )
+    res = llm.invoke(f"""
+        You are a final answer assistant. 
+
+        Your task is to provide a **final answer** to the user's question. 
+        Do NOT explain your reasoning or any ask questions. 
+
+        Information: {text}
+        User Question: {state['user_query']}
+    """)
     state["final_answer"] = res.content
     return state

@@ -1,4 +1,4 @@
-from .state import WorkerState, refine_query
+from .state import WorkerState, gov_arguments
 from .tools.gov import get_articles
 from .utils.utils import get_text
 
@@ -33,12 +33,17 @@ synthesizer_prompt = ChatPromptTemplate([
 
 
 # Node : Prompt Synthesizer(gov_synthesizer) > get_images(tools) > Curator(gov_curator) > Extractor(gov_extractor)
-Synthesizer = llm.with_structured_output(refine_query)
+Synthesizer = llm.with_structured_output(gov_arguments)
 def gov_synthesizer(state: WorkerState):
     res = Synthesizer.invoke(
         synthesizer_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
     )
-    return {"worker_query": res.query}
+    result = get_articles(
+        query=res.worker_query,
+        region=res.region,
+        max_results=res.max_results
+    )
+    return {"curated_results": result["search_results"]}
 
 def gov_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -69,13 +74,9 @@ def gov_extractor(state: WorkerState) -> WorkerState:
 gov_articles = (
     StateGraph(WorkerState)
     .add_node("gov_synthesizer",gov_synthesizer)
-    .add_node("get_articles",get_articles)
-    .add_node("gov_curator",gov_curator)
     .add_node("gov_extractor",gov_extractor)
     .add_edge(START, "gov_synthesizer")
-    .add_edge("gov_synthesizer", "get_articles")
-    .add_edge("get_articles", "gov_curator")
-    .add_edge("gov_curator","gov_extractor")
+    .add_edge("gov_synthesizer", "gov_extractor")
     .add_edge("gov_extractor",END)
     .compile()
 )

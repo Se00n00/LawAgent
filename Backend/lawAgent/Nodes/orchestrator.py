@@ -40,7 +40,6 @@ def OrchestratorNode(state:State):
     res = orchestrator.invoke(
         orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
     )
-    print(res.works)
     return {"works": res.works}
 
 def assign_task(state:State):

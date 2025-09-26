@@ -1,6 +1,7 @@
-from .state import WorkerState,refine_query
+from .state import WorkerState,refine_query, news_arguments
 from .utils.utils import get_text
 from .tools.news import get_news
+import difflib
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -33,33 +34,49 @@ retriver_prompt = ChatPromptTemplate([
 
 
 # Node : Prompt Synthesizer(news_synthesizer) > get_news(tools) > Curator(news_curator) > Extractor(news_extractor)
-Retreiver = llm.with_structured_output(refine_query)
+Retreiver = llm.with_structured_output(news_arguments)
 def news_synthesizer(state: WorkerState):
     res = Retreiver.invoke(
         retriver_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
     )
-    return {"worker_query": res.query}
+
+    result = get_news(
+        query=res.worker_query,
+        timelimit=res.timelimit,
+        max_results=res.max_results,
+        page=res.page,
+        region=res.region
+    )
+    return {"curated_results": result["search_results"]}
 
 
 def news_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
-        [f"Title: {p['title']}\n" for p in state["search_results"]]
+        [f"Title: {str(p['title'])}\n Date: {str(p['date'])} Body: {str(p['body'])}" for p in state["search_results"]]
     )
     msg = llm.invoke([
         HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
         f"Return only the chosen titles.\n\n{papers_text}")
     ])
 
-    chosen_titles = msg.content.splitlines()
-    curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
-    
-    return {"curated_results":curated}
+    chosen_titles = [line.strip() for line in msg.content.splitlines() if line.strip()]
+
+    # fuzzy match: include article if its title is similar enough to any chosen title
+    curated = []
+    for article in state["search_results"]:
+        for title in chosen_titles:
+            ratio = difflib.SequenceMatcher(None, article["title"], title).ratio()
+            if ratio > 0.7:  # threshold, adjust as needed
+                curated.append(article)
+                break
+
+    return {"curated_results": curated}
 
 
 
 def news_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
-        [f"Title: {p['title']} ({p['date']})" for p in state["curated_results"]]
+        [f"Title: {str(p['title'])}\n Date: {str(p['date'])}\n Body: {str(p['body'])}\n Source: {str(p['source'])} " for p in state["curated_results"]]
     )
     msg = llm.invoke([
         HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
@@ -69,13 +86,9 @@ def news_extractor(state: WorkerState) -> WorkerState:
 news_articles = (
     StateGraph(WorkerState)
     .add_node("news_synthesizer",news_synthesizer)
-    .add_node("get_news",get_news)
-    .add_node("news_curator",news_curator)
     .add_node("news_extractor",news_extractor)
     .add_edge(START, "news_synthesizer")
-    .add_edge("news_synthesizer", "get_news")
-    .add_edge("get_news", "news_curator")
-    .add_edge("news_curator","news_extractor")
+    .add_edge("news_synthesizer", "news_extractor")
     .add_edge("news_extractor",END)
     .compile()
 )

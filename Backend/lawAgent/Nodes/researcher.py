@@ -1,4 +1,4 @@
-from .state import WorkerState, refine_query
+from .state import WorkerState, research_arguments
 from .utils.utils import get_text
 from .tools.sementicScholar import get_papers
 
@@ -34,12 +34,13 @@ research_prompt = ChatPromptTemplate([
 
 
 # Node : Prompt Synthesizer(reserach_synthesizer) > get_papers(tools) > Curator(research_curator) > Extractor(research_extractor)
-Synthesizer = llm.with_structured_output(refine_query)
+Synthesizer = llm.with_structured_output(research_arguments)
 def research_synthesizer(state: WorkerState):
     res = Synthesizer.invoke(
         research_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
     )
-    return {"worker_query": res.query}
+    result = get_papers(query=res.worker_query)
+    return {"curated_results": result["search_results"]}
 
 def research_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -69,13 +70,9 @@ def research_extractor(state: WorkerState) -> WorkerState:
 research_articles = (
     StateGraph(WorkerState)
     .add_node("research_synthesizer",research_synthesizer)
-    .add_node("get_papers",get_papers)
-    .add_node("research_curator",research_curator)
     .add_node("research_extractor",research_extractor)
     .add_edge(START, "research_synthesizer")
-    .add_edge("research_synthesizer", "get_papers")
-    .add_edge("get_papers", "research_curator")
-    .add_edge("research_curator","research_extractor")
+    .add_edge("research_synthesizer", "research_extractor")
     .add_edge("research_extractor",END)
     .compile()
 )

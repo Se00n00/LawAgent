@@ -12,22 +12,25 @@ def get_original_link(url: str) -> str:
         print(f"Error parsing URL: {e}")
         return ""
 
-def get_articles(state:WorkerState):
-    query = state['worker_query']
-    query += " site:.gov.in"
+
+def get_articles(query, region="us-en", max_results=20):
     results = []
+
     try:
         with DDGS() as ddgs:
-            for r in ddgs.text(query, max_results=20):
-                url = r.get("href")
-                print(url)
-                if(r.get('body') != None and url and get_original_link(url).endswith(".gov.in")):
-                    results.append({
-                        "title": r.get("title"),
-                        "url": r.get("href"),
-                        "snippet": r.get("body")
-                    })
+            news_results = ddgs.text(
+                query=query,
+                region=region,
+                safesearch="off",
+                max_results=max_results
+            )
+            for r in news_results:
+                results.append({
+                    "title": r.get("title", ""),
+                    "url": r.get("href", ""),
+                    "snippet": r.get("body", "")
+                })
     except Exception as e:
-        pass
-    
-    return {"search_results":results}
+        print("Error fetching articles:", e)
+
+    return {"search_results": results}

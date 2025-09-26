@@ -2,15 +2,13 @@ from lawAgent.Nodes.state import WorkerState
 
 from ddgs import DDGS
 
-def get_images(state:WorkerState):
-    query = state['worker_query']
-
+def get_images(query, timelimit="y", region="us-en"):
     try:
         results = DDGS().images(
             query=query,
-            region="in-en",
+            region=region,
             safesearch="off",
-            timelimit=None,
+            timelimit=timelimit,
             page=1,
             backend="auto",
             size=None,

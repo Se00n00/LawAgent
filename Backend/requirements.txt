@@ -9,3 +9,4 @@ semanticscholar
 python-dotenv
 pydantic
 uvloop
+langsmith

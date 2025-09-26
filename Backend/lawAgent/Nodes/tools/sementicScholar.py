@@ -9,8 +9,7 @@ from lawAgent.Nodes.state import WorkerState
 from semanticscholar import SemanticScholar
 sch = SemanticScholar()
 
-def get_papers(state:WorkerState):
-    query = state["worker_query"]
+def get_papers(query):
     result = []
     try:
         response = sch.search_paper(query=query,limit=100)

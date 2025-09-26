@@ -2,30 +2,38 @@ from lawAgent.Nodes.state import WorkerState
 
 from ddgs import DDGS
 
-def get_news(state:WorkerState):
-    query = state['worker_query']
+def get_news(query, timelimit="y", max_results=20, page=1, region="us-en"):
+    """
+    Fetch news based on worker state and optional parameters.
+
+    query: search query
+    timelimit: 'd', 'w', 'm', 'y'
+    max_results: max number of results to fetch
+    page: which page of results
+    region: language/region
+    """
     try:
         results = DDGS().news(
             query=query,
             region="us-en",
             safesearch="off",
-            timelimit="d",
-            max_results=10,
+            timelimit="y",
+            max_results=20,
             page=1,
             backend="auto"
         )
     except Exception as e:
         results = []
-    for item in results:
-        print(item)
     News = []
     for item in results:
         News.append({
-            "title":item["title"],
-            "date": item["date"],
-            "article_url":item["url"],
-            "image_url":item["image"],
-            "source":item["source"]
+            "title": item.get("title", ""),
+            "body": item.get("body", ""),
+            "article_url": item.get("url", ""),
+            "image_url": item.get("image", ""),
+            "source": item.get("source", ""),
+            "date": item.get("date", "")
         })
+
 
     return {"search_results":News}

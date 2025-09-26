@@ -1,4 +1,4 @@
-from .state import WorkerState,refine_query
+from .state import WorkerState, image_arguments
 from .utils.utils import get_text
 from .tools.images import get_images
 
@@ -34,12 +34,17 @@ image_prompt = ChatPromptTemplate([
 
 
 # Node : Prompt Synthesizer(image_synthesizer) > get_articles(tools) > Curator(images_curator)
-Synthesizer = llm.with_structured_output(refine_query)
+Synthesizer = llm.with_structured_output(image_arguments)
 def image_synthesizer(state: WorkerState):
     res = Synthesizer.invoke(
         image_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
     )
-    return {"worker_query": res.query}
+    result = get_images(
+        query=res.worker_query,
+        timelimit=res.timelimit,
+        region=res.region
+    )
+    return {"curated_results": result["search_results"]}
 
 def images_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -58,11 +63,7 @@ def images_curator(state: WorkerState) -> WorkerState:
 images = (
     StateGraph(WorkerState)
     .add_node("image_synthesizer",image_synthesizer)
-    .add_node("get_images",get_images)
-    .add_node("images_curator",images_curator)
     .add_edge(START, "image_synthesizer")
-    .add_edge("image_synthesizer", "get_images")
-    .add_edge("get_images", "images_curator")
-    .add_edge("images_curator", END)
+    .add_edge("image_synthesizer", END)
     .compile()
 )

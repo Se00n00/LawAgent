@@ -20,6 +20,31 @@ class RedirectionState(BaseModel):
 class refine_query(BaseModel):
     query:str
 
+# NODE: Worker: News Synthesizer
+class news_arguments(BaseModel):
+    worker_query: str
+    timelimit: str
+    max_results: int
+    page: int
+    region: str
+
+# NODE: Worker: research Synthesizer
+class research_arguments(BaseModel):
+    worker_query: str
+    
+
+# NODE: Worker: Image Synthesizer
+class image_arguments(BaseModel):
+    worker_query: str
+    timelimit: str
+    region: str
+
+# NODE: Worker: Gov Synthesizer
+class gov_arguments(BaseModel):
+    worker_query: str
+    region: str
+    max_results: int
+
 # Node: Summerizer
 class SummerizerOutput(BaseModel):
     Summeries: List[Dict[str, Any]]

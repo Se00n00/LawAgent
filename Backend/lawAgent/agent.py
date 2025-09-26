@@ -9,6 +9,7 @@ from lawAgent.Nodes.orchestrator import sub_graph
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
+from langsmith import traceable
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -22,6 +23,7 @@ load_dotenv()
 primary_llm = os.getenv("PRIMARY_LLM")
 secondary_llm = os.getenv("SECONDARY_LLM")
 openrouter_api = os.getenv("OPENROUTER_APIKEY")
+
 
 llm = ChatOpenAI(
     model = primary_llm,
@@ -39,16 +41,15 @@ conversation_prompt = ChatPromptTemplate([
 
 # Node
 chatbot = llm.with_structured_output(ConverstationOutput)
+@traceable
 def ChatNode(state:State):
     if not state.get("conversation"):
         state["conversation"] = []
         
     state["conversation"].append({"role": "user", "content": state["user_query"]})
-    print("CONVERSTAION: ", state['conversation'])
     res = chatbot.invoke(
         conversation_prompt.invoke({"msg":state["conversation"]})
     )
-    print("RES",res)
     state["conversation"].append({"role": "assistant", "content": res.conversation})
 
     state['user_query'], state['proceed2Orchestration'] = res.conversation, res.proceed2Orchestration
