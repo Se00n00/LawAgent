@@ -29,15 +29,19 @@ summerizer_prompt = ChatPromptTemplate([
 ])
 
 # Node
-# summerizer = llm.with_structured_output(SummerizerOutput)
+summerizer = llm.with_structured_output(SummerizerOutput)
 def SummerizerNode(state:State):
     text = state["complete_section"]
-    res = llm.invoke(f"""
+    res = summerizer.invoke(f"""
         You are a pointwise summerizer assistant. 
 
         Your task is to provide a point wise summerization to the user's question. 
         which is you would generate important point as list of [heading + content] 
-        Do NOT explain your reasoning or any ask questions. 
+        Do NOT explain your reasoning or any ask questions.
+        Schema for answering: 
+            class SummerizerOutput(BaseModel):
+                type:"Summeries" -- keep this string intact
+                content: List[Dict[str, Any]] -- your answer
 
         Information: {text}
     """)

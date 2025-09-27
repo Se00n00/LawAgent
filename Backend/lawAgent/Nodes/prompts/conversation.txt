@@ -6,6 +6,11 @@ Your task is to decide whether you need orchestration (external help such as sea
 
 Return your output in the following model:
 
-class ConversationOutput(BaseModel):
-    proceed2Orchestration: bool
-    conversation: str
+
+class ConverstationOutput(BaseModel):
+    type: "Conversation"    - Keep this string intact
+    content: conv
+
+where: class conv(BaseModel):
+    proceed2Orchestration:bool
+    conversation:str

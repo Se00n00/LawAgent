@@ -35,12 +35,17 @@ def FinalNode(state:State):
     res = final_llm.invoke(f"""
         You are a final answer assistant. 
 
-        Your task is to provide a **final answer** to the user's question. 
-        Do NOT explain your reasoning or any ask questions. 
+        Your task is to provide a **final answer** to the user's question. keep it very short (50-70 words) but keep it detailed 
+        Do NOT explain your reasoning or any ask questions.
+                           
+        Schema for answering: 
+            class FinalOutput(BaseModel):
+                type:"FinalAnswer" -- keep this string intact
+                content:str -- your answer
 
         Information: {text}
         User Question: {state['user_query']}
     """)
-    return res.answer
+    return {"final_answer":res.content}
     # state["final_answer"] = res.content
     # return state

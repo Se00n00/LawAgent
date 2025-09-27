@@ -3,11 +3,6 @@ from typing import TypedDict,List, Dict, Any, Annotated
 import operator
 from langgraph.graph import MessagesState
 
-# NODE: Conversation
-class ConverstationOutput(BaseModel):
-    proceed2Orchestration:bool
-    conversation:str
-
 # NODE: Gaurd 
 class GaurdRailState(BaseModel):
     type:str
@@ -17,6 +12,15 @@ class GaurdRailState(BaseModel):
 class RedirectionState(BaseModel):
     type:str
     content:str
+
+# NODE: Conversation
+class conv(BaseModel):
+    proceed2Orchestration:bool
+    conversation:str
+
+class ConverstationOutput(BaseModel):
+    type:str
+    content: conv    
 
 # NODE: Worker: Gov_articles
 class refine_query(BaseModel):
@@ -49,11 +53,13 @@ class gov_arguments(BaseModel):
 
 # Node: Summerizer
 class SummerizerOutput(BaseModel):
-    Summeries: List[Dict[str, Any]]
+    type:str
+    content: List[Dict[str, Any]]
 
 # Node: Final Answer
 class FinalOutput(BaseModel):
-    answer:str
+    type:str
+    content:str
 
 class Worker_Output(BaseModel):
     name:str = Field(..., description="Name of Selected Worker")

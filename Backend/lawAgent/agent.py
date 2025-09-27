@@ -50,9 +50,9 @@ def ChatNode(state:State):
     res = chatbot.invoke(
         conversation_prompt.invoke({"msg":state["conversation"]})
     )
-    state["conversation"].append({"role": "assistant", "content": res.conversation})
+    state["conversation"].append({"role": "assistant", "content": res.content.conversation})
 
-    state['user_query'], state['proceed2Orchestration'] = res.conversation, res.proceed2Orchestration
+    state['user_query'], state['proceed2Orchestration'] = res.content.conversation, res.content.proceed2Orchestration
     return state
 
 
