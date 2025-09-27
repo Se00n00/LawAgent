@@ -5,7 +5,7 @@
     <div class="relative min-w-screen min-h-screen flex">\
 
         <!-- Right Settings -->
-        <div class="fixed left-0 bottom-0 flex flex-col h-full justify-end p-5 sm:p-10">
+        <div class="fixed z-10 left-0 bottom-0 flex flex-col h-full justify-end p-5 sm:p-10">
             <div class="h-max shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
                 <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
                 <div class="h-40 w-9 hover:scale-[0.95] transition-all"></div>
@@ -14,8 +14,6 @@
                 }@else {
                     <img (click)="auth.sign_out()" alt="sign out" [src]="auth.data()?.user.user_metadata.avatar_url" class="h-9 w-9 hover:scale-[0.95] transition-all rounded-lg">   
                 }
-                
-                
             </div>
         </div>
 
@@ -76,27 +74,45 @@
                 </div>                
             }
             @else {
-                <div class="flex flex-col justify-center items-center">
-                    <div class="flex-1 w-10/12 grid grid-cols-3 gap-5 p-10">
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="w-10/12 sm:w-11/12 lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 py-10">
                         @for (item of Components(); track $index) {
-                            @switch (item.type) {
-                                @case ("MainAnswer") {
-                                    <app-main-answer-card [Content]="item.content"/>
+                            <div class="p-2 bg-gray-50 border rounded">
+                                @for (key of objectKeys(item); track key) {
+                                    <div>
+                                    <strong>{{ key }}:</strong> 
+                                    </div>
+                                }
+                                </div>
+                            @if (item.type){
+                                @switch (item.type) {
+                                    @case ("MainAnswer") {
+                                    <app-main-answer-card [Content]="item.content" class="w-full"/>
+                                    }
+                                    @case ("NewsCard") {
+                                    <app-news-cards class="col-span-3"/>
+                                    }
+                                    @case ("SummaryCard") {
+                                    <app-summary-card class="w-full"/>
+                                    }
+                                    @case ("ErrorCard") {
+                                    <app-error-card class="w-full"/>
+                                    }
+                                    @case ("LinkImageCard") {
+                                    <app-link-images-card class="w-full"/>
+                                    }
                                 }
                             }
-                            <app-news-cards class="col-span-3 "/>
-                           
-                            <app-summary-card/>
-                            <app-error-card/>
-                            <app-link-images-card/>
+                            @else {
+                                <div class="text-sm text-gray-400">
+      {{ item | json }}
+    </div>
+                            }
                         }
-                        <!-- <app-chart-card/> -->
-                        
-                        <app-questioncard (messageEvent)="receiveMessage($event)" />
-                        
-                        
+                        <app-questioncard (messageEvent)="receiveMessage($event)" class="w-full"/>
                     </div>
-                </div>
+                    </div>
+
                 
             }
             

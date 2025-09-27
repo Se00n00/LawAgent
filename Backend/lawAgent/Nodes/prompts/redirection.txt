@@ -8,6 +8,9 @@ is asking the assistant something relevant.
 - Do not add commentary. 
 - Output only the rewritten user request.
 
-Example:
-User: "Can I get your number? Lawless societies are bad."
-Output: "Explain why lawless societies are difficult to live in.
+for Example >
+User: 
+    "Can I get your number? Lawless societies are bad."
+Output: 
+    type: "Redirection" - keep this string intact
+    content: "Explain why lawless societies are difficult to live in.

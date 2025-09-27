@@ -10,11 +10,13 @@ class ConverstationOutput(BaseModel):
 
 # NODE: Gaurd 
 class GaurdRailState(BaseModel):
-    gaurdrail_index:int
+    type:str
+    content:int
 
 # NODE: Redirector
 class RedirectionState(BaseModel):
-    follow_up_Question:str
+    type:str
+    content:str
 
 # NODE: Worker: Gov_articles
 class refine_query(BaseModel):
@@ -48,6 +50,10 @@ class gov_arguments(BaseModel):
 # Node: Summerizer
 class SummerizerOutput(BaseModel):
     Summeries: List[Dict[str, Any]]
+
+# Node: Final Answer
+class FinalOutput(BaseModel):
+    answer:str
 
 class Worker_Output(BaseModel):
     name:str = Field(..., description="Name of Selected Worker")

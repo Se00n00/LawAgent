@@ -1,5 +1,5 @@
 from .utils.utils import get_text
-from .state import SummerizerOutput, State
+from .state import SummerizerOutput, State, FinalOutput
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -29,9 +29,10 @@ llm = ChatOpenAI(
 # ])
 
 # Node
+final_llm = llm.with_structured_output(FinalOutput)
 def FinalNode(state:State):
     text = state["complete_section"]
-    res = llm.invoke(f"""
+    res = final_llm.invoke(f"""
         You are a final answer assistant. 
 
         Your task is to provide a **final answer** to the user's question. 
@@ -40,5 +41,6 @@ def FinalNode(state:State):
         Information: {text}
         User Question: {state['user_query']}
     """)
-    state["final_answer"] = res.content
-    return state
+    return res.answer
+    # state["final_answer"] = res.content
+    # return state

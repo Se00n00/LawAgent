@@ -43,6 +43,7 @@ def gov_synthesizer(state: WorkerState):
         region=res.region,
         max_results=res.max_results
     )
+    
     return {"curated_results": result["search_results"]}
 
 def gov_curator(state: WorkerState) -> WorkerState:

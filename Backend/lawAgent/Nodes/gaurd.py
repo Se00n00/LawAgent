@@ -33,4 +33,4 @@ structured_llm = llm.with_structured_output(GaurdRailState)
 def gaurdrail(state:State):
     gaurd_rail_prompt = prompt_template.invoke({"prompt": state['user_query']})
     msg = structured_llm.invoke(gaurd_rail_prompt)
-    return {"gaurd_index":msg.gaurdrail_index}
+    return {"gaurd_index":msg.content}

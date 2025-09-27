@@ -31,14 +31,17 @@ import { Supabase } from '../service/supabase';
 })
 export class Home {
   constructor(public auth:Supabase){}
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
   Components = signal([
-    {"type":"MainAnswer","content":"Nic"}
+    {"type":"MainAnswer","content":"Hello! everyone **I am Mohit**"}
   ])
   MasterQuestion: WritableSignal<string> = signal("")
   Answer: WritableSignal<string> = signal("")
 
 
-  removeIntro = signal(true)
+  removeIntro = signal(false)
   askNext = signal(false)
 
   Searching = signal(false)
@@ -54,22 +57,46 @@ export class Home {
 
     const reader = res.body?.getReader();
     const decoder = new TextDecoder();
-    this.Components.update(prev => [
-      ...prev, { type: 'MainAnswer', content: '' }
-    ]);
+
+    let buffer = "";
+    let braceCount = 0;
+    let inString = false;
+
     while (true) {
       const { done, value } = await reader!.read();
       if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      
-      this.Components.update(prev => {
-        const last = prev[prev.length - 1];
-        if (last?.type === 'MainAnswer') {
-          last.content += chunk;
-          return [...prev.slice(0, -1), last];
+
+      buffer += decoder.decode(value, { stream: true });
+
+      let start = 0;
+      for (let i = 0; i < buffer.length; i++) {
+        const char = buffer[i];
+
+        // track strings (ignore braces inside strings)
+        if (char === '"' && buffer[i - 1] !== "\\") {
+          inString = !inString;
         }
-        return [...prev, { type: 'MainAnswer', content: chunk }];
-      });
+
+        if (!inString) {
+          if (char === "{") braceCount++;
+          if (char === "}") braceCount--;
+
+          // full JSON object found
+          if (braceCount === 0 && start <= i) {
+            const jsonStr = buffer.slice(start, i + 1).trim();
+            if (jsonStr) {
+              try {
+                const dict = JSON.parse(jsonStr);
+                this.Components.update(prev => [...prev, dict]);
+              } catch (e) {
+                console.error("Bad JSON chunk:", jsonStr, e);
+              }
+            }
+            start = i + 1;
+          }
+        }
+      }
+      buffer = buffer.slice(start);
     }
   }
 

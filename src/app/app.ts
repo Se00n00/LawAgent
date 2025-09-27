@@ -8,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  background = signal(true);
+  background = signal(false);
   removeBackground(){
     this.background.set(false)
   }

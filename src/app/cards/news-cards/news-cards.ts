@@ -22,7 +22,18 @@ interface Newscard{
 export class NewsCards {
   
 
-  @Input() NewscardItems: Newscard[] = []
+  @Input() NewscardItems: Newscard[] = [
+    // {
+    //   article_id:1,
+    //   article_author:"sfd",
+    //   article_author_icon:"sd",
+    //   article_head:"df",
+    //   article_head_image_url:"df",
+    //   article_origin_web_url:"df",
+    //   article_orign_web_icon:"as",
+    //   article_summerized_content:"sd"
+    // }
+  ]
   CurrentCardIndex = signal(0)
   
   NewscardItem = computed(() => {
