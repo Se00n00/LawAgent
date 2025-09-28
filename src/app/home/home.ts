@@ -46,7 +46,7 @@ export class Home {
   Answer: WritableSignal<string> = signal("")
 
 
-  removeIntro = signal(false)
+  removeIntro = signal(true)
   askNext = signal(false)
 
   Searching = signal(false)
@@ -62,10 +62,7 @@ export class Home {
 
     const reader = res.body?.getReader();
     const decoder = new TextDecoder();
-
     let buffer = "";
-    let braceCount = 0;
-    let inString = false;
 
     while (true) {
       const { done, value } = await reader!.read();
@@ -73,37 +70,39 @@ export class Home {
 
       buffer += decoder.decode(value, { stream: true });
 
-      let start = 0;
-      for (let i = 0; i < buffer.length; i++) {
-        const char = buffer[i];
+      // The backend separates JSONs with spaces → split them
+      const parts = buffer.split("} {").map((p, i, arr) => {
+        if (arr.length === 1) return p;
+        if (i < arr.length - 1) return p + "}";
+        if (i > 0) return "{" + p;
+        return p;
+      });
 
-        // track strings (ignore braces inside strings)
-        if (char === '"' && buffer[i - 1] !== "\\") {
-          inString = !inString;
-        }
-
-        if (!inString) {
-          if (char === "{") braceCount++;
-          if (char === "}") braceCount--;
-
-          // full JSON object found
-          if (braceCount === 0 && start <= i) {
-            const jsonStr = buffer.slice(start, i + 1).trim();
-            if (jsonStr) {
-              try {
-                const dict = JSON.parse(jsonStr);
-                this.Components.update(prev => [...prev, dict]);
-              } catch (e) {
-                console.error("Bad JSON chunk:", jsonStr, e);
-              }
-            }
-            start = i + 1;
-          }
+      // Try parsing all complete JSON objects except last (may be partial)
+      for (let i = 0; i < parts.length - 1; i++) {
+        try {
+          const obj = JSON.parse(parts[i]);
+          this.Components.update(prev => [...prev, obj]);
+        } catch (e) {
+          // ignore until JSON is complete
         }
       }
-      buffer = buffer.slice(start);
+
+      // Keep last fragment in buffer for next loop
+      buffer = parts[parts.length - 1];
+    }
+
+    // Parse last leftover if valid
+    if (buffer.trim()) {
+      try {
+        const obj = JSON.parse(buffer);
+        this.Components.update(prev => [...prev, obj]);
+      } catch (e) {
+        console.error("Leftover not valid JSON:", buffer);
+      }
     }
   }
+
 
   showMainSearchInput(){
     
