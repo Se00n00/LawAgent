@@ -10,6 +10,7 @@ import { LinkImagesCard } from '../cards/link-images-card/link-images-card';
 import { ChartCard } from '../cards/chart-card/chart-card';
 import { FormsModule } from '@angular/forms';
 import { Supabase } from '../service/supabase';
+import { ZeroCard } from '../cards/zero-card/zero-card';
 
 interface output{
   type:string
@@ -28,7 +29,8 @@ interface output{
     MainAnswerCard,
     ErrorCard,
     LinkImagesCard,
-    ChartCard
+    ChartCard,
+    ZeroCard
   ],
   
   templateUrl: './home.html',
@@ -40,13 +42,13 @@ export class Home {
     return Object.keys(obj);
   }
   Components:WritableSignal<output[]> = signal([
-    {"type":"MainAnswer","content":"Hello! everyone **I am Mohit**"}
+    {"type":"ZeroCard", "content":""},
   ])
   MasterQuestion: WritableSignal<string> = signal("")
   Answer: WritableSignal<string> = signal("")
 
 
-  removeIntro = signal(true)
+  removeIntro = signal(false)
   askNext = signal(false)
 
   Searching = signal(false)

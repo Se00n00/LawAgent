@@ -110,6 +110,9 @@
                                         [ErrorIndex]="item.content.gaurdrail_index" 
                                         class="w-full"/>
                                     }
+                                    @case ("ZeroCard") {
+                                        <app-zero-card/>
+                                    }
                                     @case ("LinkImageCard") {
                                         <app-link-images-card class="w-full"/>
                                     }
@@ -117,8 +120,8 @@
                             }
                             @else {
                                 <div class="text-sm text-gray-400">
-      {{ item | json }}
-    </div>
+                                    {{ item | json }}
+                                </div>
                             }
                         }
                         <app-questioncard (messageEvent)="receiveMessage($event)" class="w-full"/>

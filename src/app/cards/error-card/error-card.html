@@ -2,16 +2,19 @@
     <div class="min-w-50 p-0.5 relative bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
         <div class="absolute top-4 left-4 flex gap-3 items-center">
             <img src="Icons/error.svg" class="h-6">
-            <p class="text-sm text-white/[0.7]">{{ErrorList[ErrorIndex].text}}</p>
+            <p class="text-sm text-white/[0.8]">{{ErrorList[ErrorIndex].text}}</p>
         </div>
 
         @if(Redirection != null){
-            <div (click)="followUp(Redirection)" 
-            class="absolute hover:scale-[1.01] hover:-translate-y-0.5 cursor-pointer bottom-0 left-0 m-2.5 backdrop-blur-md rounded-lg border border-white/[0.3] p-1.5 bg-white/[0.1] transition-all"
-            >
-                <img src="Icons/forward.svg" class="h-4 float-start">
-                <p class="text-xs text-white/[0.7]">{{Redirection}}</p>
+            <div class="absolute  bottom-0 left-0 p-2.5 w-full">
+                <div (click)="followUp(Redirection)" 
+                class="w-full hover:scale-[1.01] hover:-translate-y-0.5 cursor-pointer backdrop-blur-md rounded-lg border border-white/[0.3] p-1.5 bg-white/[0.1] transition-all"
+                >
+                    <img src="Icons/forward.svg" class="h-4 float-start">
+                    <p class="text-xs text-white/[0.7]">{{Redirection}}</p>
+                </div>
             </div>
+            
         }
         <img [src]="ErrorList[ErrorIndex].path" class="rounded-xl aspect-auto object-contain">
     </div>

@@ -1,0 +1,156 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.14.8"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "OXOz",
+      "code_hash": "662056f31400a68c92997c2d1e649351",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZuIE",
+      "code_hash": "38c71df194b2a57ffb624bc11b8f14cf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "uPzC",
+      "code_hash": "47f35adc4c9f85aba473617ed2ebf7fb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "EAuu",
+      "code_hash": "ccd4efe6463ec643f51443ee90e5aced",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "{'type': 'Error'}\n"
+        }
+      ]
+    },
+    {
+      "id": "sKpK",
+      "code_hash": "3a2e7749d867512f9317ff2ae7c2131a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "YGPk",
+      "code_hash": "8eade3341bcda72995047b1d14fb09c2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "attH",
+      "code_hash": "00b72c507f14494e4df2dab7cf5684f0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yeMI",
+      "code_hash": "1ef815d322ecd8610bd5079134d36b72",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "UfFm",
+      "code_hash": "06e4d310e03d5f4f60e5529f4c1b6666",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "1 validation error for State\ntype\n  Field required [type=missing, input_value={'messages': 'Hii'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing",
+          "traceback": []
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/marimo/_runtime/executor.py&quot;</span>, line <span class=\"m\">139</span>, in <span class=\"n\">execute_cell</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"nb\">eval</span><span class=\"p\">(</span><span class=\"n\">cell</span><span class=\"o\">.</span><span class=\"n\">last_expr</span><span class=\"p\">,</span> <span class=\"n\">glbls</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/tmp/marimo_23776/__marimo__cell_UfFm_.py&quot;</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">graph</span><span class=\"o\">.</span><span class=\"n\">invoke</span><span class=\"p\">({</span><span class=\"s2\">&quot;messages&quot;</span><span class=\"p\">:</span><span class=\"s2\">&quot;Hii&quot;</span><span class=\"p\">})</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/main.py&quot;</span>, line <span class=\"m\">3026</span>, in <span class=\"n\">invoke</span>\n<span class=\"w\">    </span><span class=\"k\">for</span> <span class=\"n\">chunk</span> <span class=\"ow\">in</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">stream</span><span class=\"p\">(</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/main.py&quot;</span>, line <span class=\"m\">2644</span>, in <span class=\"n\">stream</span>\n<span class=\"w\">    </span><span class=\"k\">while</span> <span class=\"n\">loop</span><span class=\"o\">.</span><span class=\"n\">tick</span><span class=\"p\">():</span>\n<span class=\"w\">          </span><span class=\"pm\">^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/_loop.py&quot;</span>, line <span class=\"m\">455</span>, in <span class=\"n\">tick</span>\n<span class=\"w\">    </span><span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">tasks</span> <span class=\"o\">=</span> <span class=\"n\">prepare_next_tasks</span><span class=\"p\">(</span>\n<span class=\"w\">                 </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/_algo.py&quot;</span>, line <span class=\"m\">470</span>, in <span class=\"n\">prepare_next_tasks</span>\n<span class=\"w\">    </span><span class=\"k\">if</span> <span class=\"n\">task</span> <span class=\"o\">:=</span> <span class=\"n\">prepare_single_task</span><span class=\"p\">(</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/_algo.py&quot;</span>, line <span class=\"m\">806</span>, in <span class=\"n\">prepare_single_task</span>\n<span class=\"w\">    </span><span class=\"n\">val</span> <span class=\"o\">=</span> <span class=\"n\">_proc_input</span><span class=\"p\">(</span>\n<span class=\"w\">          </span><span class=\"pm\">^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/pregel/_algo.py&quot;</span>, line <span class=\"m\">1054</span>, in <span class=\"n\">_proc_input</span>\n<span class=\"w\">    </span><span class=\"n\">val</span> <span class=\"o\">=</span> <span class=\"n\">proc</span><span class=\"o\">.</span><span class=\"n\">mapper</span><span class=\"p\">(</span><span class=\"n\">val</span><span class=\"p\">)</span>\n<span class=\"w\">          </span><span class=\"pm\">^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langgraph/graph/state.py&quot;</span>, line <span class=\"m\">1230</span>, in <span class=\"n\">_coerce_state</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">schema</span><span class=\"p\">(</span><span class=\"o\">**</span><span class=\"nb\">input</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/pydantic/main.py&quot;</span>, line <span class=\"m\">253</span>, in <span class=\"n\">__init__</span>\n<span class=\"w\">    </span><span class=\"n\">validated_self</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">__pydantic_validator__</span><span class=\"o\">.</span><span class=\"n\">validate_python</span><span class=\"p\">(</span><span class=\"n\">data</span><span class=\"p\">,</span> <span class=\"n\">self_instance</span><span class=\"o\">=</span><span class=\"bp\">self</span><span class=\"p\">)</span>\n<span class=\"w\">                     </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n<span class=\"gr\">pydantic_core._pydantic_core.ValidationError</span>: <span class=\"n\">1 validation error for State</span>\n<span class=\"x\">type</span>\n<span class=\"x\">  Field required [type=missing, input_value={&#39;messages&#39;: &#39;Hii&#39;}, input_type=dict]</span>\n<span class=\"x\">    For further information visit https://errors.pydantic.dev/2.11/v/missing</span>\n<span class=\"x\">Before task with name &#39;chat&#39; and path &#39;(&#39;__pregel_pull&#39;, &#39;chat&#39;)&#39;</span>\n</pre></div>\n</span>"
+        }
+      ]
+    },
+    {
+      "id": "Xoby",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}
