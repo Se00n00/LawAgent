@@ -9,9 +9,13 @@ class GaurdRailState(BaseModel):
     content:int
 
 # NODE: Redirector
+class redirectionContent(BaseModel):
+    redirection_str:str
+    gaurdrail_index:str
+
 class RedirectionState(BaseModel):
     type:str
-    content:str
+    content:redirectionContent
 
 # NODE: Conversation
 class conv(BaseModel):
@@ -52,14 +56,22 @@ class gov_arguments(BaseModel):
     max_results: int
 
 # Node: Summerizer
+class summeries_content(BaseModel):
+    summeries:List[Dict[str, Any]]
+    summary_title:str
+
 class SummerizerOutput(BaseModel):
     type:str
-    content: List[Dict[str, Any]]
+    content: summeries_content
 
 # Node: Final Answer
+class final_content(BaseModel):
+    answer_title:str
+    final_answer:str
+
 class FinalOutput(BaseModel):
     type:str
-    content:str
+    content:final_content
 
 class Worker_Output(BaseModel):
     name:str = Field(..., description="Name of Selected Worker")

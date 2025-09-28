@@ -11,7 +11,7 @@
                 @for (item of Summaries; track $index) {
                     <div class="summaryItem flex flex-col pl-4">
                         <div class="text-sm">{{item.heading}}</div>
-                        <div class="text-xs font-light text-black/[0.6]">{{item.content}}</div>
+                        <div class="text-xs font-light text-black/[0.6]">{{item.heading_content}}</div>
                         <div class="absolute left-[12px] border rounded-full w-2.5 h-2.5" 
                         [ngClass]="{'bg-black':$index===this.Summaries.length-1,'bg-white':$index !== this.Summaries.length-1}"
                         ></div>

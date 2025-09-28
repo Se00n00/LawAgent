@@ -13,4 +13,6 @@ User:
     "Can I get your number? Lawless societies are bad."
 Output: 
     type: "Redirection" - keep this string intact
-    content: "Explain why lawless societies are difficult to live in.
+    content: 
+        redirection_str: "Explain why lawless societies are difficult to live in.
+        gaurdrail_index: - the gaurd_index provided by the user

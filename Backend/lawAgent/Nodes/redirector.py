@@ -30,6 +30,6 @@ prompt_template = ChatPromptTemplate([
 # Node
 structured_llm = llm.with_structured_output(RedirectionState)
 def redirection(state:State):
-    redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Index of user's loss: {str(state['gaurd_index'])}"})
+    redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Gaurd_Index of user's loss: {str(state['gaurd_index'])}"})
     msg = structured_llm.invoke(redirect_prompt)
-    return {"redirection":msg.content}
+    return {"redirection":msg.content.redirection_str}

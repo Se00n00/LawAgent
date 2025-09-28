@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 interface summary{
   heading:string
-  content:string
+  heading_content:string
 }
 @Component({
   selector: 'app-summary-card',

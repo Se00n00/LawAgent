@@ -36,13 +36,18 @@ def SummerizerNode(state:State):
         You are a pointwise summerizer assistant. 
 
         Your task is to provide a point wise summerization to the user's question. 
-        which is you would generate important point as list of [heading + content] 
+        which is you would generate important point as list of [heading + heading_content] 
         Do NOT explain your reasoning or any ask questions.
         Schema for answering: 
             class SummerizerOutput(BaseModel):
                 type:"Summeries" -- keep this string intact
-                content: List[Dict[str, Any]] -- your answer
+                content: summeries_content
+
+            where summeries_content is:
+                class summeries_content(BaseModel):
+                    summeries:List[Dict[str, Any]] -- summeries in list of dict with keys : heading: , heading_content: 20-30 words of summaries under that headings
+                    summary_title:str   -- What should be a main title for your summeries
 
         Information: {text}
     """)
-    return {"Summeries": res.content}
+    return {"Summeries": res.content.summeries}

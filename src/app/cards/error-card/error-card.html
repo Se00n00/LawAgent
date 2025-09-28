@@ -5,12 +5,12 @@
             <p class="text-sm text-white/[0.7]">{{ErrorList[ErrorIndex].text}}</p>
         </div>
 
-        @if(ErrorList[ErrorIndex].redirection == true){
-            <div (click)="followUp(ErrorList[ErrorIndex].followUpQuestion)" 
+        @if(Redirection != null){
+            <div (click)="followUp(Redirection)" 
             class="absolute hover:scale-[1.01] hover:-translate-y-0.5 cursor-pointer bottom-0 left-0 m-2.5 backdrop-blur-md rounded-lg border border-white/[0.3] p-1.5 bg-white/[0.1] transition-all"
             >
                 <img src="Icons/forward.svg" class="h-4 float-start">
-                <p class="text-xs text-white/[0.7]">{{ErrorList[ErrorIndex].followUpQuestion}}</p>
+                <p class="text-xs text-white/[0.7]">{{Redirection}}</p>
             </div>
         }
         <img [src]="ErrorList[ErrorIndex].path" class="rounded-xl aspect-auto object-contain">

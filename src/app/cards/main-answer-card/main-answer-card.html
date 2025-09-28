@@ -3,7 +3,13 @@
     
         <div class="flex gap-3 items-center">
             <img src="Icons/logo.svg" class="h-6">
-            <p class="text-sm">{{Title}}</p>
+            @if (Title == null) {
+                <p class="text-sm">Bot</p>
+            }
+            @else {
+                <p class="text-sm">{{Title}}</p>
+            }
+            
         </div>
         
         <markdown [data]="Content" class="text-xs p-2"></markdown>

@@ -11,6 +11,11 @@ import { ChartCard } from '../cards/chart-card/chart-card';
 import { FormsModule } from '@angular/forms';
 import { Supabase } from '../service/supabase';
 
+interface output{
+  type:string
+  content:any
+}
+
 @Component({
   selector: 'app-home',
   imports: [
@@ -34,7 +39,7 @@ export class Home {
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
-  Components = signal([
+  Components:WritableSignal<output[]> = signal([
     {"type":"MainAnswer","content":"Hello! everyone **I am Mohit**"}
   ])
   MasterQuestion: WritableSignal<string> = signal("")

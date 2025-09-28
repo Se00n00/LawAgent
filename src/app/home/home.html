@@ -77,29 +77,47 @@
                 <div class="flex-1 flex flex-col items-center">
                     <div class="w-10/12 sm:w-11/12 lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 py-10">
                         @for (item of Components(); track $index) {
-                            <div class="p-2 bg-gray-50 border rounded">
-                                @for (key of objectKeys(item); track key) {
+                            <!-- <div class="p-2 bg-gray-50 border rounded"> -->
+                                <!-- @for (key of objectKeys(item); track key) {
                                     <div>
                                     <strong>{{ key }}:</strong> 
                                     </div>
                                 }
-                                </div>
+                                </div> -->
                             @if (item.type){
                                 @switch (item.type) {
-                                    @case ("MainAnswer") {
-                                    <app-main-answer-card [Content]="item.content" class="w-full"/>
+                                    @case ("FinalAnswer") {
+                                        <app-main-answer-card 
+                                        [Title] = "item.content.answer_title"
+                                        [Content]="item.content.final_answer" 
+                                        class="w-full"/>
                                     }
-                                    @case ("NewsCard") {
-                                    <app-news-cards class="col-span-3"/>
+                                    @case ("Conversation") {
+                                        @if (item.content.proceed2Orchestration == false) {
+                                            <app-main-answer-card [Content]="item.content.conversation" class="w-full"/>
+                                        }
+                                        <!-- <app-news-cards class="col-span-3"/> -->
                                     }
-                                    @case ("SummaryCard") {
-                                    <app-summary-card class="w-full"/>
+                                    @case ("Summeries") {
+                                        <app-summary-card 
+                                        [SummaryTitle]="item.content.summary_title"
+                                        [Summaries]="item.content.summeries"
+                                        class="w-full"/>
                                     }
-                                    @case ("ErrorCard") {
-                                    <app-error-card class="w-full"/>
+                                    @case ("Guardrail") {
+                                        @if(item.content > 3) {
+                                            <app-error-card [ErrorIndex]="item.content" class="w-full"/>
+                                        }
+                                        
+                                    }
+                                    @case ("Redirection") {
+                                        <app-error-card 
+                                        [Redirection]="item.content.redirection_str" 
+                                        [ErrorIndex]="item.content.gaurdrail_index" 
+                                        class="w-full"/>
                                     }
                                     @case ("LinkImageCard") {
-                                    <app-link-images-card class="w-full"/>
+                                        <app-link-images-card class="w-full"/>
                                     }
                                 }
                             }

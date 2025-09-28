@@ -41,8 +41,11 @@ def FinalNode(state:State):
         Schema for answering: 
             class FinalOutput(BaseModel):
                 type:"FinalAnswer" -- keep this string intact
-                content:str -- your answer
-
+                content:final_content -- your answer
+            where final_answer is:
+                class final_content(BaseModel):
+                    answer_title:str  -- What tile you give for your answer
+                    final_answer:str  -- Your Answer
         Information: {text}
         User Question: {state['user_query']}
     """)
