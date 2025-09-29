@@ -8,6 +8,8 @@ from langchain_core.messages import HumanMessage
 from langgraph.graph import StateGraph, START, END
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.config import get_stream_writer
+
 
 import os
 import asyncio
@@ -50,7 +52,12 @@ def news_synthesizer(state: WorkerState):
         region=res.region
     )
     index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    return {"curated_results": [result["search_results"][int(i)] for i in index]}
+    
+    to_send = [result["search_results"][int(i)] for i in index]
+    writer = get_stream_writer()
+    writer({"type":"News","content":to_send})
+
+    return {"curated_results": to_send}
 
 
 def news_curator(state: WorkerState) -> WorkerState:

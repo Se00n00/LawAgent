@@ -10,6 +10,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
 from langsmith import traceable
+from langgraph.config import get_stream_writer
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -56,6 +57,9 @@ def ChatNode(state:State):
     state["conversation"].append({"role": "assistant", "content": res.content.conversation})
 
     state['user_query'], state['proceed2Orchestration'] = res.content.conversation, res.content.proceed2Orchestration
+    
+    writer = get_stream_writer()
+    writer({"type":"Status","content":40})
     return state
 
 
@@ -80,6 +84,8 @@ def orchestrationOrEnd(state:State):
 #     return res
 
 def pre_end(state:State):
+    writer = get_stream_writer()
+    writer({"type":"Status","content":100})
     return state
 
 builder = StateGraph(State)
@@ -104,7 +110,7 @@ builder.add_conditional_edges(
     "chat_node", orchestrationOrEnd,
     {
         "ORCHESTRATION":"orchestrator_worker",
-        "END":END
+        "END":"pre_end"
     }
 )
 

@@ -9,6 +9,9 @@ from langgraph.graph import StateGraph, START, END
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
 
+from langgraph.config import get_stream_writer
+
+
 import os
 import asyncio
 from dotenv import load_dotenv
@@ -46,7 +49,12 @@ def gov_synthesizer(state: WorkerState):
         max_results=res.max_results
     )
     index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    return {"curated_results": [result["search_results"][int(i)] for i in index]}
+    
+    to_send = [result["search_results"][int(i)] for i in index]
+    writer = get_stream_writer()
+    writer({"type":"Gov","content":to_send})
+
+    return {"curated_results": to_send}
 
 def gov_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(

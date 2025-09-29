@@ -58,15 +58,21 @@ def home():
     return {"Ok":"Yay XD"}
 
 @app.post("/chat")
-async def chat(req: ChatRequest):
+def chat(req: ChatRequest):
     input_message = req.message
 
     try:
         def event_generator():
-            for chunk, metadata in agent.stream(
-            {"user_query": input_message},config, stream_mode="messages",):
-                if isinstance(chunk, AIMessage):
-                    yield chunk.content
+            for stream_mode in agent.stream(
+            {"user_query": input_message},config, subgraphs=True, stream_mode=["messages","custom"]):
+                
+                if stream_mode[1] == 'messages':
+                    # print(stream_mode[2])
+                    if isinstance(stream_mode[2][0], AIMessage):
+                        yield stream_mode[2][0].content
+                else:
+                    yield str(stream_mode[2])
+                # print(stream_mode)
 
 
         return StreamingResponse(event_generator(), media_type="text/plain")

@@ -3,6 +3,8 @@ from lawAgent.Nodes.state import State, GaurdRailState
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from langgraph.config import get_stream_writer
+
 
 import os
 from dotenv import load_dotenv
@@ -33,4 +35,7 @@ structured_llm = llm.with_structured_output(GaurdRailState)
 def gaurdrail(state:State):
     gaurd_rail_prompt = prompt_template.invoke({"prompt": state['user_query']})
     msg = structured_llm.invoke(gaurd_rail_prompt)
+    
+    writer = get_stream_writer()
+    writer({"type":"Status","content":20})
     return {"gaurd_index":msg.content}

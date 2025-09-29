@@ -10,6 +10,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
+from langgraph.config import get_stream_writer
+
 
 import os
 from dotenv import load_dotenv
@@ -40,6 +42,8 @@ def OrchestratorNode(state:State):
     res = orchestrator.invoke(
         orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
     )
+    writer = get_stream_writer()
+    writer({"type":"Status","content":60})
     return {"works": res.works}
 
 def assign_task(state:State):
@@ -56,8 +60,12 @@ def assign_task(state:State):
     ]
 
 def synthesizer(state: State):
+    
     completed_sections = state["extracted_content"]
     final_report = "\n\n---\n\n".join(completed_sections)
+
+    writer = get_stream_writer()
+    writer({"type":"Status","content":80})
     return {"complete_section":final_report}
 
 builder = StateGraph(State)

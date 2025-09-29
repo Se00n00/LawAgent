@@ -2,7 +2,7 @@ import asyncio
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from langchain_mcp_adapters.tools import load_mcp_tools
-
+import numpy as np
 
 server_params = StdioServerParameters(
     command="python",
@@ -19,8 +19,13 @@ async def curated_index(data, query):
             curate = next(t for t in tools if t.name == "curate")
 
             results = await curate.ainvoke({"data":data,"query":query})
+            if isinstance(results, np.ndarray) and results.shape == ():
+                results = results.item()
+
+            if not isinstance(results, (list, dict, str)):
+                results = [results]
+
             return results
-            # print(results)
 
 data = [
     {"title": "Amazon Rainforest", 
