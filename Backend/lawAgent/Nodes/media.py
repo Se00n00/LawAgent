@@ -1,6 +1,7 @@
 from .state import WorkerState, image_arguments
 from .utils.utils import get_text
 from .tools.images import get_images
+from .tools.mcp_client import curated_index
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -10,6 +11,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 
 import os
+import asyncio
 from dotenv import load_dotenv
 
 # LLM
@@ -44,7 +46,8 @@ def image_synthesizer(state: WorkerState):
         timelimit=res.timelimit,
         region=res.region
     )
-    return {"curated_results": result["search_results"]}
+    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+    return {"curated_results": [result["search_results"][int(i)] for i in index]}
 
 def images_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(

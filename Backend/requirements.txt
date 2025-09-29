@@ -10,3 +10,9 @@ python-dotenv
 pydantic
 uvloop
 langsmith
+mcp
+langchain_mcp_adapters
+
+onnxruntime
+numpy
+transformers

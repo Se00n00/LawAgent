@@ -1,6 +1,7 @@
 from .state import WorkerState, research_arguments
 from .utils.utils import get_text
 from .tools.sementicScholar import get_papers
+from .tools.mcp_client import curated_index
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -10,6 +11,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 
 import os
+import asyncio
 from dotenv import load_dotenv
 
 # LLM
@@ -40,7 +42,9 @@ def research_synthesizer(state: WorkerState):
         research_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
     )
     result = get_papers(query=res.worker_query)
-    return {"curated_results": result["search_results"]}
+
+    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+    return {"curated_results": [result["search_results"][int(i)] for i in index]}
 
 def research_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(

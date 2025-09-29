@@ -1,6 +1,7 @@
 from .state import WorkerState, gov_arguments
 from .tools.gov import get_articles
 from .utils.utils import get_text
+from .tools.mcp_client import curated_index
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -9,6 +10,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
 
 import os
+import asyncio
 from dotenv import load_dotenv
 
 # LLM
@@ -43,8 +45,8 @@ def gov_synthesizer(state: WorkerState):
         region=res.region,
         max_results=res.max_results
     )
-    
-    return {"curated_results": result["search_results"]}
+    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+    return {"curated_results": [result["search_results"][int(i)] for i in index]}
 
 def gov_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(

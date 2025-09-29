@@ -48,9 +48,10 @@ def ChatNode(state:State):
         
     state["conversation"].append({"role": "user", "content": state["user_query"]})
     
-    res = chatbot.ainvoke(
+    res = chatbot.invoke(
         conversation_prompt.invoke({"msg":state["conversation"]})
     )
+    # print(res)
 
     state["conversation"].append({"role": "assistant", "content": res.content.conversation})
 

@@ -1,7 +1,7 @@
 from .state import WorkerState,refine_query, news_arguments
 from .utils.utils import get_text
 from .tools.news import get_news
-import difflib
+from .tools.mcp_client import curated_index
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -10,6 +10,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
 
 import os
+import asyncio
+import difflib
 from dotenv import load_dotenv
 
 # LLM
@@ -47,7 +49,8 @@ def news_synthesizer(state: WorkerState):
         page=res.page,
         region=res.region
     )
-    return {"curated_results": result["search_results"]}
+    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+    return {"curated_results": [result["search_results"][int(i)] for i in index]}
 
 
 def news_curator(state: WorkerState) -> WorkerState:
