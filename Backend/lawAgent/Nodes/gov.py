@@ -50,7 +50,7 @@ def gov_synthesizer(state: WorkerState):
             region=res.region,
             max_results=res.max_results
         )
-        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))    
+        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
         to_send = [result[int(i)] for i in index]
         
         writer({"type":"Gov","content":to_send})

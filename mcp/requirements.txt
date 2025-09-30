@@ -1,0 +1,9 @@
+fastapi 
+fastapi-mcp
+uvicorn
+mcp_proxy
+python-dotenv
+fastmcp
+numpy
+onnxruntime
+transformers
