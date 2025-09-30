@@ -11,6 +11,8 @@ import { ChartCard } from '../cards/chart-card/chart-card';
 import { FormsModule } from '@angular/forms';
 import { Supabase } from '../service/supabase';
 import { ZeroCard } from '../cards/zero-card/zero-card';
+// import oboe from 'oboe';
+import JSONic from 'jsonic';
 
 interface output{
   type:string
@@ -44,6 +46,8 @@ export class Home {
   Components:WritableSignal<output[]> = signal([
     {"type":"ZeroCard", "content":""},
   ])
+  progress = 0
+
   MasterQuestion: WritableSignal<string> = signal("")
   Answer: WritableSignal<string> = signal("")
 
@@ -56,53 +60,56 @@ export class Home {
   SearchIcon="Icons/add.svg"
 
   async queryLLM(prompt: string) {
-    let res = await fetch("https://lawagent-6r30.onrender.com/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: prompt })
-    });
+    const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: prompt }),
+  });
 
-    const reader = res.body?.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
+  const reader = res.body?.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
 
-    while (true) {
-      const { done, value } = await reader!.read();
-      if (done) break;
+  while (true) {
+    const { done, value } = await reader!.read();
+    if (done) break;
 
-      buffer += decoder.decode(value, { stream: true });
+    buffer += decoder.decode(value, { stream: true });
 
-      // The backend separates JSONs with spaces → split them
-      const parts = buffer.split("} {").map((p, i, arr) => {
-        if (arr.length === 1) return p;
-        if (i < arr.length - 1) return p + "}";
-        if (i > 0) return "{" + p;
-        return p;
-      });
+    let startIdx = buffer.indexOf('{');
+    while (startIdx !== -1) {
+      let endIdx = buffer.indexOf('}', startIdx);
+      if (endIdx === -1) break; // incomplete JSON
 
-      // Try parsing all complete JSON objects except last (may be partial)
-      for (let i = 0; i < parts.length - 1; i++) {
-        try {
-          const obj = JSON.parse(parts[i]);
-          this.Components.update(prev => [...prev, obj]);
-        } catch (e) {
-          // ignore until JSON is complete
-        }
-      }
+      const rawObj = buffer.slice(startIdx, endIdx + 1);
 
-      // Keep last fragment in buffer for next loop
-      buffer = parts[parts.length - 1];
-    }
-
-    // Parse last leftover if valid
-    if (buffer.trim()) {
       try {
-        const obj = JSON.parse(buffer);
+        const obj = JSONic(rawObj); // tolerant parser
         this.Components.update(prev => [...prev, obj]);
+
+        if (obj.type === 'Status') {
+          this.progress = obj.content; // update progress
+        }
+
+        buffer = buffer.slice(endIdx + 1);
+        startIdx = buffer.indexOf('{');
       } catch (e) {
-        console.error("Leftover not valid JSON:", buffer);
+        // Could not parse → skip one character and retry
+        startIdx += 1;
       }
     }
+  }
+
+  // Parse any leftover
+  if (buffer.trim()) {
+    try {
+      const obj = JSONic(buffer);
+      this.Components.update(prev => [...prev, obj]);
+      if (obj.type === 'Status') this.progress = obj.content;
+    } catch (e) {
+      console.error('Leftover not valid JSON:', buffer);
+    }
+  }
   }
 
 

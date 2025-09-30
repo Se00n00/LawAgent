@@ -2,7 +2,7 @@ from lawAgent.Nodes.state import WorkerState
 
 from ddgs import DDGS
 
-def get_news(query, timelimit="y", max_results=20, page=1, region="us-en"):
+def get_news(query, timelimit="y", max_results=5, page=1, region="us-en"):
     """
     Fetch news based on worker state and optional parameters.
 
@@ -18,7 +18,7 @@ def get_news(query, timelimit="y", max_results=20, page=1, region="us-en"):
             region="us-en",
             safesearch="off",
             timelimit="y",
-            max_results=20,
+            max_results=5,
             page=1,
             backend="auto"
         )

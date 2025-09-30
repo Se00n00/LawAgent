@@ -40,24 +40,27 @@ retriver_prompt = ChatPromptTemplate([
 # Node : Prompt Synthesizer(news_synthesizer) > get_news(tools) > Curator(news_curator) > Extractor(news_extractor)
 Retreiver = llm.with_structured_output(news_arguments)
 def news_synthesizer(state: WorkerState):
-    res = Retreiver.invoke(
-        retriver_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
-    )
-
-    result = get_news(
-        query=res.worker_query,
-        timelimit=res.timelimit,
-        max_results=res.max_results,
-        page=res.page,
-        region=res.region
-    )
-    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    
-    to_send = [result["search_results"][int(i)] for i in index]
     writer = get_stream_writer()
-    writer({"type":"News","content":to_send})
+    try:
+        res = Retreiver.invoke(
+            retriver_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
+        )
 
-    return {"curated_results": to_send}
+        result = get_news(
+            query=res.worker_query,
+            timelimit=res.timelimit,
+            max_results=res.max_results,
+            page=res.page,
+            region=res.region
+        )
+        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        
+        to_send = [result["search_results"][int(i)] for i in index]
+        writer({"type":"News","content":to_send})
+
+        return {"curated_results": to_send}
+    except Exception as e:
+            writer({"type":"Error","content":e})
 
 
 def news_curator(state: WorkerState) -> WorkerState:
@@ -88,10 +91,15 @@ def news_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {str(p['title'])}\n Date: {str(p['date'])}\n Body: {str(p['body'])}\n Source: {str(p['source'])} " for p in state["curated_results"]]
     )
-    msg = llm.invoke([
-        HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
-    ])
-    return {"extracted_content":["News Articles: ", msg.content]}
+
+    writer = get_stream_writer()
+    try:
+        msg = llm.invoke([
+            HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
+        ])
+        return {"extracted_content":["News Articles: ", msg.content]}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 news_articles = (
     StateGraph(WorkerState)

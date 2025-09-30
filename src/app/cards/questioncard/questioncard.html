@@ -33,7 +33,7 @@
         </div>
         <div class="flex gap-1 mt-3">
             <div *ngFor="let step of steps; let i = index"
-            class="h-8 w-1 flex-1 rounded-[2px]"
+            class="h-8 w-1 flex-1 rounded-[2px] opacity-60"
             [ngStyle]="{
                 'background': i < filledSteps ? stepColor(i) : '#e5e7eb'
             }"

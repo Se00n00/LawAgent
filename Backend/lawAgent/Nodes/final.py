@@ -4,6 +4,7 @@ from .state import SummerizerOutput, State, FinalOutput
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.config import get_stream_writer
 
 import os
 from dotenv import load_dotenv
@@ -32,23 +33,27 @@ llm = ChatOpenAI(
 final_llm = llm.with_structured_output(FinalOutput)
 def FinalNode(state:State):
     text = state["complete_section"]
-    res = final_llm.invoke(f"""
-        You are a final answer assistant. 
+    writer = get_stream_writer()
+    try:
+        res = final_llm.invoke(f"""
+            You are a final answer assistant. 
 
-        Your task is to provide a **final answer** to the user's question. keep it very short (50-70 words) but keep it detailed 
-        Do NOT explain your reasoning or any ask questions.
-                           
-        Schema for answering: 
-            class FinalOutput(BaseModel):
-                type:"FinalAnswer" -- keep this string intact
-                content:final_content -- your answer
-            where final_answer is:
-                class final_content(BaseModel):
-                    answer_title:str  -- What tile you give for your answer
-                    final_answer:str  -- Your Answer
-        Information: {text}
-        User Question: {state['user_query']}
-    """)
-    return {"final_answer":res.content}
+            Your task is to provide a **final answer** to the user's question. keep it very short (50-70 words) but keep it detailed 
+            Do NOT explain your reasoning or any ask questions.
+                            
+            Schema for answering: 
+                class FinalOutput(BaseModel):
+                    type:"FinalAnswer" -- keep this string intact
+                    content:final_content -- your answer
+                where final_answer is:
+                    class final_content(BaseModel):
+                        answer_title:str  -- What tile you give for your answer
+                        final_answer:str  -- Your Answer
+            Information: {text}
+            User Question: {state['user_query']}
+        """)
+        return {"final_answer":res.content}
+    except Exception as e:
+        writer({"type":"Error","content":e})
     # state["final_answer"] = res.content
     # return state

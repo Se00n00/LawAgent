@@ -4,6 +4,7 @@ from .state import SummerizerOutput, State
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.config import get_stream_writer
 
 import os
 from dotenv import load_dotenv
@@ -32,22 +33,28 @@ summerizer_prompt = ChatPromptTemplate([
 summerizer = llm.with_structured_output(SummerizerOutput)
 def SummerizerNode(state:State):
     text = state["complete_section"]
-    res = summerizer.invoke(f"""
-        You are a pointwise summerizer assistant. 
 
-        Your task is to provide a point wise summerization to the user's question. 
-        which is you would generate important point as list of [heading + heading_content] 
-        Do NOT explain your reasoning or any ask questions.
-        Schema for answering: 
-            class SummerizerOutput(BaseModel):
-                type:"Summeries" -- keep this string intact
-                content: summeries_content
+    writer = get_stream_writer()
+    try:
+        res = summerizer.invoke(f"""
+            You are a pointwise summerizer assistant. 
 
-            where summeries_content is:
-                class summeries_content(BaseModel):
-                    summeries:List[Dict[str, Any]] -- summeries in list of dict with keys : heading: , heading_content: 20-30 words of summaries under that headings
-                    summary_title:str   -- What should be a main title for your summeries
+            Your task is to provide a point wise summerization to the user's question. 
+            which is you would generate important point as list of [heading + heading_content] 
+            Do NOT explain your reasoning or any ask questions.
+            Schema for answering: 
+                class SummerizerOutput(BaseModel):
+                    type:"Summeries" -- keep this string intact
+                    content: summeries_content
 
-        Information: {text}
-    """)
-    return {"Summeries": res.content.summeries}
+                where summeries_content is:
+                    class summeries_content(BaseModel):
+                        summeries:List[Dict[str, Any]] -- summeries in list of dict with keys : heading: , heading_content: 20-30 words of summaries under that headings
+                        summary_title:str   -- What should be a main title for your summeries
+
+            Information: {text}
+        """)
+        return {"Summeries": res.content.summeries}
+    
+    except Exception as e:
+        writer({"type":"Error","content":e})

@@ -2,9 +2,9 @@ import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ImageWithLink{
-  ImageUrl:string
-  link:string
-  relevance:number
+  image_url:string
+  title:string
+  article_url:string
 }
 
 @Component({
@@ -16,5 +16,7 @@ interface ImageWithLink{
 
 
 export class LinkImagesCard {
-  @Input() ImageWithLinks: ImageWithLink[] = []
+  @Input() ImageWithLinks: ImageWithLink[] = [
+    {'image_url':'images/0Node.png','article_url':'','title':'title'}
+  ]
 }

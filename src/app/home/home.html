@@ -113,7 +113,10 @@
                                     @case ("ZeroCard") {
                                         <app-zero-card/>
                                     }
-                                    @case ("LinkImageCard") {
+                                    @case ("News") {
+                                        <app-link-images-card class="w-full"/>
+                                    }
+                                    @case ("Media") {
                                         <app-link-images-card class="w-full"/>
                                     }
                                 }
@@ -124,7 +127,8 @@
                                 </div>
                             }
                         }
-                        <app-questioncard (messageEvent)="receiveMessage($event)" class="w-full"/>
+                        
+                        <app-questioncard [progress]="progress" (messageEvent)="receiveMessage($event)" class="w-full"/>
                     </div>
                     </div>
 

@@ -36,6 +36,15 @@ def _(value):
 
 @app.cell
 def _(llm):
+    try:
+        res = llm.invoke("Hii")
+    except Exception as e:
+        print(e)
+    return
+
+
+@app.cell
+def _(llm):
     from langgraph.graph import MessagesState
 
     def model(state: MessagesState):

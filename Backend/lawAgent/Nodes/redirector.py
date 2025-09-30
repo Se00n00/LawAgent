@@ -3,6 +3,7 @@ from lawAgent.Nodes.state import State, RedirectionState, GaurdRailState
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from langgraph.config import get_stream_writer
 
 import os
 from dotenv import load_dotenv
@@ -30,6 +31,10 @@ prompt_template = ChatPromptTemplate([
 # Node
 structured_llm = llm.with_structured_output(RedirectionState)
 def redirection(state:State):
-    redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Gaurd_Index of user's loss: {str(state['gaurd_index'])}"})
-    msg = structured_llm.invoke(redirect_prompt)
-    return {"redirection":msg.content.redirection_str}
+    writer = get_stream_writer()
+    try:
+        redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Gaurd_Index of user's loss: {str(state['gaurd_index'])}"})
+        msg = structured_llm.invoke(redirect_prompt)
+        return {"redirection":msg.content.redirection_str}
+    except Exception as e:
+        writer({"type":"Error","content":e})

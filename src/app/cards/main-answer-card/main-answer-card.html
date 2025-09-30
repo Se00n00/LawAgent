@@ -3,8 +3,8 @@
     
         <div class="flex gap-3 items-center">
             <img src="Icons/logo.svg" class="h-6">
-            @if (Title == null) {
-                <p class="text-sm">Bot</p>
+            @if (Title == "") {
+                <p class="text-sm">Law Agent</p>
             }
             @else {
                 <p class="text-sm">{{Title}}</p>

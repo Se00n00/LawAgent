@@ -15,6 +15,7 @@ def get_images(query, timelimit="y", region="us-en"):
             type_image=None,
             layout=None,
             license_image=None,
+            max_results=4
         )
     except Exception as e:
         results = []

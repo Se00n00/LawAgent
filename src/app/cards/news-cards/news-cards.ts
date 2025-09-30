@@ -2,14 +2,11 @@ import { Component, Input, WritableSignal, signal, computed } from '@angular/cor
 import { single } from 'rxjs';
 
 interface Newscard{
-  article_id: number
-  article_head: string
-  article_head_image_url: string
-  article_summerized_content: string
-  article_origin_web_url: string
-  article_orign_web_icon: string
-  article_author: null|string
-  article_author_icon:null|string
+  title: string
+  image_url: string
+  body: string
+  source: string
+  date: string
 }
 
 @Component({

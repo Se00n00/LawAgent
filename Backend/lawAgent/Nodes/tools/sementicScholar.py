@@ -12,7 +12,7 @@ sch = SemanticScholar()
 def get_papers(query):
     result = []
     try:
-        response = sch.search_paper(query=query,limit=100)
+        response = sch.search_paper(query=query,limit=3)
         
         for item in response.items:
             names = [i['name'] for i in item["authors"]]

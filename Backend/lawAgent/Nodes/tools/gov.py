@@ -13,7 +13,7 @@ def get_original_link(url: str) -> str:
         return ""
 
 
-def get_articles(query, region="us-en", max_results=20):
+def get_articles(query, region="us-en", max_results=5):
     results = []
 
     try:
@@ -22,7 +22,7 @@ def get_articles(query, region="us-en", max_results=20):
                 query=query,
                 region=region,
                 safesearch="off",
-                max_results=max_results
+                max_results=5
             )
             for r in news_results:
                 results.append({

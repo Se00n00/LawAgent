@@ -49,18 +49,23 @@ def ChatNode(state:State):
         
     state["conversation"].append({"role": "user", "content": state["user_query"]})
     
-    res = chatbot.invoke(
-        conversation_prompt.invoke({"msg":state["conversation"]})
-    )
-    # print(res)
-
-    state["conversation"].append({"role": "assistant", "content": res.content.conversation})
-
-    state['user_query'], state['proceed2Orchestration'] = res.content.conversation, res.content.proceed2Orchestration
-    
     writer = get_stream_writer()
-    writer({"type":"Status","content":40})
-    return state
+    try:
+        res = chatbot.invoke(
+            conversation_prompt.invoke({"msg":state["conversation"]})
+        )
+        # print(res)
+
+        state["conversation"].append({"role": "assistant", "content": res.content.conversation})
+
+        state['user_query'], state['proceed2Orchestration'] = res.content.conversation, res.content.proceed2Orchestration
+        
+        
+        writer({"type":"Status","content":40})
+        return state
+    
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 
 # Conditional Node 
@@ -103,7 +108,7 @@ builder.add_conditional_edges(
     {
         "Normal":"chat_node",
         "Redirector":"redirector",
-        "DeadEnd":END
+        "DeadEnd":"pre_end"
     })
 
 builder.add_conditional_edges(
@@ -115,7 +120,7 @@ builder.add_conditional_edges(
 )
 
 
-builder.add_edge("redirector", END)
+builder.add_edge("redirector", "pre_end")
 builder.add_edge("orchestrator_worker", "final_answer")
 builder.add_edge("orchestrator_worker", "summerizer")
 builder.add_edge("final_answer", "pre_end")

@@ -39,12 +39,15 @@ orchestraor_prompt = ChatPromptTemplate([
 # Node
 orchestrator = llm.with_structured_output(Orchestrator_Output)
 def OrchestratorNode(state:State):
-    res = orchestrator.invoke(
-        orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
-    )
     writer = get_stream_writer()
-    writer({"type":"Status","content":60})
-    return {"works": res.works}
+    try:
+        res = orchestrator.invoke(
+            orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
+        )
+        writer({"type":"Status","content":60})
+        return {"works": res.works}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 def assign_task(state:State):
     workers = {

@@ -39,35 +39,45 @@ image_prompt = ChatPromptTemplate([
 # Node : Prompt Synthesizer(image_synthesizer) > get_articles(tools) > Curator(images_curator)
 Synthesizer = llm.with_structured_output(image_arguments)
 def image_synthesizer(state: WorkerState):
-    res = Synthesizer.invoke(
-        image_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
-    )
-    result = get_images(
-        query=res.worker_query,
-        timelimit=res.timelimit,
-        region=res.region
-    )
-    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    
-    to_send = [result["search_results"][int(i)] for i in index]
     writer = get_stream_writer()
-    writer({"type":"Media","content":to_send})
+    try:
+        res = Synthesizer.invoke(
+            image_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
+        )
+        result = get_images(
+            query=res.worker_query,
+            timelimit=res.timelimit,
+            region=res.region
+        )
+        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        
+        to_send = [result["search_results"][int(i)] for i in index]
+        writer({"type":"Media","content":to_send})
 
-    return {"curated_results": to_send}
+        return {"curated_results": to_send}
+    
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 def images_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {p['title']}\n" for p in state["search_results"]]
     )
-    msg = llm.invoke([
-        HumanMessage(content=f"From these titles of images that contains articles, select the most relevant ones for the query '{state['worker_query']}'. "
-        f"Return only the chosen titles.\n\n{papers_text}")
-    ])
 
-    chosen_titles = msg.content.splitlines()
-    curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
+    writer = get_stream_writer()
+    try:
+        msg = llm.invoke([
+            HumanMessage(content=f"From these titles of images that contains articles, select the most relevant ones for the query '{state['worker_query']}'. "
+            f"Return only the chosen titles.\n\n{papers_text}")
+        ])
+
+        chosen_titles = msg.content.splitlines()
+        curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
+        
+        return {"curated_results":curated}
     
-    return {"curated_results":curated}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 images = (
     StateGraph(WorkerState)

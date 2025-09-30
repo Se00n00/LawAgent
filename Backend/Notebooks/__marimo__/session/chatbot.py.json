@@ -13,14 +13,47 @@
     {
       "id": "MJUe",
       "code_hash": "d9d659ec0b077d7de49f17f83a77368b",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "vblA",
       "code_hash": "5d067168fbbfa456b72e40e162e9b171",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
+    },
+    {
+      "id": "woCx",
+      "code_hash": "fd348f2caed0062e9d99d48261a69b08",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Error code: 401 - {'error': {'message': 'No auth credentials found', 'code': 401}}\n"
+        }
+      ]
     },
     {
       "id": "bkHC",

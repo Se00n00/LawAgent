@@ -38,18 +38,22 @@ research_prompt = ChatPromptTemplate([
 # Node : Prompt Synthesizer(reserach_synthesizer) > get_papers(tools) > Curator(research_curator) > Extractor(research_extractor)
 Synthesizer = llm.with_structured_output(research_arguments)
 def research_synthesizer(state: WorkerState):
-    res = Synthesizer.invoke(
-        research_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
-    )
-    result = get_papers(query=res.worker_query)
-
-    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    
-    to_send = [result["search_results"][int(i)] for i in index]
     writer = get_stream_writer()
-    writer({"type":"Research","content":to_send})
+    try:
+        res = Synthesizer.invoke(
+            research_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
+        )
+        result = get_papers(query=res.worker_query)
 
-    return {"curated_results": to_send}
+        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        
+        to_send = [result["search_results"][int(i)] for i in index]
+        
+        writer({"type":"Research","content":to_send})
+
+        return {"curated_results": to_send}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 def research_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -71,10 +75,14 @@ def research_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {p['title']} ({p['year']})\nAbstract: {p.get('abstract','')}" for p in state["curated_results"]]
     )
-    msg = llm.invoke([
-        HumanMessage(content=f"Extract the most important findings and insights from these papers:\n\n{papers_text}")
-    ])
-    return {"extracted_content":["Researched Content: ", msg.content]}
+    writer = get_stream_writer()
+    try:
+        msg = llm.invoke([
+            HumanMessage(content=f"Extract the most important findings and insights from these papers:\n\n{papers_text}")
+        ])
+        return {"extracted_content":["Researched Content: ", msg.content]}
+    except Exception as e:
+            writer({"type":"Error","content":e})
 
 research_articles = (
     StateGraph(WorkerState)

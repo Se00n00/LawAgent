@@ -67,9 +67,9 @@ def chat(req: ChatRequest):
             {"user_query": input_message},config, subgraphs=True, stream_mode=["messages","custom"]):
                 
                 if stream_mode[1] == 'messages':
-                    # print(stream_mode[2])
                     if isinstance(stream_mode[2][0], AIMessage):
-                        yield stream_mode[2][0].content
+                        if (stream_mode[2][1]['langgraph_node'] in ['gaudrail','redirector','chat_node','summerizer','final_answer']):
+                            yield stream_mode[2][0].content
                 else:
                     yield str(stream_mode[2])
                 # print(stream_mode)

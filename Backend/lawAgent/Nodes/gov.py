@@ -40,21 +40,25 @@ synthesizer_prompt = ChatPromptTemplate([
 # Node : Prompt Synthesizer(gov_synthesizer) > get_images(tools) > Curator(gov_curator) > Extractor(gov_extractor)
 Synthesizer = llm.with_structured_output(gov_arguments)
 def gov_synthesizer(state: WorkerState):
-    res = Synthesizer.invoke(
-        synthesizer_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
-    )
-    result = get_articles(
-        query=res.worker_query,
-        region=res.region,
-        max_results=res.max_results
-    )
-    index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-    
-    to_send = [result["search_results"][int(i)] for i in index]
     writer = get_stream_writer()
-    writer({"type":"Gov","content":to_send})
+    try:
+        res = Synthesizer.invoke(
+            synthesizer_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
+        )
+        result = get_articles(
+            query=res.worker_query,
+            region=res.region,
+            max_results=res.max_results
+        )
+        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        
+        to_send = [result["search_results"][int(i)] for i in index]
+        
+        writer({"type":"Gov","content":to_send})
 
-    return {"curated_results": to_send}
+        return {"curated_results": to_send}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 def gov_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -75,11 +79,16 @@ def gov_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {p['title']} Body: {p['snippet']}" for p in state["curated_results"]]
     )
-    msg = llm.invoke([
-        HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
-    ])
 
-    return {"extracted_content":["Official Governement Articles: ", msg.content]}
+    writer = get_stream_writer()
+    try:
+        msg = llm.invoke([
+            HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
+        ])
+
+        return {"extracted_content":["Official Governement Articles: ", msg.content]}
+    except Exception as e:
+        writer({"type":"Error","content":e})
 
 
 gov_articles = (
