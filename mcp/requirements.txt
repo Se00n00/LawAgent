@@ -1,4 +1,4 @@
-fastapip
+fastapi
 uvicorn
 mcp_proxy
 python-dotenv
