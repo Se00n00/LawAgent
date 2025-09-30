@@ -62,7 +62,7 @@ def chat(req: ChatRequest):
     input_message = req.message
 
     try:
-        def event_generator():
+        async def event_generator():
             for stream_mode in agent.stream(
             {"user_query": input_message},config, subgraphs=True, stream_mode=["messages","custom"]):
                 

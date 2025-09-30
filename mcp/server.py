@@ -28,7 +28,7 @@ def curate(data, query) -> list:
 
     sims = np.dot(data_emb, query_emb.T).squeeze()
 
-    curated_indexes = [i for i, score in enumerate(sims) if score > 0.5]
+    curated_indexes = [i for i, score in enumerate(sims) if score > 0.3]
 
     return curated_indexes
     

@@ -1,7 +1,8 @@
 import asyncio
 from fastmcp import Client
+import numpy as np
 
-client = Client("http://localhost:8000/mcp")
+client = Client("https://57d169b444ff.ngrok-free.app/mcp")
 
 async def call_tool(name:str):
     async with client:
@@ -10,9 +11,15 @@ async def call_tool(name:str):
 
 async def call_curate(data, query):
     async with client:
-        result = await client.call_tool("curate",{"data":data,"query":query})
-        # print(result)
-        return result.data
+        results = await client.call_tool("curate",{"data":data,"query":query})
+        results = results.data
+        if isinstance(results, np.ndarray) and results.shape == ():
+            results = results.item()
+
+        if not isinstance(results, (list, dict, str)):
+            results = [results]
+
+        return results
     
 data = [
     {"title": "Amazon Rainforest", 
