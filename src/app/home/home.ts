@@ -11,6 +11,7 @@ import { ChartCard } from '../cards/chart-card/chart-card';
 import { FormsModule } from '@angular/forms';
 import { Supabase } from '../service/supabase';
 import { ZeroCard } from '../cards/zero-card/zero-card';
+import { ModelErrorCard } from '../cards/model-error-card/model-error-card';
 // import oboe from 'oboe';
 import JSONic from 'jsonic';
 
@@ -32,7 +33,8 @@ interface output{
     ErrorCard,
     LinkImagesCard,
     ChartCard,
-    ZeroCard
+    ZeroCard,
+    ModelErrorCard
   ],
   
   templateUrl: './home.html',

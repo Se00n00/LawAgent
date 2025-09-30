@@ -13,7 +13,7 @@ def get_news(query, timelimit="y", max_results=5, page=1, region="us-en"):
     region: language/region
     """
     try:
-        results = DDGS().news(
+        News = DDGS().news(
             query=query,
             region="us-en",
             safesearch="off",
@@ -23,10 +23,11 @@ def get_news(query, timelimit="y", max_results=5, page=1, region="us-en"):
             backend="auto"
         )
     except Exception as e:
-        results = []
-    News = []
-    for item in results:
-        News.append({
+        News = []
+
+    results = []
+    for item in News:
+        results.append({
             "title": item.get("title", ""),
             "body": item.get("body", ""),
             "article_url": item.get("url", ""),
@@ -36,4 +37,4 @@ def get_news(query, timelimit="y", max_results=5, page=1, region="us-en"):
         })
 
 
-    return {"search_results":News}
+    return results

@@ -4,7 +4,7 @@ from ddgs import DDGS
 
 def get_images(query, timelimit="y", region="us-en"):
     try:
-        results = DDGS().images(
+        Images = DDGS().images(
             query=query,
             region=region,
             safesearch="off",
@@ -18,13 +18,14 @@ def get_images(query, timelimit="y", region="us-en"):
             max_results=4
         )
     except Exception as e:
-        results = []
-    Images = []
-    for item in results:
-        Images.append({
+        Images = []
+        
+    results = []
+    for item in Images:
+        results.append({
             "title":item["title"],
             "article_url":item["url"],
             "image_url":item["image"]
         })
 
-    return {"search_results":Images}
+    return results

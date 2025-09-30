@@ -35,6 +35,8 @@ def redirection(state:State):
     try:
         redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Gaurd_Index of user's loss: {str(state['gaurd_index'])}"})
         msg = structured_llm.invoke(redirect_prompt)
-        return {"redirection":msg.content.redirection_str}
+        # return {"redirection":msg.content.redirection_str}
+
+        return {}
     except Exception as e:
         writer({"type":"Error","content":e})

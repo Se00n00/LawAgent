@@ -92,18 +92,19 @@ class SearchState(TypedDict):
 class State(TypedDict):
     user_query:str
     gaurd_index:int
-    redirection:str
+    # redirection:str
     proceed2Orchestration:bool
     conversation:list[MessagesState]
     works: List[Worker_Output]
     extracted_content: Annotated[List[str], operator.add]
     complete_section:str
-    final_answer:str
-    Summeries: List[Dict[str, Any]]
+
+    # final_answer:str
+    # Summeries: List[Dict[str, Any]]
 
 # Worker State
 class WorkerState(TypedDict):
     worker_query:str
-    search_results: List[Dict[str, Any]]
+    # search_results: List[Dict[str, Any]]
     curated_results: List[Dict[str, Any]]
     extracted_content: Annotated[List[str], operator.add]

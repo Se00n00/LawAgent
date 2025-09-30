@@ -10,7 +10,7 @@ from semanticscholar import SemanticScholar
 sch = SemanticScholar()
 
 def get_papers(query):
-    result = []
+    results = []
     try:
         response = sch.search_paper(query=query,limit=3)
         
@@ -19,7 +19,7 @@ def get_papers(query):
             authors = ", ".join(names)
 
             if (item['abstract'] != None):
-                result.append(
+                results.append(
                     {
                         "urls":item["externalIds"],
                         "pdfs":item["openAccessPdf"],
@@ -32,4 +32,4 @@ def get_papers(query):
     except Exception as e:
         print(f"Error: {e}")
     
-    return {"search_results":result}
+    return results

@@ -49,9 +49,9 @@ def image_synthesizer(state: WorkerState):
             timelimit=res.timelimit,
             region=res.region
         )
-        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
         
-        to_send = [result["search_results"][int(i)] for i in index]
+        to_send = [result[int(i)] for i in index]
         writer({"type":"Media","content":to_send})
 
         return {"curated_results": to_send}

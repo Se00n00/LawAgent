@@ -54,7 +54,8 @@ def SummerizerNode(state:State):
 
             Information: {text}
         """)
-        return {"Summeries": res.content.summeries}
+        return {}
+        # return {"Summeries": res.content.summeries}
     
     except Exception as e:
         writer({"type":"Error","content":e})

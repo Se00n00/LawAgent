@@ -52,7 +52,8 @@ def FinalNode(state:State):
             Information: {text}
             User Question: {state['user_query']}
         """)
-        return {"final_answer":res.content}
+        return {}
+        # return {"final_answer":res.content}
     except Exception as e:
         writer({"type":"Error","content":e})
     # state["final_answer"] = res.content

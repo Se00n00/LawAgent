@@ -119,6 +119,9 @@
                                     @case ("Media") {
                                         <app-link-images-card class="w-full"/>
                                     }
+                                    @case ("Error") {
+                                        <app-model-error-card [e]="item.content" class="w-full" />
+                                    }
                                 }
                             }
                             @else {

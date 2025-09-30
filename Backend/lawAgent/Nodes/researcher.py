@@ -45,9 +45,9 @@ def research_synthesizer(state: WorkerState):
         )
         result = get_papers(query=res.worker_query)
 
-        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
+        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
         
-        to_send = [result["search_results"][int(i)] for i in index]
+        to_send = [result[int(i)] for i in index]
         
         writer({"type":"Research","content":to_send})
 

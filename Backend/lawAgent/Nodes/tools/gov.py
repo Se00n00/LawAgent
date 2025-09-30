@@ -33,4 +33,5 @@ def get_articles(query, region="us-en", max_results=5):
     except Exception as e:
         print("Error fetching articles:", e)
 
-    return {"search_results": results}
+    # return {"search_results": results}
+    return results

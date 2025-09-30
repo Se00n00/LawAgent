@@ -50,13 +50,13 @@ def gov_synthesizer(state: WorkerState):
             region=res.region,
             max_results=res.max_results
         )
-        index = asyncio.run(curated_index(data=result["search_results"], query=state["worker_query"]))
-        
-        to_send = [result["search_results"][int(i)] for i in index]
+        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))    
+        to_send = [result[int(i)] for i in index]
         
         writer({"type":"Gov","content":to_send})
 
         return {"curated_results": to_send}
+    
     except Exception as e:
         writer({"type":"Error","content":e})
 
