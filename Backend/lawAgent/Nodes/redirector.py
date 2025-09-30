@@ -39,4 +39,4 @@ def redirection(state:State):
 
         return {}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})

@@ -1,7 +1,7 @@
 from .state import WorkerState,refine_query, news_arguments
 from .utils.utils import get_text
 from .tools.news import get_news
-from .tools.mcp_client import curated_index
+from .tools.mcp_client import mcp
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -36,10 +36,14 @@ retriver_prompt = ChatPromptTemplate([
     MessagesPlaceholder("msg")
 ])
 
+async def curated_index(data, query):
+    return await mcp.call("curate", {"data": data, "query": query})
+
+
 
 # Node : Prompt Synthesizer(news_synthesizer) > get_news(tools) > Curator(news_curator) > Extractor(news_extractor)
 Retreiver = llm.with_structured_output(news_arguments)
-def news_synthesizer(state: WorkerState):
+async def news_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
         res = Retreiver.invoke(
@@ -53,14 +57,14 @@ def news_synthesizer(state: WorkerState):
             page=res.page,
             region=res.region
         )
-        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
-        
+        index = await curated_index(data=result, query=state["worker_query"])
         to_send = [result[int(i)] for i in index]
         writer({"type":"News","content":to_send})
 
         return {"curated_results": to_send}
     except Exception as e:
-            writer({"type":"Error","content":e})
+            writer({"type":"Error","content": str(e)})
+
 
 
 def news_curator(state: WorkerState) -> WorkerState:
@@ -99,7 +103,8 @@ def news_extractor(state: WorkerState) -> WorkerState:
         ])
         return {"extracted_content":["News Articles: ", msg.content]}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
+
 
 news_articles = (
     StateGraph(WorkerState)

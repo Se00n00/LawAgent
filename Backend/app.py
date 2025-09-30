@@ -3,6 +3,7 @@ from langgraph.graph import MessagesState, StateGraph, START
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import HumanMessage, AIMessage
 import os
+import json
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -63,15 +64,19 @@ def chat(req: ChatRequest):
 
     try:
         async def event_generator():
-            for stream_mode in agent.stream(
-            {"user_query": input_message},config, subgraphs=True, stream_mode=["messages","custom"]):
-                
-                if stream_mode[1] == 'messages':
-                    if isinstance(stream_mode[2][0], AIMessage):
-                        if (stream_mode[2][1]['langgraph_node'] in ['gaudrail','redirector','chat_node','summerizer','final_answer']):
-                            yield stream_mode[2][0].content
+            async for stream_mode in agent.astream(
+                {"user_query": input_message}, config, subgraphs=True, stream_mode=["messages","custom"]
+            ):
+                mode_type, payload = stream_mode[1], stream_mode[2]
+
+                if mode_type == "messages":
+                    if isinstance(payload[0], AIMessage):
+                        node = payload[1].get("langgraph_node")
+                        if node in ["gaudrail","redirector","chat_node","summerizer","final_answer"]:
+                            yield payload[0].content
                 else:
-                    yield str(stream_mode[2])
+                    # safer JSON streaming
+                    yield str(payload)
                 # print(stream_mode)
 
 

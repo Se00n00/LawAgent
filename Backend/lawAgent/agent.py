@@ -65,7 +65,8 @@ def ChatNode(state:State):
         return state
     
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
+
 
 
 # Conditional Node 

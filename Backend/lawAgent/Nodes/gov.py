@@ -1,7 +1,7 @@
 from .state import WorkerState, gov_arguments
 from .tools.gov import get_articles
 from .utils.utils import get_text
-from .tools.mcp_client import curated_index
+from .tools.mcp_client import mcp
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -36,10 +36,14 @@ synthesizer_prompt = ChatPromptTemplate([
     MessagesPlaceholder("msg")
 ])
 
+async def curated_index(data, query):
+    return await mcp.call("curate", {"data": data, "query": query})
+
+
 
 # Node : Prompt Synthesizer(gov_synthesizer) > get_images(tools) > Curator(gov_curator) > Extractor(gov_extractor)
 Synthesizer = llm.with_structured_output(gov_arguments)
-def gov_synthesizer(state: WorkerState):
+async def gov_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
         res = Synthesizer.invoke(
@@ -50,7 +54,7 @@ def gov_synthesizer(state: WorkerState):
             region=res.region,
             max_results=res.max_results
         )
-        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
+        index = await curated_index(data=result, query=state["worker_query"])
         to_send = [result[int(i)] for i in index]
         
         writer({"type":"Gov","content":to_send})
@@ -58,7 +62,7 @@ def gov_synthesizer(state: WorkerState):
         return {"curated_results": to_send}
     
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
 
 def gov_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -88,7 +92,7 @@ def gov_extractor(state: WorkerState) -> WorkerState:
 
         return {"extracted_content":["Official Governement Articles: ", msg.content]}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
 
 
 gov_articles = (

@@ -1,7 +1,7 @@
 from .state import WorkerState, image_arguments
 from .utils.utils import get_text
 from .tools.images import get_images
-from .tools.mcp_client import curated_index
+from .tools.mcp_client import mcp
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -35,10 +35,14 @@ image_prompt = ChatPromptTemplate([
     MessagesPlaceholder("msg")
 ])
 
+async def curated_index(data, query):
+    return await mcp.call("curate", {"data": data, "query": query})
+
+
 
 # Node : Prompt Synthesizer(image_synthesizer) > get_articles(tools) > Curator(images_curator)
 Synthesizer = llm.with_structured_output(image_arguments)
-def image_synthesizer(state: WorkerState):
+async def image_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
         res = Synthesizer.invoke(
@@ -49,15 +53,14 @@ def image_synthesizer(state: WorkerState):
             timelimit=res.timelimit,
             region=res.region
         )
-        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
-        
+        index = await curated_index(data=result, query=state["worker_query"])
         to_send = [result[int(i)] for i in index]
         writer({"type":"Media","content":to_send})
 
         return {"curated_results": to_send}
     
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
 
 def images_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -77,7 +80,7 @@ def images_curator(state: WorkerState) -> WorkerState:
         return {"curated_results":curated}
     
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
 
 images = (
     StateGraph(WorkerState)

@@ -55,6 +55,7 @@ def FinalNode(state:State):
         return {}
         # return {"final_answer":res.content}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
+
     # state["final_answer"] = res.content
     # return state

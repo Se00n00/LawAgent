@@ -41,4 +41,4 @@ def gaurdrail(state:State):
         writer({"type":"Status","content":20})
         return {"gaurd_index":msg.content}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})

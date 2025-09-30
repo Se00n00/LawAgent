@@ -1,7 +1,7 @@
 from .state import WorkerState, research_arguments
 from .utils.utils import get_text
 from .tools.sementicScholar import get_papers
-from .tools.mcp_client import curated_index
+from .tools.mcp_client import mcp
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -34,10 +34,14 @@ research_prompt = ChatPromptTemplate([
     MessagesPlaceholder("msg")
 ])
 
+async def curated_index(data, query):
+    return await mcp.call("curate", {"data": data, "query": query})
+
+
 
 # Node : Prompt Synthesizer(reserach_synthesizer) > get_papers(tools) > Curator(research_curator) > Extractor(research_extractor)
 Synthesizer = llm.with_structured_output(research_arguments)
-def research_synthesizer(state: WorkerState):
+async def research_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
         res = Synthesizer.invoke(
@@ -45,15 +49,15 @@ def research_synthesizer(state: WorkerState):
         )
         result = get_papers(query=res.worker_query)
 
-        index = asyncio.run(curated_index(data=result, query=state["worker_query"]))
-        
+        index = await curated_index(data=result, query=state["worker_query"])
         to_send = [result[int(i)] for i in index]
         
         writer({"type":"Research","content":to_send})
 
         return {"curated_results": to_send}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
+
 
 def research_curator(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
@@ -82,7 +86,8 @@ def research_extractor(state: WorkerState) -> WorkerState:
         ])
         return {"extracted_content":["Researched Content: ", msg.content]}
     except Exception as e:
-            writer({"type":"Error","content":e})
+            writer({"type":"Error","content": str(e)})
+
 
 research_articles = (
     StateGraph(WorkerState)

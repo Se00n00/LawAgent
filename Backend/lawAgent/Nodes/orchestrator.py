@@ -47,7 +47,8 @@ def OrchestratorNode(state:State):
         writer({"type":"Status","content":60})
         return {"works": res.works}
     except Exception as e:
-        writer({"type":"Error","content":e})
+        writer({"type":"Error","content": str(e)})
+
 
 def assign_task(state:State):
     workers = {
