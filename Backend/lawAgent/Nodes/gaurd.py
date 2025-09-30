@@ -32,11 +32,11 @@ prompt_template = ChatPromptTemplate([
 
 # Node
 structured_llm = llm.with_structured_output(GaurdRailState)
-def gaurdrail(state:State):
+async def gaurdrail(state:State):
     writer = get_stream_writer()
     try:
         gaurd_rail_prompt = prompt_template.invoke({"prompt": state['user_query']})
-        msg = structured_llm.invoke(gaurd_rail_prompt)
+        msg = await structured_llm.ainvoke(gaurd_rail_prompt)
         
         writer({"type":"Status","content":20})
         return {"gaurd_index":msg.content}

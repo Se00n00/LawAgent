@@ -38,10 +38,10 @@ orchestraor_prompt = ChatPromptTemplate([
 
 # Node
 orchestrator = llm.with_structured_output(Orchestrator_Output)
-def OrchestratorNode(state:State):
+async def OrchestratorNode(state:State):
     writer = get_stream_writer()
     try:
-        res = orchestrator.invoke(
+        res = await orchestrator.ainvoke(
             orchestraor_prompt.invoke({"msg":[HumanMessage(content = state["user_query"])]})
         )
         writer({"type":"Status","content":60})

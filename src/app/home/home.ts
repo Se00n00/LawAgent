@@ -54,7 +54,7 @@ export class Home {
   Answer: WritableSignal<string> = signal("")
 
 
-  removeIntro = signal(false)
+  removeIntro = signal(true)
   askNext = signal(false)
 
   Searching = signal(false)

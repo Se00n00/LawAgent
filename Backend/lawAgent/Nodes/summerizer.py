@@ -31,12 +31,12 @@ summerizer_prompt = ChatPromptTemplate([
 
 # Node
 summerizer = llm.with_structured_output(SummerizerOutput)
-def SummerizerNode(state:State):
+async def SummerizerNode(state:State):
     text = state["complete_section"]
 
     writer = get_stream_writer()
     try:
-        res = summerizer.invoke(f"""
+        res = await summerizer.ainvoke(f"""
             You are a pointwise summerizer assistant. 
 
             Your task is to provide a point wise summerization to the user's question. 

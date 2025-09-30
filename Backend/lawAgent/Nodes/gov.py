@@ -46,7 +46,7 @@ Synthesizer = llm.with_structured_output(gov_arguments)
 async def gov_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
-        res = Synthesizer.invoke(
+        res = await Synthesizer.ainvoke(
             synthesizer_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
         )
         result = get_articles(
@@ -64,29 +64,29 @@ async def gov_synthesizer(state: WorkerState):
     except Exception as e:
         writer({"type":"Error","content": str(e)})
 
-def gov_curator(state: WorkerState) -> WorkerState:
-    papers_text = "\n\n".join(
-        [f"Title: {p['title']}\n Body: {p['snippet']}" for p in state["search_results"]]
-    )
-    msg = llm.invoke([
-        HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
-        f"Return only the chosen titles.\n\n{papers_text}")
-    ])
+# def gov_curator(state: WorkerState) -> WorkerState:
+#     papers_text = "\n\n".join(
+#         [f"Title: {p['title']}\n Body: {p['snippet']}" for p in state["search_results"]]
+#     )
+#     msg = llm.invoke([
+#         HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
+#         f"Return only the chosen titles.\n\n{papers_text}")
+#     ])
 
-    chosen_titles = msg.content.splitlines()
-    curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
+#     chosen_titles = msg.content.splitlines()
+#     curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
     
-    return {"curated_results":curated}
+#     return {"curated_results":curated}
 
 
-def gov_extractor(state: WorkerState) -> WorkerState:
+async def gov_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {p['title']} Body: {p['snippet']}" for p in state["curated_results"]]
     )
 
     writer = get_stream_writer()
     try:
-        msg = llm.invoke([
+        msg = await llm.ainvoke([
             HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
         ])
 

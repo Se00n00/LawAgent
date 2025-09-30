@@ -31,11 +31,11 @@ llm = ChatOpenAI(
 
 # Node
 final_llm = llm.with_structured_output(FinalOutput)
-def FinalNode(state:State):
+async def FinalNode(state:State):
     text = state["complete_section"]
     writer = get_stream_writer()
     try:
-        res = final_llm.invoke(f"""
+        res = await final_llm.ainvoke(f"""
             You are a final answer assistant. 
 
             Your task is to provide a **final answer** to the user's question. keep it very short (50-70 words) but keep it detailed 

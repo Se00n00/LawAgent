@@ -44,7 +44,7 @@ Synthesizer = llm.with_structured_output(research_arguments)
 async def research_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
-        res = Synthesizer.invoke(
+        res = await Synthesizer.ainvoke(
             research_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
         )
         result = get_papers(query=res.worker_query)
@@ -59,29 +59,29 @@ async def research_synthesizer(state: WorkerState):
         writer({"type":"Error","content": str(e)})
 
 
-def research_curator(state: WorkerState) -> WorkerState:
-    papers_text = "\n\n".join(
-        [f"Title: {p['title']}\nAbstract: {p.get('abstract','')}" for p in state["search_results"]]
-    )
-    msg = llm.invoke([
-        HumanMessage(content=f"From these papers, select the most relevant ones for the query '{state['worker_query']}'. "
-        f"Return only the chosen titles.\n\n{papers_text}")
-    ])
+# def research_curator(state: WorkerState) -> WorkerState:
+#     papers_text = "\n\n".join(
+#         [f"Title: {p['title']}\nAbstract: {p.get('abstract','')}" for p in state["search_results"]]
+#     )
+#     msg = llm.invoke([
+#         HumanMessage(content=f"From these papers, select the most relevant ones for the query '{state['worker_query']}'. "
+#         f"Return only the chosen titles.\n\n{papers_text}")
+#     ])
 
-    chosen_titles = msg.content.splitlines()
-    curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
+#     chosen_titles = msg.content.splitlines()
+#     curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
     
-    return {"curated_results":curated}
+#     return {"curated_results":curated}
 
 
 
-def research_extractor(state: WorkerState) -> WorkerState:
+async def research_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {p['title']} ({p['year']})\nAbstract: {p.get('abstract','')}" for p in state["curated_results"]]
     )
     writer = get_stream_writer()
     try:
-        msg = llm.invoke([
+        msg = await llm.ainvoke([
             HumanMessage(content=f"Extract the most important findings and insights from these papers:\n\n{papers_text}")
         ])
         return {"extracted_content":["Researched Content: ", msg.content]}

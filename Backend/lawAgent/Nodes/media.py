@@ -45,7 +45,7 @@ Synthesizer = llm.with_structured_output(image_arguments)
 async def image_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
-        res = Synthesizer.invoke(
+        res = await Synthesizer.ainvoke(
             image_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
         )
         result = get_images(
@@ -62,25 +62,25 @@ async def image_synthesizer(state: WorkerState):
     except Exception as e:
         writer({"type":"Error","content": str(e)})
 
-def images_curator(state: WorkerState) -> WorkerState:
-    papers_text = "\n\n".join(
-        [f"Title: {p['title']}\n" for p in state["search_results"]]
-    )
+# def images_curator(state: WorkerState) -> WorkerState:
+#     papers_text = "\n\n".join(
+#         [f"Title: {p['title']}\n" for p in state["search_results"]]
+#     )
 
-    writer = get_stream_writer()
-    try:
-        msg = llm.invoke([
-            HumanMessage(content=f"From these titles of images that contains articles, select the most relevant ones for the query '{state['worker_query']}'. "
-            f"Return only the chosen titles.\n\n{papers_text}")
-        ])
+#     writer = get_stream_writer()
+#     try:
+#         msg = llm.invoke([
+#             HumanMessage(content=f"From these titles of images that contains articles, select the most relevant ones for the query '{state['worker_query']}'. "
+#             f"Return only the chosen titles.\n\n{papers_text}")
+#         ])
 
-        chosen_titles = msg.content.splitlines()
-        curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
+#         chosen_titles = msg.content.splitlines()
+#         curated = [p for p in state["search_results"] if p["title"] in chosen_titles]
         
-        return {"curated_results":curated}
+#         return {"curated_results":curated}
     
-    except Exception as e:
-        writer({"type":"Error","content": str(e)})
+#     except Exception as e:
+#         writer({"type":"Error","content": str(e)})
 
 images = (
     StateGraph(WorkerState)

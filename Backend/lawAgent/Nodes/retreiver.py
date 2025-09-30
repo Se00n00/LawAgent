@@ -46,7 +46,7 @@ Retreiver = llm.with_structured_output(news_arguments)
 async def news_synthesizer(state: WorkerState):
     writer = get_stream_writer()
     try:
-        res = Retreiver.invoke(
+        res = await Retreiver.ainvoke(
             retriver_prompt.invoke({"msg":[HumanMessage(content =state["worker_query"])]})
         )
 
@@ -67,38 +67,38 @@ async def news_synthesizer(state: WorkerState):
 
 
 
-def news_curator(state: WorkerState) -> WorkerState:
-    papers_text = "\n\n".join(
-        [f"Title: {str(p['title'])}\n Date: {str(p['date'])} Body: {str(p['body'])}" for p in state["search_results"]]
-    )
-    msg = llm.invoke([
-        HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
-        f"Return only the chosen titles.\n\n{papers_text}")
-    ])
+# def news_curator(state: WorkerState) -> WorkerState:
+#     papers_text = "\n\n".join(
+#         [f"Title: {str(p['title'])}\n Date: {str(p['date'])} Body: {str(p['body'])}" for p in state["search_results"]]
+#     )
+#     msg = llm.invoke([
+#         HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
+#         f"Return only the chosen titles.\n\n{papers_text}")
+#     ])
 
-    chosen_titles = [line.strip() for line in msg.content.splitlines() if line.strip()]
+#     chosen_titles = [line.strip() for line in msg.content.splitlines() if line.strip()]
 
-    # fuzzy match: include article if its title is similar enough to any chosen title
-    curated = []
-    for article in state["search_results"]:
-        for title in chosen_titles:
-            ratio = difflib.SequenceMatcher(None, article["title"], title).ratio()
-            if ratio > 0.7:  # threshold, adjust as needed
-                curated.append(article)
-                break
+#     # fuzzy match: include article if its title is similar enough to any chosen title
+#     curated = []
+#     for article in state["search_results"]:
+#         for title in chosen_titles:
+#             ratio = difflib.SequenceMatcher(None, article["title"], title).ratio()
+#             if ratio > 0.7:  # threshold, adjust as needed
+#                 curated.append(article)
+#                 break
 
-    return {"curated_results": curated}
+#     return {"curated_results": curated}
 
 
 
-def news_extractor(state: WorkerState) -> WorkerState:
+async def news_extractor(state: WorkerState) -> WorkerState:
     papers_text = "\n\n".join(
         [f"Title: {str(p['title'])}\n Date: {str(p['date'])}\n Body: {str(p['body'])}\n Source: {str(p['source'])} " for p in state["curated_results"]]
     )
 
     writer = get_stream_writer()
     try:
-        msg = llm.invoke([
+        msg = await llm.ainvoke([
             HumanMessage(content=f"Extract the most important findings and insights from these articles:\n\n{papers_text}")
         ])
         return {"extracted_content":["News Articles: ", msg.content]}

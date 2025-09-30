@@ -43,7 +43,7 @@ conversation_prompt = ChatPromptTemplate([
 # Node
 chatbot = llm.with_structured_output(ConverstationOutput)
 @traceable
-def ChatNode(state:State):
+async def ChatNode(state:State):
     if not state.get("conversation"):
         state["conversation"] = []
         
@@ -51,7 +51,7 @@ def ChatNode(state:State):
     
     writer = get_stream_writer()
     try:
-        res = chatbot.invoke(
+        res = await chatbot.ainvoke(
             conversation_prompt.invoke({"msg":state["conversation"]})
         )
         # print(res)
