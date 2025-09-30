@@ -13,7 +13,5 @@ langsmith
 mcp
 langchain_mcp_adapters
 
-onnxruntime
 numpy
-transformers
 fastmcp
