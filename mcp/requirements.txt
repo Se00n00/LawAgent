@@ -1,5 +1,4 @@
-fastapi 
-fastapi-mcp
+fastapip
 uvicorn
 mcp_proxy
 python-dotenv
@@ -7,3 +6,4 @@ fastmcp
 numpy
 onnxruntime
 transformers
+torch
