@@ -52,7 +52,7 @@ async def FinalNode(state:State):
             Information: {text}
             User Question: {state['user_query']}
         """)
-        writer({"type":"final_answer","content":res.content})
+        writer(res.model_dump())
         return {}
         # return {"final_answer":res.content}
     except Exception as e:

@@ -80,25 +80,25 @@
                             
                             @if (item.type){
                                 @switch (item.type) {
-                                    @case ("FinalAnswer") {
+                                    @case ("final_answer") {
                                         <app-main-answer-card 
                                         [Title] = "item.content.answer_title"
                                         [Content]="item.content.final_answer" 
                                         class="w-full"/>
                                     }
-                                    @case ("Conversation") {
+                                    @case ("chat_node") {
                                         @if (item.content.proceed2Orchestration == false) {
                                             <app-main-answer-card [Content]="item.content.conversation" class="w-full"/>
                                         }
                                         <!-- <app-news-cards class="col-span-3"/> -->
                                     }
-                                    @case ("Summeries") {
+                                    @case ("summerizer") {
                                         <app-summary-card 
                                         [SummaryTitle]="item.content.summary_title"
                                         [Summaries]="item.content.summeries"
                                         class="w-full"/>
                                     }
-                                    @case ("Guardrail") {
+                                    @case ("Gaudrail") {
                                         @if(item.content > 3) {
                                             <app-error-card [ErrorIndex]="item.content" class="w-full"/>
                                         }

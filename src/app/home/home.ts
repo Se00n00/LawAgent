@@ -115,6 +115,7 @@ export class Home{
 
                 try {
                     const obj = JSON.parse(line);
+                    console.log(obj)
                     this.Components.update(prev => [...prev, obj]);
                     if (obj.type === 'Status') this.progress = obj.content;
                 } catch {

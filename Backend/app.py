@@ -79,11 +79,13 @@ def chat(req: ChatRequest):
                 # else:
                     try:
                     # Convert to JSON string and add newline
-                        if hasattr(payload, "__dict__"):
-                            serializable_payload = payload.__dict__
-                        else:
-                            serializable_payload = payload
-                        yield json.dumps(serializable_payload, default=str) + "\n"
+                        # print(payload)
+                        # if hasattr(payload, "__dict__"):
+                            
+                        #     serializable_payload = payload.model_dump_json()
+                        # else:
+                        #     serializable_payload = payload
+                        yield json.dumps(payload) + "\n"
                     except Exception as e:
                         yield json.dumps({"type": "Error", "content": str(e)}) + "\n"
         

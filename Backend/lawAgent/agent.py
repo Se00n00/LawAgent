@@ -55,7 +55,7 @@ async def ChatNode(state:State):
             conversation_prompt.invoke({"msg":state["conversation"]})
         )
         # print(res)
-        writer({"type":"chat_node","content":res.content})
+        writer(res.model_dump())
 
         state["conversation"].append({"role": "assistant", "content": res.content.conversation})
 
