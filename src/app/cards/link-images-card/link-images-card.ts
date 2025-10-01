@@ -16,7 +16,6 @@ interface ImageWithLink{
 
 
 export class LinkImagesCard {
-  @Input() ImageWithLinks: any[] = [
-    {'image_url':'images/0Node.png','article_url':'','title':'title'}
-  ]
+  @Input() ImageWithLinks:ImageWithLink |any
+  @Input() Index:any
 }

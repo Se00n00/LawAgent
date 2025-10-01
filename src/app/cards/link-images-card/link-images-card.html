@@ -1,18 +1,28 @@
-@if (ImageWithLinks.length > 0) {
-    <div class="realtive grid grid-cols-4 gap-2">
-        @for (item of ImageWithLinks; track $index) {
-            <div 
-            class="realtive group p-0.5 h-fit bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all" 
-            [ngClass]="{ 'col-span-2': item}"
+@if (ImageWithLinks) {
+  <div class="relative grid grid-cols-4 gap-2">
+    @for (media of ImageWithLinks; track $index) {
+      <div 
+        class="relative group p-[1px] h-fit bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all" 
+        [ngClass]="{ 'col-span-2': $index < 2, 'col-span-1': $index >= 2 }"
+      >
+        <a [href]="media.article_url" class="relative block w-full">
+          
+          <!-- Square container -->
+          <div class="relative w-full aspect-square bg-black/[0.1] rounded-xl overflow-hidden">
+            <img 
+              [src]="media.image_url" 
+              (error)="media.image_url = 'images/home.jpg'"
+              class="absolute inset-0 w-full h-full object-cover rounded-xl"
             >
-                <a [href]="item.article_url" class="relative">
-                    <img [src]="item.image_url" class="rounded-xl">
-                    
-                    <div class="w-max z-10 absolute bottom-5 -right-5 bg-white/[0.4] backdrop-blur-md border-black/[0.4] border-1 rounded-md bg-opacity-50 text-black/[0.7] text-xs p-1 px-2 truncate opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {{ item.article_url}}
-                    </div>
-                </a>
-            </div>
-        }
-    </div>
+          </div>
+
+          <div 
+            class="w-max z-10 absolute bottom-5 -right-5 bg-white/[0.4] backdrop-blur-md border-black/[0.4] border-1 rounded-md bg-opacity-50 text-black/[0.7] text-xs p-1 px-2 truncate opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            {{ media.title }}
+          </div>
+        </a>
+      </div>
+    }
+  </div>
 }

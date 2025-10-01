@@ -12,8 +12,9 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './questioncard.css'
 })
 export class Questioncard {
+  @Input() progress:any = 0;
   @Output() messageEvent = new EventEmitter<string>();
-  askQuestion = signal(true)
+  askQuestion = signal(false)
 
   Question: WritableSignal<string> = signal("");
 
@@ -22,19 +23,19 @@ export class Questioncard {
     return this.Question().trim().length === 0;
   }
 
-  running_status_text = "This would take a least time "
+  running_status_text = "This would take at least somtime "
 
-  @Input() progress:any = 0;
+  
   ngOnChanges(changes: SimpleChanges) {
-  if (changes['progress']) {
-    const newValue = changes['progress'].currentValue;
-    if(newValue == 100){
-      this.progress = 0
-      this.askQuestion.set(true)
-    }
+    if (changes['progress']) {
+      const newValue = changes['progress'].currentValue;
+      if(newValue == 100){
+        this.progress = 0
+        this.askQuestion.set(true)
+      }
 
+    }
   }
-}
 
   
   steps = Array(30).fill(0);

@@ -1,53 +1,48 @@
 @if (NewscardItems.length > 0) {
-    <div class="flex gap-2">
-        <div class="p-1 relative bg-white rounded-xl border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
-            <div class="cursor-pointer flex gap-3 bg-black/[0.05] p-1 rounded-lg border border-black/[0.1]">
-                <img [src]="NewscardItem()?.image_url" alt="nothing.jpg" class="aspect-square h-50 rounded-lg">
-                <div class="flex flex-col justify-between">
-                    <div class="flex flex-col">
-                        <p class="font-light">{{NewscardItem()?.title?.slice(-30)}}</p>
-                        <p class="text-sm font-light text-black/[0.8]">{{ NewscardItem()?.body?.slice(-220)}}</p>
-                    </div>
-                    
-                    <div class="flex justify-between items-center">
-                        <!-- @if (NewscardItem()?.article_author !=null) {
-                            <div class="flex gap-1 p-1 pr-2 rounded-lg items-center">
-                                <img [src]="NewscardItem()?.article_author_icon" class="h-6">
-                                <p class="text-sm">{{NewscardItem()?.article_author}}</p>
-                            </div>
-                        }@else {
-                            <div></div>
-                        } -->
-                        <div></div>
-                        {{NewscardItem()?.source}}
-                        {{NewscardItem()?.date}}
-                        <!-- <a hre [href]="NewscardItem()?.source" class="self-end p-1">
-                            <img [src]="NewscardItem()?.article_orign_web_icon" class="h-6 opacity-60 hover:opacity-80 transition-all">
-                        </a> -->
-                    </div>
-                </div>
+    <div class="p-1 relative bg-white rounded-xl border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+        <div class="relative aspect-square flex flex-col bg-black/[0.05] rounded-lg border-black/[0.1] overflow-hidden">
+            <img #imgElement
+            [src]="NewscardItem()?.image_url" 
+            (error)="imgElement.src='images/home.jpg'"
+            class="inset-0 w-full h-full object-cover rounded-lg">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/[0.4] to-transparent"></div>
 
-                <div class="flex flex-col justify-start items-center gap-2 overflow-hidden">
-                    <img src="Icons/weblinks.svg" class="h-10">
+            <div class="absolute bottom-0 p-2 w-full text-white flex-1 flex flex-col justify-between ">
+                <div (click)="showBody()" class="flex justify-center font-extralight cursor-pointer">
+                    <div class="-rotate-90">></div>
+                </div>
+                <div class="flex flex-col gap-1 overflow-scroll">
+                    <p class="text-sm font-normal">{{NewscardItem()?.title}}</p>
+                    @if (body()) {
+                        <p (click)="showBody()" class="cursor-pointer mb-2 text-xs font-light text-white/[0.8]">{{ NewscardItem()?.body}}</p>
+                    }
+                    
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <div class="text-xs font-light">
+                    {{NewscardItem()?.date|date}}
+                    </div>
+                    <a [href]="NewscardItem()?.article_url" class="flex opacity-100 hover:opacity-60 text-xs items-center gap-1 transition-all">
+                        <!-- <img src="Icons/globewhite.svg" class="h-4"> -->
+                        {{NewscardItem()?.source}}
+                    </a>
+                </div>
+            </div>
+
+            <div class="absolute top-2 right-2 flex flex-col justify-start items-center gap-2">
+                <button (click)="next()" class="mb-2 h-4 w-4 cursor-pointer border rounded-full bg-gray-100 hover:bg-gray-600 shadow-[1px_2px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all"></button>
+                <div class="flex flex-col gap-2 items-center">
                     @for (item of NewscardItems; track $index) {    
                         @if ($index === this.CurrentCardIndex()) {
-                            <span (click)="changeCardIndex($index)" class="cursor-pointer m-0 p-0 h-0.5 w-4 rounded-full font-bold bg-black"></span>
+                            <span (click)="changeCardIndex($index)" class="cursor-pointer m-0 p-0 h-0.5 w-3 rounded-full font-bold bg-black"></span>
                         }@else {
                             <span (click)="changeCardIndex($index)" class="cursor-pointer m-0 p-0 h-0.5 w-2 text-xs bg-black/[0.3]"></span>
                         }
                     }
                 </div>
-            </div>
-        </div>
-        
-        <div class="h-max overflow-hidden p-1 relative bg-white rounded-xl flex flex-col justify-center gap-0.5 border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
-            @for (item of NewscardItems; track $index) {
-                <div (click)="changeCardIndex($index)" class="cursor-pointer flex gap-2 bg-black/[0.05] hover:bg-black/[0.3] p-0.5 items-center rounded-lg border border-black/[0.1] transition-all">
-                    <img [src]="NewscardItem()?.image_url" alt="nothing.jpg" class="h-8 rounded-lg">
-                    <p class="font-light text-sm min-w-sm ">{{NewscardItem()?.title?.slice(-30)}}</p>
-                </div>
                 
-            }
+            </div>
         </div>
     </div>
 }

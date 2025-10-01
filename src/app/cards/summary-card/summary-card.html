@@ -4,14 +4,14 @@
             <img src="Icons/summary.svg" class="h-9">
             <p>{{SummaryTitle}}</p>
         </div>
-        <div class="relative flex flex-col gap-5 w-sm px-4">
+        <div class="relative flex flex-col gap-5 px-4">
             <div id="Line" class="absolute w-0.5 bg-black/[0.6] h-auto"></div>
                 
             <div id="summaryContent" class="flex flex-col gap-5 overflow-y-scroll">
                 @for (item of Summaries; track $index) {
                     <div class="summaryItem flex flex-col pl-4">
                         <div class="text-sm">{{item.heading}}</div>
-                        <div class="text-xs font-light text-black/[0.6]">{{item.heading_content}}</div>
+                        <div class="text-xs font-light text-black/[0.6] text-wrap">{{item.heading_content}}</div>
                         <div class="absolute left-[12px] border rounded-full w-2.5 h-2.5" 
                         [ngClass]="{'bg-black':$index===this.Summaries.length-1,'bg-white':$index !== this.Summaries.length-1}"
                         ></div>

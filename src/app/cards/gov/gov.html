@@ -1,0 +1,27 @@
+@if(current_item){
+  <div class="p-2 aspect-square relative bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    
+    <!-- Snippet -->
+    <div class="m-2 p-2 text-sm font-light rounded-xl flex-1  transition-all">
+        {{ current_item.snippet }}
+    </div>
+
+    <div class="flex gap-3 items-center p-2">
+      <a [href]="current_item.url">
+        <img src="Icons/globe.svg" class="h-6">
+      </a>
+        
+      <p class="text-sm text-black/[0.8] text-wrap">{{ current_item.title }}</p>
+    </div>
+
+    <div class="absolute top-3 w-full flex justify-center gap-1">
+        @for (item of Content; track $index) {
+            <div class="h-1 w-1 rounded-full"
+            [ngClass]="{'bg-black':$index === current_index(), 'bg-black/[0.1]':$index !== current_index()}"></div>
+        }
+    </div>
+    <button (click)="next()" class="absolute top-2 right-2 h-4 w-4 cursor-pointer border rounded-full bg-gray-100 hover:bg-black/[0.3] shadow-[1px_2px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all"></button>
+  </div>
+}
+
+

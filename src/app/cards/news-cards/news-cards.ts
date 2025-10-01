@@ -1,17 +1,18 @@
 import { Component, Input, WritableSignal, signal, computed } from '@angular/core';
 import { single } from 'rxjs';
-
+import { DatePipe } from '@angular/common';
 interface Newscard{
   title: string
-  image_url: string
   body: string
+  article_url:string
+  image_url: string
   source: string
   date: string
 }
 
 @Component({
   selector: 'app-news-cards',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './news-cards.html',
   styleUrl: './news-cards.css'
 })
@@ -19,18 +20,7 @@ interface Newscard{
 export class NewsCards {
   
 
-  @Input() NewscardItems: Newscard[] = [
-    // {
-    //   article_id:1,
-    //   article_author:"sfd",
-    //   article_author_icon:"sd",
-    //   article_head:"df",
-    //   article_head_image_url:"df",
-    //   article_origin_web_url:"df",
-    //   article_orign_web_icon:"as",
-    //   article_summerized_content:"sd"
-    // }
-  ]
+  @Input() NewscardItems: Newscard[] = []
   CurrentCardIndex = signal(0)
   
   NewscardItem = computed(() => {
@@ -50,5 +40,15 @@ export class NewsCards {
       const length = this.NewscardItems.length
       this.CurrentCardIndex.update(val => (val + increment + length) % length)
     }
+  }
+  next(){
+    const newIndex = (this.CurrentCardIndex() + 1) % this.NewscardItems.length;
+    this.CurrentCardIndex.set(newIndex);
+    this.body.set(false)
+  }
+
+  body = signal(false)
+  showBody(){
+    this.body.update((val)=> val = !val)
   }
 }
