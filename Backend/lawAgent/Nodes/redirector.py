@@ -35,6 +35,7 @@ async def redirection(state:State):
     try:
         redirect_prompt = prompt_template.invoke({"prompt": f"{state['user_query']} Gaurd_Index of user's loss: {str(state['gaurd_index'])}"})
         msg = await structured_llm.ainvoke(redirect_prompt)
+        writer({"type":"redirector","content":msg.content})
         # return {"redirection":msg.content.redirection_str}
 
         return {}

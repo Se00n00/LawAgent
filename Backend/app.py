@@ -69,19 +69,23 @@ def chat(req: ChatRequest):
             ):
                 mode_type, payload = stream_mode[1], stream_mode[2]
 
-                if mode_type == "messages":
-                    if isinstance(payload[0], AIMessage):
-                        node = payload[1].get("langgraph_node")
-                        if node in ["gaudrail","redirector","chat_node","summerizer","final_answer"]:
-                            content = payload[0].content
-                            if content:  # Only yield if there's content
-                                yield content
-                else:
+                if mode_type == "custom":
+                #     if isinstance(payload[0], AIMessage):
+                #         node = payload[1].get("langgraph_node")
+                #         # if node in ["gaudrail","redirector","chat_node","summerizer","final_answer"]:
+                #             # content = payload[0].content
+                #             # if content:  # Only yield if there's content
+                #             #     yield content
+                # else:
                     try:
                     # Convert to JSON string and add newline
-                        yield json.dumps(payload) + "\n"
+                        if hasattr(payload, "__dict__"):
+                            serializable_payload = payload.__dict__
+                        else:
+                            serializable_payload = payload
+                        yield json.dumps(serializable_payload, default=str) + "\n"
                     except Exception as e:
-                        yield json.dumps({"type": "error", "content": str(e)}) + "\n"
+                        yield json.dumps({"type": "Error", "content": str(e)}) + "\n"
         
 
 

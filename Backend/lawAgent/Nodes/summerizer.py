@@ -54,6 +54,8 @@ async def SummerizerNode(state:State):
 
             Information: {text}
         """)
+        
+        writer({"type":"summerizer","content":res.content})
         return {}
         # return {"Summeries": res.content.summeries}
     

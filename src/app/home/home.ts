@@ -84,46 +84,64 @@ export class Home{
     
 
   async queryLLM(prompt: string) {
-  const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: prompt })
-  });
+    const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: prompt })
+    });
 
-  const reader = res.body?.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  while (true) {
-    const { done, value } = await reader!.read();
-    if (done) break;
-
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split('\n');
-    buffer = lines.pop()!; // keep last incomplete line
-
-    for (const line of lines) {
-      try {
-        const obj = JSON.parse(line);
-        this.Components.update(prev => [...prev, obj]);
-        if (obj.type === 'Status') this.progress = obj.content;
-      } catch {
-        // not JSON → treat as plain message
-        this.Components.update(prev => [...prev, { type: 'message', content: line }]);
-      }
+    // const reader = res.body?.getReader();
+    const decoder = new TextDecoder();
+    if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
     }
-  }
 
-  // parse leftover
-  if (buffer.trim()) {
-    try {
-      const obj = JSON.parse(buffer);
-      this.Components.update(prev => [...prev, obj]);
-      if (obj.type === 'Status') this.progress = obj.content;
-    } catch {
-      this.Components.update(prev => [...prev, { type: 'message', content: buffer }]);
+    const reader = res.body?.getReader();
+    if (!reader) {
+        throw new Error('No reader available');
     }
-  }
+    let buffer = '';
+
+    while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop()!; // keep last incomplete line
+
+            for (const line of lines) {
+                if (!line.trim()) continue; // ✅ Skip empty lines
+
+                try {
+                    const obj = JSON.parse(line);
+                    this.Components.update(prev => [...prev, obj]);
+                    if (obj.type === 'Status') this.progress = obj.content;
+                } catch {
+                    // Plain text message (from AI messages)
+                    if (line.trim()) { // ✅ Only add non-empty messages
+                        this.Components.update(prev => [...prev, { 
+                            type: 'message', 
+                            content: line.trim() 
+                        }]);
+                    }
+                }
+            }
+        }
+
+        // Parse leftover
+        if (buffer.trim()) {
+            try {
+                const obj = JSON.parse(buffer);
+                this.Components.update(prev => [...prev, obj]);
+                if (obj.type === 'Status') this.progress = obj.content;
+            } catch {
+                this.Components.update(prev => [...prev, { 
+                    type: 'message', 
+                    content: buffer.trim() 
+                }]);
+            }
+        }
 // }
 
       
