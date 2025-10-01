@@ -16,7 +16,7 @@ interface ImageWithLink{
 
 
 export class LinkImagesCard {
-  @Input() ImageWithLinks: ImageWithLink[] = [
+  @Input() ImageWithLinks: any[] = [
     {'image_url':'images/0Node.png','article_url':'','title':'title'}
   ]
 }

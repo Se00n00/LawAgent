@@ -19,7 +19,7 @@ llm = ChatOpenAI(
     model = primary_llm,
     api_key=openrouter_api,
     base_url = "https://openrouter.ai/api/v1",
-    streaming=True
+    streaming=False
 )
 
 # # Prompt

@@ -73,13 +73,18 @@ def chat(req: ChatRequest):
                     if isinstance(payload[0], AIMessage):
                         node = payload[1].get("langgraph_node")
                         if node in ["gaudrail","redirector","chat_node","summerizer","final_answer"]:
-                            yield payload[0].content
+                            content = payload[0].content
+                            if content:  # Only yield if there's content
+                                yield content
                 else:
-                    # safer JSON streaming
-                    yield str(payload)
-                # print(stream_mode)
+                    try:
+                    # Convert to JSON string and add newline
+                        yield json.dumps(payload) + "\n"
+                    except Exception as e:
+                        yield json.dumps({"type": "error", "content": str(e)}) + "\n"
+        
 
 
-        return StreamingResponse(event_generator(), media_type="text/plain")
+        return StreamingResponse(event_generator(), media_type="application/x-ndjson")
     except Exception as e:
         return {"error":f"Exception: {e}"}

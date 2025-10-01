@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal, effect } from '@angular/core';
+import { Component, signal, WritableSignal, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Questioncard } from '../cards/questioncard/questioncard';
@@ -14,6 +14,21 @@ import { ZeroCard } from '../cards/zero-card/zero-card';
 import { ModelErrorCard } from '../cards/model-error-card/model-error-card';
 // import oboe from 'oboe';
 import JSONic from 'jsonic';
+// @ts-ignore
+// import oboe from 'oboe';
+
+declare const clarinet: any;
+// // @ts-ignore
+// import clarinet from 'clarinet';
+// @ts-ignore
+declare module 'oboe' {
+  const oboe: any;
+  export default oboe;
+}
+
+// In your component/service
+// @ts-ignore
+import oboe from 'oboe';
 
 interface output{
   type:string
@@ -40,8 +55,12 @@ interface output{
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+
+export class Home{
   constructor(public auth:Supabase){}
+  // home.component.ts or wherever you use it
+  // clarinet: any;
+
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
@@ -60,12 +79,15 @@ export class Home {
   Searching = signal(false)
 
   SearchIcon="Icons/add.svg"
+  
+  // async queryLLM(prompt: string) {
+    
 
   async queryLLM(prompt: string) {
-    const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
+  const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: prompt }),
+    body: JSON.stringify({ message: prompt })
   });
 
   const reader = res.body?.getReader();
@@ -77,41 +99,76 @@ export class Home {
     if (done) break;
 
     buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop()!; // keep last incomplete line
 
-    let startIdx = buffer.indexOf('{');
-    while (startIdx !== -1) {
-      let endIdx = buffer.indexOf('}', startIdx);
-      if (endIdx === -1) break; // incomplete JSON
-
-      const rawObj = buffer.slice(startIdx, endIdx + 1);
-
+    for (const line of lines) {
       try {
-        const obj = JSONic(rawObj); // tolerant parser
+        const obj = JSON.parse(line);
         this.Components.update(prev => [...prev, obj]);
-
-        if (obj.type === 'Status') {
-          this.progress = obj.content; // update progress
-        }
-
-        buffer = buffer.slice(endIdx + 1);
-        startIdx = buffer.indexOf('{');
-      } catch (e) {
-        // Could not parse → skip one character and retry
-        startIdx += 1;
+        if (obj.type === 'Status') this.progress = obj.content;
+      } catch {
+        // not JSON → treat as plain message
+        this.Components.update(prev => [...prev, { type: 'message', content: line }]);
       }
     }
   }
 
-  // Parse any leftover
+  // parse leftover
   if (buffer.trim()) {
     try {
-      const obj = JSONic(buffer);
+      const obj = JSON.parse(buffer);
       this.Components.update(prev => [...prev, obj]);
       if (obj.type === 'Status') this.progress = obj.content;
-    } catch (e) {
-      console.error('Leftover not valid JSON:', buffer);
+    } catch {
+      this.Components.update(prev => [...prev, { type: 'message', content: buffer }]);
     }
   }
+// }
+
+      
+  //   let buffer = '';
+
+  //   while (true) {
+  //     const { done, value } = await reader!.read();
+  //     if (done) break;
+
+  //     buffer += decoder.decode(value, { stream: true });
+
+  //     let startIdx = buffer.indexOf('{');
+  //     while (startIdx !== -1) {
+  //       let endIdx = buffer.indexOf('}', startIdx);
+  //       if (endIdx === -1) break; // incomplete JSON
+
+  //       const rawObj = buffer.slice(startIdx, endIdx + 1);
+
+  //       try {
+  //         const obj = JSONic(rawObj); // tolerant parser
+  //         this.Components.update(prev => [...prev, obj]);
+
+  //         if (obj.type === 'Status') {
+  //           this.progress = obj.content; // update progress
+  //         }
+
+  //         buffer = buffer.slice(endIdx + 1);
+  //         startIdx = buffer.indexOf('{');
+  //       } catch (e) {
+  //         // Could not parse → skip one character and retry
+  //         startIdx += 1;
+  //       }
+  //     }
+  //   }
+
+  // // Parse any leftover
+  //   if (buffer.trim()) {
+  //     try {
+  //       const obj = JSONic(buffer);
+  //       this.Components.update(prev => [...prev, obj]);
+  //       if (obj.type === 'Status') this.progress = obj.content;
+  //     } catch (e) {
+  //       console.error('Leftover not valid JSON:', buffer);
+  //     }
+  //   }
   }
 
 
