@@ -1,6 +1,9 @@
-# A
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+# News & Law Agent
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo">
+    <img src="Overall.gif">
+  </a>
+</div>
 
 ## Development server
 
