@@ -32,7 +32,14 @@ def curate(data, query) -> list:
     curated_indexes = [i for i, score in enumerate(sims) if score > 0.3]
 
     return curated_indexes
-    
+
+@mcp.tool
+def embeddings(data:list) -> list:
+    """Returns the Embedding vectors for the given data"""
+    if len(data) == 0:
+        return []
+    data_embed = embedder(data)
+    return data_embed.tolist()
 
 
 if __name__ == "__main__":
