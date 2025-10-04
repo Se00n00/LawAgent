@@ -18,10 +18,11 @@ from dotenv import load_dotenv
 load_dotenv()
 primary_llm = os.getenv("PRIMARY_LLM")
 secondary_llm = os.getenv("SECONDARY_LLM")
+worker_llm = os.getenv("WORKER_LLM")
 openrouter_api = os.getenv("OPENROUTER_APIKEY")
 
 llm = ChatOpenAI(
-    model = primary_llm,
+    model = worker_llm,
     api_key=openrouter_api,
     base_url = "https://openrouter.ai/api/v1",
     streaming=True

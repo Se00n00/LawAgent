@@ -1,8 +1,12 @@
 import asyncio
 from fastmcp import Client
 import numpy as np
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
-client = Client("https://7b0a3dca6180.ngrok-free.app/mcp")
+client_url = os.getenv("MCP_CLIENT")
+client = Client(client_url)
 
 async def call_tool(name:str):
     async with client:

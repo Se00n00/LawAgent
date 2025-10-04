@@ -20,11 +20,12 @@ from dotenv import load_dotenv
 load_dotenv()
 primary_llm = os.getenv("PRIMARY_LLM")
 secondary_llm = os.getenv("SECONDARY_LLM")
+worker_llm = os.getenv("WORKER_LLM")
 openrouter_api = os.getenv("OPENROUTER_APIKEY")
 
 llm = ChatOpenAI(
-    model = primary_llm,
-    api_key=openrouter_api,
+    model = worker_llm,
+    api_key = openrouter_api,
     base_url = "https://openrouter.ai/api/v1",
     streaming=True
 )
@@ -64,31 +65,6 @@ async def news_synthesizer(state: WorkerState):
         return {"curated_results": to_send}
     except Exception as e:
             writer({"type":"Error","content": str(e)})
-
-
-
-# def news_curator(state: WorkerState) -> WorkerState:
-#     papers_text = "\n\n".join(
-#         [f"Title: {str(p['title'])}\n Date: {str(p['date'])} Body: {str(p['body'])}" for p in state["search_results"]]
-#     )
-#     msg = llm.invoke([
-#         HumanMessage(content=f"From these articles, select the most relevant ones for the query '{state['worker_query']}'. "
-#         f"Return only the chosen titles.\n\n{papers_text}")
-#     ])
-
-#     chosen_titles = [line.strip() for line in msg.content.splitlines() if line.strip()]
-
-#     # fuzzy match: include article if its title is similar enough to any chosen title
-#     curated = []
-#     for article in state["search_results"]:
-#         for title in chosen_titles:
-#             ratio = difflib.SequenceMatcher(None, article["title"], title).ratio()
-#             if ratio > 0.7:  # threshold, adjust as needed
-#                 curated.append(article)
-#                 break
-
-#     return {"curated_results": curated}
-
 
 
 async def news_extractor(state: WorkerState) -> WorkerState:

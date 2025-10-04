@@ -15,8 +15,8 @@ secondary_llm = os.getenv("SECONDARY_LLM")
 openrouter_api = os.getenv("OPENROUTER_APIKEY")
 
 llm = ChatOpenAI(
-    model = primary_llm,
-    api_key=openrouter_api,
+    model = secondary_llm,
+    api_key = openrouter_api,
     base_url = "https://openrouter.ai/api/v1",
     streaming=False
 )
