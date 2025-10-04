@@ -21,5 +21,15 @@
             <!-- <img src="Icons/error.svg" class="h-6 "> -->
             <!-- <p class="text-sm text-white/[0.8]">{{ErrorList[ErrorIndex].text}}</p> -->
         </div>
+        <div class="absolute text-white/[0.7] top-0 flex gap-1 items-center justify-between w-full p-5">
+            <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo" class="flex gap-2 text-sm items-center">
+                
+                <img src="Icons/Youtube.svg" class="h-8 z-10 opacity-70 hover:opacity-100">
+                <div>Demo</div>
+            </a>
+            <div (click)="newConversation()" class="cursor-pointer">
+                <img src="Icons/New.svg" class="z-10 h-7 opacity-70 hover:opacity-100">
+            </div>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class=" relative">
+<div class=" relative select-none">
     <!-- Background Dots  + Faded -->
     <div class="absolute -z-10 inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] [background-size:3px_3px]"></div>
     <div class="absolute -z-10 inset-0 bg-gradient-to-b from-white/30 to-white"></div>
@@ -29,29 +29,31 @@
                             <p class="text-gray-700 text-sm px-2">A multi-agent conversational system with a hierarchical architecture to handle complex law and news-related queries, leveraging specialized agents for classification, redirection, orchestration, and response synthesis.</p>
                             
                         </div>
-                        
+                        <div class="text-xs text-white bg-amber-300/[0.8] backdrop-blur-xs border-amber-400/[0.6] border-1 px-2 py-1 rounded-md mb-5 shadow-amber-500 shadow-xl">
+                            Click Over any of below to view examples
+                        </div>
                         <div class="w-11/12 sm::w-8/12 lg:w-7/12 flex flex-col md:grid grid-cols-2 grid-rows-2 gap-4">
                             <!-- Left Card -->
-                            <div class="row-span-2 bg-white rounded-lg p-2 flex flex-col border-black border-2">
-                                <img src="Gifs/Overall.gif" alt="Card Image" class="aspect-video rounded-lg mb-2 object-cover">
-                                <h2 class="font-semibold mb-1 px-2">Autonomus task Completion</h2>
-                                <p class="text-gray-700 text-sm px-2">An agentic workflow where specialized workers automatically reframe queries, fetch domain-specific data (research, images, news), extract relevant insights, and synthesize final outputs without manual intervention.</p>
+                            <div class="row-span-2 bg-white rounded-lg p-3 flex flex-col border-black border-2">
+                                <img (click)="getExampleContent('autonomustask')" src="Gifs/Overall.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all relative aspect-video border border-black/[0.1] rounded-lg mb-2 object-cover">
+                                <h2 class="font-semibold mb-1 px-2 text-sm">Autonomus task Completion</h2>
+                                <p class="text-gray-700 font-light text-xs px-2">An agentic workflow where specialized workers automatically reframe queries, fetch domain-specific data (research, images, news), extract relevant insights, and synthesize final outputs without manual intervention.</p>
                             </div>
                             <!-- Right Top Card -->
-                            <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
-                                <img src="Gifs/Orchestration.gif" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
+                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border-2">
+                                <img (click)="getExampleContent('cardoutput')" src="Gifs/Orchestration.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
-                                    <h2 class="font-semibold mb-1 px-2">Card-Wise Output Arrangement</h2>
-                                    <p class="text-gray-700 text-sm px-2">organizes system responses into card-based views</p>
+                                    <h2 class="font-semibold mb-1 text-sm px-2">Card-Wise Output Arrangement</h2>
+                                    <p class="text-gray-700 font-light text-xs px-2">organizes system responses into card-based views</p>
                                     
                                 </div>
                             </div>
                             <!-- Right Bottom Card -->
-                            <div class="bg-white rounded-xl p-2 flex flex-row border-black border-2">
-                                <img src="Gifs/ErrorAndRedirector.gif" alt="Card Image" class="h-40 aspect-square rounded-lg object-cover">
+                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border-2">
+                                <img (click)="getExampleContent('errorgaurdrail')" src="Gifs/ErrorAndRedirector.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
-                                    <h2 class="font-semibold mb-1 px-2">Error & Guardrail Handling</h2>
-                                    <p class="text-gray-700 text-sm px-2">Handles Irrelvent and dangerous queries with robust Error Handling</p>
+                                    <h2 class="font-semibold mb-1 text-sm px-2">Error & Guardrail Handling</h2>
+                                    <p class="text-gray-700 font-light text-xs px-2">Handles Irrelvent and dangerous queries with robust Error Handling</p>
                             
                                 </div>
                             </div>
@@ -72,16 +74,13 @@
                         </div>
                         
                     </div>
-                    <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo" class="border px-2.5 p-1.5 rounded-lg bg-black text-white text-xs hover:bg-black/[0.8] transition-all">
-                        <div>Demo: (In case the endpoint may throw any error) 
-                    </div>
-                    </a>
+                    
                     
                 </div>                
             }
             @else {
                 <div class="flex-1 flex flex-col items-center">
-                    <div class="w-10/12 sm:w-11/12 lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-10">
+                    <div class="select-text w-10/12 sm:w-11/12 lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-10">
                         @for (item of Components(); track $index) {
                             
                             @if (item.type){
@@ -116,7 +115,7 @@
                                         class="w-full"/>
                                     }
                                     @case ("ZeroCard") {
-                                        <app-zero-card/>
+                                        <app-zero-card (messageEvent)="newConversation($event)"/>
                                     }
                                     @case ("Error") {
                                         <app-model-error-card [e]="item.content" class="w-full" />

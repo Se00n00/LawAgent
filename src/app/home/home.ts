@@ -90,7 +90,7 @@ export class Home{
     
 
   async queryLLM(prompt: string) {
-    const res = await fetch('https://lawagent-6r30.onrender.com/chat', {
+    const res = await fetch('https://lawagent-630.onrender.com/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: prompt })
@@ -168,13 +168,31 @@ export class Home{
     this.removeIntro.update((val)=>val = !val)
   }
   receiveMessage(msg: string){
-    console.log(msg)
     this.queryLLM(msg)
   }
 
+  newConversation(msg:boolean){
+    this.Components.set([{"type":"ZeroCard", "content":""},])
+    this.removeIntro.set(true)
+  }
 
-  // Card: Description + Parameters
-  // Main Answer Card : Markdown
-  // Card Showing + Map ??? : All Screen Setting
-  // Converstation History
+  async getExampleContent(content_code: string) {
+    try {
+      const res = await fetch(`https://json-server-vercel-kappa-nine.vercel.app/${content_code}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      this.removeIntro.set(false)
+      if (!res.ok) {
+        this.Components.set([{"type":"Error","content":res.status}])
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      this.Components.set(data)
+    } catch (error) {
+      console.error('Error fetching content:', error);
+    }
+  }
+
 }
