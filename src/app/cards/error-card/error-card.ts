@@ -1,4 +1,4 @@
-import { Component, Input, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-error-card',
@@ -17,6 +17,7 @@ export class ErrorCard {
   */
   @Input() Redirection: string|null = null
   @Input() ErrorIndex:number|null = null
+  @Output() message = new EventEmitter<string>();
 
   ErrorList = [
     {"path":"images/DeadEnd/NothingFound.jpg","text":"Seems likes, I have found nothing"},
@@ -25,5 +26,7 @@ export class ErrorCard {
     {"path":"images/DeadEnd/Inappropriate.jpg","text":"DeadEnd: Inappropriate Query"},
     {"path":"images/DeadEnd/Dangerous.jpg","text":"DeadEnd: Dangerous Query! Please seek help"}
   ]
-  followUp(followQuestion:string){}
+  followUp(followQuestion:string){
+    this.message.emit(followQuestion)
+  }
 }

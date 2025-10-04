@@ -117,11 +117,11 @@ export class Home{
       buffer = lines.pop()!; // keep last incomplete line
 
       for (const line of lines) {
-          if (!line.trim()) continue; // ✅ Skip empty lines
+          if (!line.trim()) continue; // Skip empty lines
 
           try {
               const obj = JSON.parse(line);
-              console.log(obj)
+              // console.log(obj)
               this.Components.update(prev => [...prev, obj]);
               if (obj.type === 'Status') this.progress = obj.content;
           } catch {

@@ -112,6 +112,8 @@
                                         <app-error-card 
                                         [Redirection]="item.content.redirection_str" 
                                         [ErrorIndex]="item.content.gaurdrail_index" 
+
+                                        (message)="receiveMessage($event)"
                                         class="w-full"/>
                                     }
                                     @case ("ZeroCard") {
