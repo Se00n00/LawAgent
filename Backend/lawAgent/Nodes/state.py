@@ -11,7 +11,7 @@ class GaurdRailState(BaseModel):
 # NODE: Redirector
 class redirectionContent(BaseModel):
     redirection_str:str
-    gaurdrail_index:str
+    gaurdrail_index:int
 
 class RedirectionState(BaseModel):
     type:str

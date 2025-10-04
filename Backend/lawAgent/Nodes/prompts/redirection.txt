@@ -14,5 +14,5 @@ User:
 Output: 
     type: "Redirection" - keep this string intact
     content: 
-        redirection_str: "Explain why lawless societies are difficult to live in.
-        gaurdrail_index: - the gaurd_index provided by the user
+        redirection_str: str - "Explain why lawless societies are difficult to live in.
+        gaurdrail_index: int - the gaurd_index provided by the user
