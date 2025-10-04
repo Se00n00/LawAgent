@@ -4,6 +4,8 @@ declare interface Env {
   readonly NG_APP_SUPABASE_URL: string;
   readonly NG_APP_SUPABASE_API_KEY: string;
   readonly NG_APP_REDIRECT: string;
+  readonly NG_APP_EXAMPLES_JSON: string;
+  readonly NG_APP_AGENT_BACKEND: string;
   // Replace the following with your own environment variables.
   // Example: NGX_VERSION: string;
   [key: string]: any;

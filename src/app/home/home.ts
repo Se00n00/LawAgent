@@ -90,7 +90,7 @@ export class Home{
     
 
   async queryLLM(prompt: string) {
-    const res = await fetch('https://lawagent-630.onrender.com/chat', {
+    const res = await fetch(import.meta.env.NG_APP_AGENT_BACKEND, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: prompt })
@@ -178,7 +178,7 @@ export class Home{
 
   async getExampleContent(content_code: string) {
     try {
-      const res = await fetch(`https://json-server-vercel-kappa-nine.vercel.app/${content_code}`, {
+      const res = await fetch(import.meta.env.NG_APP_EXAMPLES_JSON+`/${content_code}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -188,7 +188,9 @@ export class Home{
         this.Components.set([{"type":"Error","content":res.status}])
         throw new Error(`HTTP error! status: ${res.status}`);
       }
+      
       const data = await res.json();
+      console.log(data)
       this.Components.set(data)
     } catch (error) {
       console.error('Error fetching content:', error);
