@@ -103,8 +103,8 @@
                                         [Summaries]="item.content.summeries"
                                         class="w-full"/>
                                     }
-                                    @case ("Gaudrail") {
-                                        @if(item.content > 3) {
+                                    @case ("Guardrail") {
+                                        @if(item.content > 2 && item.content <= 4 ) {
                                             <app-error-card [ErrorIndex]="item.content" class="w-full"/>
                                         }
                                     }

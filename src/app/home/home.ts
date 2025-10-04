@@ -121,7 +121,7 @@ export class Home{
 
           try {
               const obj = JSON.parse(line);
-              // console.log(obj)
+              console.log(obj)
               this.Components.update(prev => [...prev, obj]);
               if (obj.type === 'Status') this.progress = obj.content;
           } catch {
@@ -191,7 +191,7 @@ export class Home{
       
       const data = await res.json();
       console.log(data)
-      this.Components.set(data)
+      this.Components.set([{"type":"ZeroCard", "content":""}]+data)
     } catch (error) {
       console.error('Error fetching content:', error);
     }
