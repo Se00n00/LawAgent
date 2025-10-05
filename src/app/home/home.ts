@@ -190,6 +190,7 @@ export class Home{
       }
       
       const data = await res.json();
+      // console.log(data)
 
       this.Components.set([{"type":"ZeroCard", "content":""}, ...data])
     } catch (error) {

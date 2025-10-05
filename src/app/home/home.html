@@ -125,7 +125,10 @@
                                     <!-- Need to Be Fixed  from herer > -->
 
                                     @case ("News") {
-                                        <app-news-cards [NewscardItems]="item.content" class="w-full"/>
+                                        @if(item.content.length != 0){
+                                            <app-news-cards [NewscardItems]="item.content" class="w-full"/>
+                                        }
+                                        
                                     }
                                     @case ("Media") {
                                         <app-link-images-card [ImageWithLinks]="item.content" class="w-full"/>
