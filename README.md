@@ -3,15 +3,22 @@
   <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo">
     <img src="Overall.gif">
   </a>
+  
 </div>
 
+<div align="center">
+  Click to view Demo video on youtube
+</div>
+  
+  
 # Architecture
+
 ### Agentic Workflow
 <div align="center">
   <img src="Graph.png">
 </div>
 
----
+<hr>
 
 ### **Initial Query Processing**
 
