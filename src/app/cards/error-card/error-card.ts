@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, signal, WritableSignal } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-error-card',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './error-card.html',
   styleUrl: './error-card.css'
 })

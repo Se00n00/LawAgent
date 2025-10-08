@@ -1,2 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pulses {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@layer utilities {
+  .animate-pulses {
+    animation: pulses 1s ease-in-out infinite;
+  }
+}

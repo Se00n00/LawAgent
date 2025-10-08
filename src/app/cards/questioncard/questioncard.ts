@@ -13,7 +13,9 @@ import {FormsModule} from '@angular/forms';
 })
 export class Questioncard {
   @Input() progress:any = 0;
+  @Input() stopdot:any
   @Output() messageEvent = new EventEmitter<string>();
+  @Output() stopEvent = new EventEmitter<boolean>();
   askQuestion = signal(false)
 
   Question: WritableSignal<string> = signal("");
@@ -31,9 +33,11 @@ export class Questioncard {
       const newValue = changes['progress'].currentValue;
       if(newValue == 100){
         this.progress = 0
-        this.askQuestion.set(true)
       }
 
+    }
+    if(changes['stopdot']){
+      this.askQuestion.set(this.stopdot)
     }
   }
 
@@ -62,14 +66,15 @@ export class Questioncard {
   }
 
   stopAnswering(){
-    this.askQuestion.update((val)=>true)
+    this.stopEvent.emit(false)
+    // this.askQuestion.update((val)=>true)
   }
 
   Ask() {
     this.isTouched.set(true)
     if (!this.IsAskQuestionValid()) {
-      console.log('User asked:', this.Question());
-      this.askQuestion.update(val=>false)
+      // console.log('User asked:', this.Question());
+      // this.askQuestion.update(val=>false)
 
       // LLM Call
       this.messageEvent.emit(this.Question());

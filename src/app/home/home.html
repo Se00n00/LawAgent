@@ -25,23 +25,23 @@
                 <div class="flex-1 h-full flex flex-col justify-center items-center">
                     <div class="flex flex-col justify-center items-center">
                         <div class="w-11/12 md:w-8/12 lg:w-6/12 relative flex flex-col p-2 text-center mb-10">
-                            <h2 class="font-semibold text-3xl mb-1 px-2">News & Law Agent</h2>
-                            <p class="text-gray-700 text-sm px-2">A multi-agent conversational system with a hierarchical architecture to handle complex law and news-related queries, leveraging specialized agents for classification, redirection, orchestration, and response synthesis.</p>
+                            <h2 class=" text-3xl mb-1 px-2">News & Law Agent</h2>
+                            <p class="text-gray-700 text-sm font-light px-2">A multi-agent conversational system with a hierarchical architecture to handle complex law and news-related queries, leveraging specialized agents for classification, redirection, orchestration, and response synthesis.</p>
                             
                         </div>
-                        <div class="text-xs text-white bg-amber-300/[0.8] backdrop-blur-xs border-amber-400/[0.6] border-1 px-2 py-1 rounded-md mb-5 shadow-amber-500 shadow-xl">
+                        <div class="text-xs text-white bg-amber-300/[0.7] backdrop-blur-xs border-amber-400/[0.8] border-1 px-2 py-1 rounded-md mb-5 shadow-amber-500/[0.6] shadow-xl">
                             Click Over any of below to view examples
                         </div>
                         <div class="w-11/12 sm::w-8/12 lg:w-7/12 flex flex-col md:grid grid-cols-2 grid-rows-2 gap-4">
                             <!-- Left Card -->
-                            <div class="row-span-2 bg-white rounded-lg p-3 flex flex-col border-black border-2">
-                                <img (click)="getExampleContent('autonomustask')" src="Gifs/Overall.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all relative aspect-video border border-black/[0.1] rounded-lg mb-2 object-cover">
+                            <div class="row-span-2 bg-white rounded-lg p-3 flex flex-col border-black/[0.1] border">
+                                <img (click)="getExampleContent('autonomustask')" src="Gifs/Overall.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.5] hover:shadow transition-all relative aspect-video border border-black/[0.3] rounded-lg mb-2 object-cover">
                                 <h2 class="font-semibold mb-1 px-2 text-sm">Autonomus task Completion</h2>
                                 <p class="text-gray-700 font-light text-xs px-2">An agentic workflow where specialized workers automatically reframe queries, fetch domain-specific data (research, images, news), extract relevant insights, and synthesize final outputs without manual intervention.</p>
                             </div>
                             <!-- Right Top Card -->
-                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border-2">
-                                <img (click)="getExampleContent('cardoutput')" src="Gifs/Orchestration.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
+                            <div class="bg-white rounded-xl p-3 flex flex-row border-black/[0.1] border">
+                                <img (click)="getExampleContent('cardoutput')" src="Gifs/Orchestration.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.5] hover:shadow transition-all h-40 aspect-square border border-black/[0.3] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
                                     <h2 class="font-semibold mb-1 text-sm px-2">Card-Wise Output Arrangement</h2>
                                     <p class="text-gray-700 font-light text-xs px-2">organizes system responses into card-based views</p>
@@ -49,8 +49,8 @@
                                 </div>
                             </div>
                             <!-- Right Bottom Card -->
-                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border-2">
-                                <img (click)="getExampleContent('errorgaurdrail')" src="Gifs/ErrorAndRedirector.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
+                            <div class="bg-white rounded-xl p-3 flex flex-row border-black/[0.1] border">
+                                <img (click)="getExampleContent('errorgaurdrail')" src="Gifs/ErrorAndRedirector.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.5] hover:shadow transition-all h-40 aspect-square border border-black/[0.3] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
                                     <h2 class="font-semibold mb-1 text-sm px-2">Error & Guardrail Handling</h2>
                                     <p class="text-gray-700 font-light text-xs px-2">Handles Irrelvent and dangerous queries with robust Error Handling</p>
@@ -67,9 +67,9 @@
                         [ngModel]="MasterQuestion()" 
                         (ngModelChange)="MasterQuestion.set($event)"
                         (keydown.enter)="showMainSearchInput()"
-                        type="text" class="font-light right-25 w-[50vw] p-5 h-10 rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:outline-0 px-5 pr-10" placeholder="Ask Anything !">
+                        type="text" class="font-light right-25 w-[50vw] p-5 h-10 rounded-lg bg-white border-black border-2 shadow-[4px_4px_0px_0px_#000000] focus:shadow-[0px_0px_0px_0px_#000000] focus:outline-0 px-5 pr-10 transition-all" placeholder="Ask Anything !">
                         
-                        <div class="shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer" >
+                        <div class="shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] rounded-lg text-black bg-white border-black border-2 p-1  cursor-pointer transition-all" >
                             <img [src]="'Icons/search.svg'" class="h-8 hover:scale-[0.95] transition-all" (click)="showMainSearchInput()">
                         </div>
                         
@@ -145,8 +145,11 @@
                                 </div>
                             }
                         }
+                        @if (stopdot()) {
+                            <div class="w-full shadow-[4px_4px_0px_0px_#00000040] backdrop-blur-sm hover:shadow-[0px_0px_0px_0px_#000000] rounded-lg text-white bg-black/[0.01] border-black/[0.3] border transition-all animate-pulses"></div>
+                        }
                         <!-- @for (item of items; track $index) {} -->
-                        <app-questioncard [progress]="progress" (messageEvent)="receiveMessage($event)" class="w-full"/>
+                        <app-questioncard [stopdot]="stopdot()" (stopEvent)="stopProcess($event)" [progress]="progress" (messageEvent)="receiveMessage($event)" class="w-full"/>
                     </div>
                     </div>
 

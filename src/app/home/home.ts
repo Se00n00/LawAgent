@@ -78,15 +78,12 @@ export class Home{
   MasterQuestion: WritableSignal<string> = signal("")
   Answer: WritableSignal<string> = signal("")
 
-
   removeIntro = signal(true)
   askNext = signal(false)
-
   Searching = signal(false)
-
+  stopdot = signal(false)
+  stoprocess = signal(false)
   SearchIcon="Icons/add.svg"
-  
-  // async queryLLM(prompt: string) {
     
 
   async queryLLM(prompt: string) {
@@ -111,6 +108,7 @@ export class Home{
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
+      if (this.stoprocess()) break;
 
       buffer += decoder.decode(value, { stream: true });
       const lines = buffer.split('\n');
@@ -122,8 +120,12 @@ export class Home{
           try {
               const obj = JSON.parse(line);
               // console.log(obj)
+              if (obj.type == "Error") this.stopdot.set(false)
               this.Components.update(prev => [...prev, obj]);
-              if (obj.type === 'Status') this.progress = obj.content;
+              if (obj.type === 'Status'){
+                if(obj.content == 100){this.stopdot.set(false)}
+                this.progress = obj.content;
+              }
           } catch {
               // Plain text message (from AI messages)
               if (line.trim()) { // Only add non-empty messages
@@ -164,11 +166,17 @@ export class Home{
       
 
       this.MasterQuestion.set("")
+      this.stopdot.set(true)
     }
     this.removeIntro.update((val)=>val = !val)
   }
   receiveMessage(msg: string){
     this.queryLLM(msg)
+    this.stopdot.set(true)
+  }
+  stopProcess(sign:boolean){
+    this.stopdot.set(false)
+    this.stoprocess.set(true)
   }
 
   newConversation(msg:boolean){
