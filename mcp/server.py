@@ -1,6 +1,7 @@
 from fastmcp import FastMCP
 
 from embedding import EmbeddingModel
+from get_papers import get_papers, get_paper
 import numpy as np
 
 
@@ -12,9 +13,9 @@ embedder = EmbeddingModel("model.onnx","sentence-transformers/all-MiniLM-L6-v2")
 #     data: dict
 #     query: str
 
-@mcp.tool
-def greet(name: str) -> str:
-    return f"Hello, {name}!"
+@mcp.tool()
+def greet(name: str) -> dict:
+    return {"message":f"Hello, {name}!"}
 
 @mcp.tool
 def curate(data, query) -> list:
@@ -41,6 +42,13 @@ def embeddings(data:list) -> list:
     data_embed = embedder(data)
     return data_embed.tolist()
 
+@mcp.tool
+def papers(query: str) -> dict:
+    return get_papers(query)
+
+@mcp.tool
+def paper(query: str) -> dict:
+    return get_paper(query)
 
 if __name__ == "__main__":
     mcp.run(transport="http", port=8000)

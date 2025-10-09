@@ -7,12 +7,19 @@
     {
       "id": "Hbol",
       "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "MJUe",
-      "code_hash": "d9d659ec0b077d7de49f17f83a77368b",
+      "code_hash": "9d21c09f8bb8cb6650e49e9a34fb0038",
       "outputs": [
         {
           "type": "data",
@@ -25,7 +32,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "5d067168fbbfa456b72e40e162e9b171",
+      "code_hash": "81b87d998cc989da46f363851ddc5bba",
       "outputs": [
         {
           "type": "data",
@@ -38,7 +45,7 @@
     },
     {
       "id": "woCx",
-      "code_hash": "fd348f2caed0062e9d99d48261a69b08",
+      "code_hash": null,
       "outputs": [
         {
           "type": "data",
@@ -57,54 +64,73 @@
     },
     {
       "id": "bkHC",
+      "code_hash": "fd348f2caed0062e9d99d48261a69b08",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "interruption",
+          "evalue": "This cell was interrupted and needs to be re-run",
+          "traceback": []
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/marimo/_runtime/executor.py&quot;</span>, line <span class=\"m\">138</span>, in <span class=\"n\">execute_cell</span>\n<span class=\"w\">    </span><span class=\"n\">exec</span><span class=\"p\">(</span><span class=\"n\">cell</span><span class=\"o\">.</span><span class=\"n\">body</span><span class=\"p\">,</span> <span class=\"n\">glbls</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/tmp/marimo_434825/__marimo__cell_bkHC_.py&quot;</span>, line <span class=\"m\">2</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">res</span> <span class=\"o\">=</span> <span class=\"n\">llm</span><span class=\"o\">.</span><span class=\"n\">invoke</span><span class=\"p\">(</span><span class=\"s2\">&quot;Hii&quot;</span><span class=\"p\">)</span>\n<span class=\"w\">          </span><span class=\"pm\">^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py&quot;</span>, line <span class=\"m\">393</span>, in <span class=\"n\">invoke</span>\n<span class=\"w\">    </span><span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">generate_prompt</span><span class=\"p\">(</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py&quot;</span>, line <span class=\"m\">1019</span>, in <span class=\"n\">generate_prompt</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">generate</span><span class=\"p\">(</span><span class=\"n\">prompt_messages</span><span class=\"p\">,</span> <span class=\"n\">stop</span><span class=\"o\">=</span><span class=\"n\">stop</span><span class=\"p\">,</span> <span class=\"n\">callbacks</span><span class=\"o\">=</span><span class=\"n\">callbacks</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py&quot;</span>, line <span class=\"m\">837</span>, in <span class=\"n\">generate</span>\n<span class=\"w\">    </span><span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_generate_with_cache</span><span class=\"p\">(</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py&quot;</span>, line <span class=\"m\">1085</span>, in <span class=\"n\">_generate_with_cache</span>\n<span class=\"w\">    </span><span class=\"n\">result</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_generate</span><span class=\"p\">(</span>\n<span class=\"w\">             </span><span class=\"pm\">^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_openai/chat_models/base.py&quot;</span>, line <span class=\"m\">1142</span>, in <span class=\"n\">_generate</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">generate_from_stream</span><span class=\"p\">(</span><span class=\"n\">stream_iter</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py&quot;</span>, line <span class=\"m\">168</span>, in <span class=\"n\">generate_from_stream</span>\n<span class=\"w\">    </span><span class=\"n\">generation</span> <span class=\"o\">=</span> <span class=\"nb\">next</span><span class=\"p\">(</span><span class=\"n\">stream</span><span class=\"p\">,</span> <span class=\"kc\">None</span><span class=\"p\">)</span>\n<span class=\"w\">                 </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/langchain_openai/chat_models/base.py&quot;</span>, line <span class=\"m\">1093</span>, in <span class=\"n\">_stream</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">client</span><span class=\"o\">.</span><span class=\"n\">create</span><span class=\"p\">(</span><span class=\"o\">**</span><span class=\"n\">payload</span><span class=\"p\">)</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/openai/_utils/_utils.py&quot;</span>, line <span class=\"m\">287</span>, in <span class=\"n\">wrapper</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">func</span><span class=\"p\">(</span><span class=\"o\">*</span><span class=\"n\">args</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py&quot;</span>, line <span class=\"m\">1147</span>, in <span class=\"n\">create</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_post</span><span class=\"p\">(</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/openai/_base_client.py&quot;</span>, line <span class=\"m\">1259</span>, in <span class=\"n\">post</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">cast</span><span class=\"p\">(</span><span class=\"n\">ResponseT</span><span class=\"p\">,</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">request</span><span class=\"p\">(</span><span class=\"n\">cast_to</span><span class=\"p\">,</span> <span class=\"n\">opts</span><span class=\"p\">,</span> <span class=\"n\">stream</span><span class=\"o\">=</span><span class=\"n\">stream</span><span class=\"p\">,</span> <span class=\"n\">stream_cls</span><span class=\"o\">=</span><span class=\"n\">stream_cls</span><span class=\"p\">))</span>\n<span class=\"w\">                           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/openai/_base_client.py&quot;</span>, line <span class=\"m\">982</span>, in <span class=\"n\">request</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_client</span><span class=\"o\">.</span><span class=\"n\">send</span><span class=\"p\">(</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpx/_client.py&quot;</span>, line <span class=\"m\">914</span>, in <span class=\"n\">send</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_send_handling_auth</span><span class=\"p\">(</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpx/_client.py&quot;</span>, line <span class=\"m\">942</span>, in <span class=\"n\">_send_handling_auth</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_send_handling_redirects</span><span class=\"p\">(</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpx/_client.py&quot;</span>, line <span class=\"m\">979</span>, in <span class=\"n\">_send_handling_redirects</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_send_single_request</span><span class=\"p\">(</span><span class=\"n\">request</span><span class=\"p\">)</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpx/_client.py&quot;</span>, line <span class=\"m\">1014</span>, in <span class=\"n\">_send_single_request</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"n\">transport</span><span class=\"o\">.</span><span class=\"n\">handle_request</span><span class=\"p\">(</span><span class=\"n\">request</span><span class=\"p\">)</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpx/_transports/default.py&quot;</span>, line <span class=\"m\">250</span>, in <span class=\"n\">handle_request</span>\n<span class=\"w\">    </span><span class=\"n\">resp</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_pool</span><span class=\"o\">.</span><span class=\"n\">handle_request</span><span class=\"p\">(</span><span class=\"n\">req</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py&quot;</span>, line <span class=\"m\">268</span>, in <span class=\"n\">handle_request</span>\n<span class=\"w\">    </span><span class=\"k\">raise</span> <span class=\"n\">exc</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py&quot;</span>, line <span class=\"m\">251</span>, in <span class=\"n\">handle_request</span>\n<span class=\"w\">    </span><span class=\"n\">response</span> <span class=\"o\">=</span> <span class=\"n\">connection</span><span class=\"o\">.</span><span class=\"n\">handle_request</span><span class=\"p\">(</span><span class=\"n\">request</span><span class=\"p\">)</span>\n<span class=\"w\">               </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpcore/_sync/connection.py&quot;</span>, line <span class=\"m\">76</span>, in <span class=\"n\">handle_request</span>\n<span class=\"w\">    </span><span class=\"n\">stream</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_connect</span><span class=\"p\">(</span><span class=\"n\">request</span><span class=\"p\">)</span>\n<span class=\"w\">             </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpcore/_sync/connection.py&quot;</span>, line <span class=\"m\">124</span>, in <span class=\"n\">_connect</span>\n<span class=\"w\">    </span><span class=\"n\">stream</span> <span class=\"o\">=</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">_network_backend</span><span class=\"o\">.</span><span class=\"n\">connect_tcp</span><span class=\"p\">(</span><span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n<span class=\"w\">             </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/httpcore/_backends/sync.py&quot;</span>, line <span class=\"m\">206</span>, in <span class=\"n\">connect_tcp</span>\n<span class=\"w\">    </span><span class=\"n\">sock</span> <span class=\"o\">=</span> <span class=\"n\">socket</span><span class=\"o\">.</span><span class=\"n\">create_connection</span><span class=\"p\">(</span>\n<span class=\"w\">           </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/socket.py&quot;</span>, line <span class=\"m\">837</span>, in <span class=\"n\">create_connection</span>\n<span class=\"w\">    </span><span class=\"n\">sock</span><span class=\"o\">.</span><span class=\"n\">connect</span><span class=\"p\">(</span><span class=\"n\">sa</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/home/seono/anaconda3/lib/python3.12/site-packages/marimo/_runtime/handlers.py&quot;</span>, line <span class=\"m\">32</span>, in <span class=\"n\">interrupt_handler</span>\n<span class=\"w\">    </span><span class=\"k\">raise</span> <span class=\"n\">MarimoInterrupt</span>\n<span class=\"gr\">KeyboardInterrupt</span>\n</pre></div>\n</span>"
+        }
+      ]
+    },
+    {
+      "id": "lEQa",
       "code_hash": "54d97b456875d4ccecbaed290ae50ec4",
       "outputs": [],
       "console": []
     },
     {
-      "id": "lEQa",
+      "id": "PKri",
       "code_hash": "8158352a86a2945574c6c408b0b68809",
       "outputs": [],
       "console": []
     },
     {
-      "id": "PKri",
+      "id": "Xref",
       "code_hash": "2cd82deb23b5318cc648170dba24f229",
       "outputs": [],
       "console": []
     },
     {
-      "id": "Xref",
+      "id": "SFPL",
       "code_hash": "09c9b19e5a00652161ccc478391c89d0",
       "outputs": [],
       "console": []
     },
     {
-      "id": "SFPL",
+      "id": "BYtC",
       "code_hash": "a0a603631860732888262883cd231cc6",
       "outputs": [],
       "console": []
     },
     {
-      "id": "BYtC",
+      "id": "RGSE",
       "code_hash": "723e64681dcb831d96c87acb410f153d",
       "outputs": [],
       "console": []
     },
     {
-      "id": "RGSE",
+      "id": "Kclp",
       "code_hash": "aadbaee92031ba34adaf2f7ff72c6000",
       "outputs": [],
       "console": []
     },
     {
-      "id": "Kclp",
+      "id": "emfo",
       "code_hash": "2ec9ae68ddadfc063b8036c9fee12102",
       "outputs": [],
       "console": []
     },
     {
-      "id": "emfo",
+      "id": "Hstk",
       "code_hash": null,
       "outputs": [],
       "console": []

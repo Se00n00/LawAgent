@@ -6,4 +6,3 @@ fastmcp
 numpy
 onnxruntime
 transformers
-torch

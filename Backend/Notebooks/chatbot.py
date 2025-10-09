@@ -16,7 +16,7 @@ def _():
     os.environ["OPENAI_API_KEY"] = ""
 
     # ✅ Get the environment variable
-    value = os.getenv("OPENAI_API_KEY")
+    value = "coeai-Ldiz6OdBwMJiSAnTwuX7dUKrV0aM9cEa"
     return (value,)
 
 
@@ -25,9 +25,9 @@ def _(value):
     from langchain_openai import ChatOpenAI
 
     llm = ChatOpenAI(
-        model = "nvidia/nemotron-nano-9b-v2:free",
+        model = "llama4",
         api_key=value,
-        base_url = "https://openrouter.ai/api/v1",
+        base_url = "http://10.9.6.165:8001/generate",
         streaming=True
 
     )
