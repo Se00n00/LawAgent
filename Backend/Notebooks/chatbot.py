@@ -16,8 +16,29 @@ def _():
     os.environ["OPENAI_API_KEY"] = ""
 
     # ✅ Get the environment variable
-    value = "coeai-Ldiz6OdBwMJiSAnTwuX7dUKrV0aM9cEa"
+    value = ""
     return (value,)
+
+
+@app.cell
+def _():
+    from coeai import LLMinfer
+    llm1 = LLMinfer(api_key="", host="http://10.9.6.165:8001")
+    return
+
+
+app._unparsable_cell(
+    r"""
+    response = llm1.generate(
+        model=\"llama4:16x17b\",http://localhost:2718/
+        prompt=\"Explain quantum computing in simple terms.\",
+        max_tokens=256
+    )
+
+    print(response['choices'][0]['message']['content'])
+    """,
+    name="_"
+)
 
 
 @app.cell
@@ -25,9 +46,9 @@ def _(value):
     from langchain_openai import ChatOpenAI
 
     llm = ChatOpenAI(
-        model = "llama4",
+        model = "openai/gpt-oss-20b",
         api_key=value,
-        base_url = "http://10.9.6.165:8001/generate",
+        base_url = "https://api.groq.com/openai/v1",
         streaming=True
 
     )
@@ -38,6 +59,7 @@ def _(value):
 def _(llm):
     try:
         res = llm.invoke("Hii")
+        print(res)
     except Exception as e:
         print(e)
     return
