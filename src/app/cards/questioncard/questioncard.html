@@ -1,11 +1,14 @@
 <div id="ask_next" class="bg-white border p-3 rounded-xl relative flex flex-col justify-center gap-3 shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all"
 [ngClass]="{'shadow-[4px_4px_0px_0px_#ff6467a0]  border-red-400': IsAskQuestionValid() && isTouched()}">
     @if (!askQuestion()) {
-        <div class="flex gap-3">
+        <div class="flex gap-3 relative">
             <img src="Icons/arrowDown.svg" class="h-10">
             <div class="flex flex-col">
                 <p class="text-sm">Ask More about it</p>
                 <p class="text-xs font-light">Ask any relevent questions from results</p>
+            </div>
+            <div (click)="newConversation()" class="absolute right-0 cursor-pointer flex gap-2 text-sm items-center">
+                <img src="Icons/NewBlack.svg" class="z-10 h-8 hover:scale-[0.96] transition-all">
             </div>
         </div>
         

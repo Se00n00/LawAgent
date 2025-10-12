@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-zero-card',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './zero-card.html',
   styleUrl: './zero-card.css'
 })

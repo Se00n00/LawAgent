@@ -16,6 +16,12 @@ export class Questioncard {
   @Input() stopdot:any
   @Output() messageEvent = new EventEmitter<string>();
   @Output() stopEvent = new EventEmitter<boolean>();
+  @Output() newmessageEvent = new EventEmitter<boolean>();
+
+  newConversation(){
+    this.newmessageEvent.emit(true)
+  }
+
   askQuestion = signal(false)
 
   Question: WritableSignal<string> = signal("");
