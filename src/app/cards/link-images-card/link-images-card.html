@@ -3,7 +3,7 @@
     @for (media of ImageWithLinks; track $index) {
       <div 
         class="relative group p-[1px] h-fit bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all" 
-        [ngClass]="{ 'col-span-2': $index < 2, 'col-span-1': $index >= 2 }"
+        [ngClass]="{ 'col-span-2': $index < 3, 'col-span-1': $index >= 2 }"
       >
         <a [href]="media.article_url" class="relative block w-full">
           

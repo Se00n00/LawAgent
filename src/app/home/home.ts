@@ -119,7 +119,7 @@ export class Home{
 
           try {
               const obj = JSON.parse(line);
-              // console.log(obj)
+              console.log(obj)
               if (obj.type == "Error") this.stopdot.set(false)
               this.Components.update(prev => [...prev, obj]);
               if (obj.type === 'Status'){

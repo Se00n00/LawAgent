@@ -1,5 +1,6 @@
 @if(Content.length > 0){
-    <div class="p-3 relative bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    <div class=" p-3 relative bg-white rounded-xl flex flex-col border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all"
+    [ngClass]="{'aspect-square':Title!==''}">
     
         <div class="flex gap-3 items-center">
             <img src="Icons/logo.svg" class="h-6">

@@ -1,6 +1,5 @@
 @if(ErrorIndex != null){
-    <div class="min-w-50 p-0.5 relative bg-white rounded-xl flex flex-col border hover:shadow-[0px_0px_0px_0px_#000000] transition-all"
-    [ngClass]="{'shadow-[4px_4px_0px_0px_#fb2c36a0] border-orange-500':ErrorIndex >= 3,'shadow-[4px_4px_0px_0px_#00c950a0] border-green-500':ErrorIndex == 1,'shadow-[4px_4px_0px_0px_#ffb86aa0] border-orange-300':ErrorIndex ==2}">
+    <div class="min-w-50 p-[1px] relative bg-white rounded-xl flex flex-col border hover:shadow-[0px_0px_0px_0px_#000000] shadow-[4px_4px_0px_0px_#000000] transition-all">
         <div class="absolute top-4 left-4 flex gap-3 items-center">
             <img src="Icons/error.svg" class="h-6">
             <p class="text-sm text-white/[0.8]">{{ErrorList[ErrorIndex]["text"]}}</p>

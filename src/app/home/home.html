@@ -2,36 +2,62 @@
     <!-- Background Dots  + Faded -->
     <div class="absolute -z-10 inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] [background-size:3px_3px]"></div>
     <div class="absolute -z-10 inset-0 bg-gradient-to-b from-white/30 to-white"></div>
-    <div class="relative min-w-screen min-h-screen flex">\
+    <div class="relative min-w-screen min-h-screen flex">
 
         <!-- Right Settings -->
-        <div class="fixed z-0 left-0 bottom-0 flex flex-col h-full justify-center p-5 sm:p-10">
-            <div class="h-max shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border p-1  cursor-pointer" >
-                <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
-                <div class="h-40 w-9 hover:scale-[0.95] transition-all"></div>
-                @if(auth.sessions && auth.sessions.user.is_anonymous){
-                    <img (click)="auth.sign_in_oauth()" alt="sign in" src="Icons/sign.svg" class="h-9 w-9 hover:scale-[0.95] transition-all" title="sign in">
-                }@else {
-                    <img (click)="auth.sign_out()" alt="sign out" [src]="auth.data()?.user.user_metadata.avatar_url" class="h-9 w-9 hover:scale-[0.95] transition-all rounded-lg">   
-                }
+        @if (!removeIntro()){
+            <div class="fixed z-0 left-0 bottom-0 flex flex-col h-full justify-center p-5 sm:p-10">
+                
+                <div class="h-max shadow-[4px_4px_0px_0px_#000000] rounded-lg text-black bg-white border-black border p-1  cursor-pointer" >
+                    <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
+                    <div class="h-40 w-9 hover:scale-[0.95] transition-all"></div>
+                    @if(auth.sessions && auth.sessions.user.is_anonymous){
+                        <img (click)="auth.sign_in_oauth()" alt="sign in" src="Icons/sign.svg" class="h-9 w-9 hover:scale-[0.95] transition-all" title="sign in">
+                        
+                    }@else {
+                        <img (click)="auth.sign_out()" alt="sign out" [src]="auth.data()?.user.user_metadata.avatar_url" class="h-9 w-9 hover:scale-[0.95] transition-all rounded-lg">   
+                        
+                    }
+                </div>
             </div>
-        </div>
+        }
+        
 
         <!-- Central DashBorad  -->
         <div class="flex-1 flex">
             
 
             @if (removeIntro()) {
-                <div class="flex-1 h-full flex flex-col justify-center items-center">
+                <div class="relative flex-1 h-full flex flex-col justify-between items-center">
+
+                    <div class="mt-10 w-full flex items-center justify-center">
+                        <div class="w-11/12 md:w-6/12 lg:w-4/12 flex justify-between items-center shadow-[4px_4px_0px_0px_#000000] rounded-xl text-black bg-white border-black border p-1  cursor-pointer" >
+                            <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
+                            <div class="flex gap-3 text-sm">
+                                <a [routerLink]="['/']" class="hover:opacity-70">Home</a>
+                                <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo" class="hover:opacity-70">Demo</a>
+                                <a href="https://github.com/Se00n00/LawAgent" class="hover:opacity-70">Github</a>
+                            </div>
+                            
+                            @if(auth.sessions && auth.sessions.user.is_anonymous){
+                                <img (click)="auth.sign_in_oauth()" alt="sign in" src="Icons/sign.svg" class="h-9 w-9 hover:scale-[0.95] transition-all" title="sign in">
+                                
+                            }@else {
+                                <img (click)="auth.sign_out()" alt="sign out" [src]="auth.data()?.user.user_metadata.avatar_url" class="h-9 w-9 hover:scale-[0.95] transition-all rounded-lg">   
+                                
+                            }
+                        </div>
+                    </div>
+
                     <div class="flex flex-col justify-center items-center">
                         <div class="w-11/12 md:w-8/12 lg:w-6/12 relative flex flex-col p-2 text-center mb-10">
-                            <h2 class=" text-3xl mb-1 px-2">News & Law Agent</h2>
-                            <p class="text-gray-700 text-sm font-light px-2">A multi-agent conversational system with a hierarchical architecture to handle complex law and news-related queries, leveraging specialized agents for classification, redirection, orchestration, and response synthesis.</p>
+                            <h2 class=" text-3xl mb-1 px-2 font-semibold">News & Law Agent</h2>
+                            <p class="text-sm font-light px-2">A multi-agent conversational system with a hierarchical architecture to handle complex law and news-related queries, leveraging specialized agents for classification, redirection, orchestration, and response synthesis.</p>
                             
                         </div>
-                        <div class="text-xs text-white bg-amber-300/[0.7] backdrop-blur-xs border-amber-400/[0.8] border-1 px-2 py-1 rounded-md mb-5 shadow-amber-500/[0.6] shadow-xl">
+                        <!-- <div class="text-xs text-white bg-black/[0.6] backdrop-blur-xs border-black/[0.6] border-1 px-2 py-1 rounded-md mb-5 shadow-black/[0.6] shadow-xl">
                             Click Over any of below to view examples
-                        </div>
+                        </div> -->
                         <div class="w-11/12 sm::w-8/12 lg:w-7/12 flex flex-col md:grid grid-cols-2 grid-rows-2 gap-4">
                             <!-- Left Card -->
                             <div class="row-span-2 bg-white rounded-xl p-3 flex flex-col border-black border">
@@ -69,7 +95,7 @@
                             [ngModel]="MasterQuestion()" 
                             (ngModelChange)="MasterQuestion.set($event)"
                             (keydown.enter)="showMainSearchInput()"
-                            type="text" class="font-light right-25 w-[50vw] p-5 h-10 focus:outline-0 px-5 transition-all" placeholder="Ask Anything !">
+                            type="text" class="font-light right-25 w-[70vw] sm:w-[50vw] p-5 h-10 focus:outline-0 px-5 transition-all" placeholder="Ask Anything !">
                         
                             <img [src]="'Icons/search.svg'" class="h-10 hover:scale-[0.95] transition-all" (click)="showMainSearchInput()">
                         </div>
@@ -86,13 +112,25 @@
                             
                             @if (item.type){
                                 @switch (item.type) {
-                                    @case ("FinalAnswer") {
+                                    @case ("FinalOutput") {
                                         <app-main-answer-card 
                                         [Title] = "item.content.answer_title"
                                         [Content]="item.content.final_answer" 
                                         class="w-full"/>
                                     }
+                                    @case ("FinalAnswer") {
+                                        <app-main-answer-card 
+                                        [Title] = "item.content.answer_title"
+                                        [Content]="item.content.final_answer" 
+                                        class="w-full "/>
+                                    }
                                     @case ("Conversation") {
+                                        @if (item.content.proceed2Orchestration == false) {
+                                            <app-main-answer-card [Content]="item.content.conversation" class="w-full"/>
+                                        }
+                                        <!-- <app-news-cards class="col-span-3"/> -->
+                                    }
+                                    @case ("ConverstationOutput") {
                                         @if (item.content.proceed2Orchestration == false) {
                                             <app-main-answer-card [Content]="item.content.conversation" class="w-full"/>
                                         }
@@ -132,7 +170,10 @@
                                         
                                     }
                                     @case ("Media") {
-                                        <app-link-images-card [ImageWithLinks]="item.content" class="w-full"/>
+                                        @if(item.content.length != 0){
+                                            <app-link-images-card [ImageWithLinks]="item.content" class="w-full"/>
+                                        }
+                                        
                                     }
                                     @case ("Gov") {
                                         <app-gov [Content]="item.content" class="w-full"/>

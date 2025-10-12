@@ -1,9 +1,10 @@
 import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MarkdownComponent} from 'ngx-markdown'
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-main-answer-card',
-  imports: [MarkdownComponent],
+  imports: [MarkdownComponent, CommonModule],
   templateUrl: './main-answer-card.html',
   styleUrl: './main-answer-card.css'
 })

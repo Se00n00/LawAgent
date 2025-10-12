@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, input, OnInit, signal, WritableSignal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, input, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface summary{
@@ -17,6 +17,9 @@ export class SummaryCard implements OnInit, AfterViewInit {
   @Input() SummaryTitle: string = "";
   @Input() Summaries: summary[] = [];
 
+  @ViewChild('SummaryElement') summary: ElementRef|any;
+  
+
   setHeight() {
     const sourceDiv = document.getElementById("summaryContent");
     const targetDiv = document.getElementById("Line");
@@ -29,11 +32,37 @@ export class SummaryCard implements OnInit, AfterViewInit {
       const lastDivHeight = lastDiv.offsetHeight;
       targetDiv.style.height = (sourceDivHeight - lastDivHeight) + 'px';
     }
-}
+  }
   ngOnInit(): void {
     this.setHeight()
   }
   ngAfterViewInit(): void {
-      this.setHeight()
+    this.setHeight()
   }
+
+  direction: 'down' | 'up' = 'down';
+
+  scroll_next() {
+    const element = this.summary.nativeElement;
+    const maxScroll = element.scrollHeight - element.clientHeight;
+
+    if (this.direction === 'down') {
+      element.scroll({
+        top: element.scrollTop + 100,
+        behavior: 'smooth'
+      });
+      if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
+        this.direction = 'up';
+      }
+    } else {
+      element.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
+      if (element.scrollTop <= 0) {
+        this.direction = 'down';
+      }
+    }
+  }
+
 }

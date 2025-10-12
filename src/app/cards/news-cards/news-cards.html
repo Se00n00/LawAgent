@@ -1,10 +1,10 @@
 @if (NewscardItems.length > 0) {
-    <div class="p-1 relative bg-white rounded-xl border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    <div class="p-[1px] relative bg-white rounded-xl border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
         <div class="relative aspect-square flex flex-col bg-black/[0.05] rounded-lg border-black/[0.1] overflow-hidden">
             <img #imgElement
             [src]="NewscardItem()?.image_url" 
             (error)="imgElement.src='images/home.jpg'"
-            class="inset-0 w-full h-full object-cover rounded-lg">
+            class="inset-0 w-full h-full object-cover rounded-xl">
             <div class="absolute inset-0 bg-gradient-to-t from-black/[0.4] to-transparent"></div>
 
             <div class="absolute bottom-0 p-2 w-full text-white flex-1 flex flex-col justify-between ">
