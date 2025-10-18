@@ -4,6 +4,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import HumanMessage, AIMessage
 import os
 import json
+import uuid
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -61,6 +62,7 @@ def home():
 @app.post("/chat")
 def chat(req: ChatRequest):
     input_message = req.message
+    config['configurable']['thread_id'] = uuid.uuid4()
 
     try:
         async def event_generator():
