@@ -1,5 +1,5 @@
 @if(Summaries.length > 0){
-    <div  class="aspect-square overflow-hidden p-3 pb-5 relative bg-white rounded-xl flex-col gap-3 border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
+    <div  class="aspect-square p-3 pb-5 relative bg-white rounded-xl flex-col gap-3 border shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all">
         <button (click)="scroll_next()" class="absolute right-2.5 mb-2 h-4 w-4 cursor-pointer border rounded-full bg-gray-100 hover:bg-gray-600 shadow-[1px_2px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] transition-all"></button>
     
              
@@ -7,7 +7,7 @@
             <img src="Icons/summary.svg" class="h-6">
             <p>{{SummaryTitle}}</p>
         </div>
-        <div #SummaryElement class="relative flex flex-col gap-5 px-4 aspect-[4/3] overflow-scroll">
+        <div #SummaryElement class="relative flex flex-col gap-5 px-4 aspect-[4/3] overflow-y-scroll">
             <div id="Line" class="absolute w-0.5 bg-black/[0.6] h-auto"></div>
             
             <div id="summaryContent" class="flex flex-col gap-5 ">
