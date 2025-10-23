@@ -87,6 +87,7 @@ export class Home{
     
 
   async queryLLM(prompt: string) {
+    this.Components.update(prev => [...prev, {"type":"User","content":prompt}])
     const res = await fetch(import.meta.env.NG_APP_AGENT_BACKEND, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -167,8 +168,9 @@ export class Home{
 
       this.MasterQuestion.set("")
       this.stopdot.set(true)
+      this.removeIntro.update((val)=>val = !val)
     }
-    this.removeIntro.update((val)=>val = !val)
+    
   }
   receiveMessage(msg: string){
     this.queryLLM(msg)
@@ -180,7 +182,7 @@ export class Home{
   }
 
   newConversation(msg:boolean){
-    this.Components.set([{"type":"ZeroCard", "content":""},])
+    this.Components.set([{"type":"ZeroCard", "content":""}])
     this.removeIntro.set(true)
   }
 

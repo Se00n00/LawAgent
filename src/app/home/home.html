@@ -31,7 +31,7 @@
                 <div class="relative flex-1 h-full flex flex-col justify-between items-center">
 
                     <div class="mt-10 w-full flex items-center justify-center">
-                        <div class="w-11/12 md:w-6/12 lg:w-6/12 flex justify-between items-center shadow-[4px_4px_0px_0px_#000000] rounded-xl text-black bg-white border-black border p-1  cursor-pointer" >
+                        <div class="w-11/12 md:w-6/12 lg:w-6/12 flex justify-between items-center shadow-[4px_4px_0px_0px_#000000] rounded-xl text-black bg-white border-black border p-1" >
                             <img [routerLink]="['']" src="Icons/logo.svg" class="h-9 w-9 hover:scale-[0.95] transition-all">
                             <div class="flex gap-3 text-sm">
                                 <a [routerLink]="['/']" class="hover:opacity-70">Home</a>
@@ -60,13 +60,13 @@
                         </div> -->
                         <div class="w-11/12 sm::w-8/12 lg:w-7/12 flex flex-col md:grid grid-cols-2 grid-rows-2 gap-4">
                             <!-- Left Card -->
-                            <div class="row-span-2 bg-white rounded-xl p-3 flex flex-col border-black border">
+                            <div class="row-span-2 shadow-[4px_4px_0px_0px_#000000] bg-white rounded-xl p-3 flex flex-col border-black border">
                                 <img (click)="getExampleContent('autonomustask')" src="Gifs/Overall.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all relative aspect-video border border-black/[0.1] rounded-lg mb-2 object-cover">
                                 <h2 class="font-semibold mb-1 px-2 text-sm">Autonomus task Completion</h2>
                                 <p class="text-gray-700 font-light text-xs px-2">An agentic workflow where specialized workers automatically reframe queries, fetch domain-specific data (research, images, news), extract relevant insights, and synthesize final outputs without manual intervention.</p>
                             </div>
                             <!-- Right Top Card -->
-                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border">
+                            <div class="shadow-[4px_4px_0px_0px_#000000] bg-white rounded-xl p-3 flex flex-row border-black border">
                                 <img (click)="getExampleContent('cardoutput')" src="Gifs/Orchestration.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
                                     <h2 class="font-semibold mb-1 text-sm px-2">Card-Wise Output Arrangement</h2>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <!-- Right Bottom Card -->
-                            <div class="bg-white rounded-xl p-3 flex flex-row border-black border">
+                            <div class="shadow-[4px_4px_0px_0px_#000000] bg-white rounded-xl p-3 flex flex-row border-black border">
                                 <img (click)="getExampleContent('errorgaurdrail')" src="Gifs/ErrorAndRedirector.gif" alt="Card Image" class="cursor-pointer hover:scale-[1.01] hover:border-black/[0.2] hover:shadow transition-all h-40 aspect-square border border-black/[0.1] rounded-lg object-cover">
                                 <div class="flex flex-col p-2">
                                     <h2 class="font-semibold mb-1 text-sm px-2">Error & Guardrail Handling</h2>
@@ -90,7 +90,7 @@
                     <div class="flex gap-3 p-5 sm:p-10">
                         
                         
-                        <div class="flex shadow-[4px_4px_0px_0px_#000000] hover:shadow-[0px_0px_0px_0px_#000000] rounded-lg text-black bg-white border-black border p-1 cursor-pointer transition-all" >
+                        <div class="flex shadow-[4px_4px_0px_0px_#000000] rounded-xl text-black bg-white border-black border p-1 cursor-pointer transition-all" >
                             <input
                             [ngModel]="MasterQuestion()" 
                             (ngModelChange)="MasterQuestion.set($event)"
@@ -177,6 +177,12 @@
                                     }
                                     @case ("Gov") {
                                         <app-gov [Content]="item.content" class="w-full"/>
+                                    }
+                                    @case ("User") {
+                                        <app-main-answer-card 
+                                        [Title] = "item.type"
+                                        [Content]="item.content" 
+                                        class="w-full h-fit"/>
                                     }
                                     
                                 }
