@@ -3,10 +3,11 @@ from fastmcp import FastMCP
 from embedding import EmbeddingModel
 from get_papers import get_papers, get_paper
 import numpy as np
-
+from sentence_transformers import CrossEncoder
 
 mcp = FastMCP("Curator")
 embedder = EmbeddingModel("model.onnx","sentence-transformers/all-MiniLM-L6-v2")
+reranker_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L6-v2')
 
 # @mcp.tool()
 # class InputRequest(BaseModel):
@@ -41,6 +42,17 @@ def embeddings(data:list) -> list:
         return []
     data_embed = embedder(data)
     return data_embed.tolist()
+
+@mcp.tool
+def rerank(data, query) -> list:
+  """Rerank the documents with respect to the given query"""
+  if len(data) == 0:
+      return []
+  
+  data_to_send = [(query, doc) for doc in data]
+  scores = reranker_model.predict(data_to_send)
+  reranked_results = sorted(zip(data, scores.astype(float)), key=lambda x: x[1], reverse=True)
+  return reranked_results
 
 @mcp.tool
 def papers(query: str) -> dict:
