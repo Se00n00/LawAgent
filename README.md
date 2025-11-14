@@ -37,11 +37,6 @@
   Click to view Demo video on youtube
 </div>
 
-Got it — GitHub strips most CSS, so **flex won't render horizontally**.
-To guarantee a **true horizontal layout**, the correct approach is a **Markdown table**.
-
-Here is the *horizontal* layout you want:
-
 ---
 
 ### Features
