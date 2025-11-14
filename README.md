@@ -1,6 +1,33 @@
+<div align="center" ><img height="200px" src="logo_lawagent.png"></div>
+<div align="center">
+  
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.121.2-009688?logo=fastapi)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-0.38.0-4B8BBE?logo=python)
+![LangChain](https://img.shields.io/badge/LangChain-1.0.5-orange)
+![LangGraph](https://img.shields.io/badge/LangGraph-1.0.3-purple)
+![LangSmith](https://img.shields.io/badge/LangSmith-0.4.42-blueviolet)
+![OpenAI](https://img.shields.io/badge/OpenAI%20API-2.8.0-black?logo=openai)
+
+![Pinecone](https://img.shields.io/badge/Pinecone-VectorDB-0A2239?logo=pinecone)
+![NumPy](https://img.shields.io/badge/NumPy-2.3.4-%23013243?logo=numpy)
+![Semantic Scholar](https://img.shields.io/badge/SemanticScholar-API-yellow)
+![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup4-WebScraping-brightgreen)
+
+![PyMuPDF](https://img.shields.io/badge/PyMuPDF-PDF%20Parser-red)
+![PyPDF](https://img.shields.io/badge/PyPDF-Extractor-blue)
+
+![dotenv](https://img.shields.io/badge/Dotenv-Config-green)
+![AnyIO](https://img.shields.io/badge/AnyIO-Async-ff6600)
+![Requests](https://img.shields.io/badge/Requests-HTTP-black)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue?logo=docker)
+
+
+</div>
+
 # News & Law Agent
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=pqSOzzbYKuo">
+  <a href="https://www.youtube.com/watch?v=Aj6uJ9t6-YA">
     <img src="Overall.gif">
   </a>
   
@@ -81,3 +108,62 @@ This step represents a process of "curating the received result" using a "cosine
 Finally, the curated information is sent to the **Extractor**. This node's purpose is to "extract important and must-have information" from the prepared data. This is where the system gets down to the specifics, pulling out key facts, and conclusions.
 
 The output of the **Extractor** is a concise and highly relevant set of data that is then sent to the final **Synthesizer** (from the first diagram) to be combined with other information and formulated into the final user-facing answer.
+
+## Project Structure
+```
+LawAgent > 
+Backend
+├── __pycache__/                           
+│   └── app.cpython-312.pyc
+│
+├── app.py                                 # Main FastAPI entrypoint for the Law & News Agent
+├── Dockerfile                             # Docker build file for production deployment
+├── requirements.txt                       # Project dependencies for the entire agentic system
+├── lawAgent/                              # Core Agentic system (agents, nodes, routing, tools)
+│   ├── __init__.py
+│   ├── agent.py                            # Master Agent or Orchestrator entry point (Enseble point)
+│   │
+│   ├── Nodes/                              # All nodes used inside LangGraph workflow
+│   │   ├── __init__.py
+│   │   ├── example.py                      # Demo node (used for tests )
+│   │   ├── final.py                        # Final answer synthesis node
+│   │   ├── gaurd.py                        # Safety, moderation, rule-based filtering
+│   │   ├── gov.py                          # Government laws & legal news query node
+│   │   ├── media.py                        # Image-based query node
+│   │   ├── orchestrator.py                 # Orchestrator node (routing logic)
+│   │   ├── redirector.py                   # Redirect to follow up during any irrelvent query
+│   │   ├── researcher.py                   # Fetches Research article
+│   │   ├── retreiver.py                    # News/Articles retreiver
+│   │   ├── state.py                        # LangGraph state schema
+│   │   ├── summerizer.py                   # Summarization node for retrieved documents
+│   │   │
+│   │   ├── prompts/                        # Prompt templates for each node
+│   │   │   ├── conversation.txt
+│   │   │   ├── finalanswer.txt
+│   │   │   ├── gaurd.txt
+│   │   │   ├── gov_synthesizer.txt
+│   │   │   ├── image_synthesizer.txt
+│   │   │   ├── orchestrator.txt
+│   │   │   ├── redirection.txt
+│   │   │   ├── research_synthesizer.txt
+│   │   │   ├── retriver_synthesizer.txt
+│   │   │   └── summerizer.txt              
+│   │   │
+│   │   ├── tools/                          # External information tools (APIs, scrapers)
+│   │   │   ├── __init__.py
+│   │   │   ├── gov.py                      # GoDuckGo API fetch for official gov cites
+│   │   │   ├── images.py                   # GoDuckGo API fetch for media
+│   │   │   ├── mcp_client.py               # MCP (Model Context Protocol) tool client
+│   │   │   ├── news.py                     # GoDuckGo API fetch for News and articles
+│   │   │   └── sementicScholar.py          # Semantic Scholar API fetch for research articles
+│   │   │
+│   │   └── utils/                          # Utility functions shared across nodes
+│   │       ├── __init__.py
+│   │       └── utils.py                    # Common helpers, formatting, normalization
+│   │
+│   └── __pycache__/                        
+│
+└── Notebooks/                              # Experimentation, prototyping, and debugging
+
+```
+---
