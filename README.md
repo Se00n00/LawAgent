@@ -36,8 +36,23 @@
 <div align="center">
   Click to view Demo video on youtube
 </div>
+
+Got it — GitHub strips most CSS, so **flex won't render horizontally**.
+To guarantee a **true horizontal layout**, the correct approach is a **Markdown table**.
+
+Here is the *horizontal* layout you want:
+
+---
+
+### Features
+<div align="center">
   
-  
+| Autonomous Task Completion                                       | Card-wise Output Arrangement                           | Error & Guardrail Handling                            |
+| ---------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------- |
+| <img src="public/Gifs/Orchestration.gif"/> | <img src="public/Gifs/example.gif"/> | <img src="public/Gifs/error.gif" /> |
+
+</div>
+
 # Architecture
 
 ### Agentic Workflow
