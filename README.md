@@ -9,17 +9,7 @@
 ![LangSmith](https://img.shields.io/badge/LangSmith-0.4.42-blueviolet)
 ![OpenAI](https://img.shields.io/badge/OpenAI%20API-2.8.0-black?logo=openai)
 
-![Pinecone](https://img.shields.io/badge/Pinecone-VectorDB-0A2239?logo=pinecone)
-![NumPy](https://img.shields.io/badge/NumPy-2.3.4-%23013243?logo=numpy)
 ![Semantic Scholar](https://img.shields.io/badge/SemanticScholar-API-yellow)
-![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup4-WebScraping-brightgreen)
-
-![PyMuPDF](https://img.shields.io/badge/PyMuPDF-PDF%20Parser-red)
-![PyPDF](https://img.shields.io/badge/PyPDF-Extractor-blue)
-
-![dotenv](https://img.shields.io/badge/Dotenv-Config-green)
-![AnyIO](https://img.shields.io/badge/AnyIO-Async-ff6600)
-![Requests](https://img.shields.io/badge/Requests-HTTP-black)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue?logo=docker)
 
 
