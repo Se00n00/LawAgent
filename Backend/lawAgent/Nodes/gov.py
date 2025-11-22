@@ -82,6 +82,11 @@ async def gov_synthesizer(state: WorkerState):
 
 
 async def gov_extractor(state: WorkerState) -> WorkerState:
+    if "curated_results" not in state or not state["curated_results"]:
+        return {
+            **state,
+            "extracted_content": ['Nothing Here'],
+        }
     papers_text = "\n\n".join(
         [f"Title: {p['title']} Body: {p['snippet']}" for p in state["curated_results"]]
     )

@@ -130,4 +130,4 @@ builder.add_edge("summerizer", "pre_end")
 builder.add_edge("pre_end", END)
 
 memory = MemorySaver()
-agent = builder.compile(checkpointer=memory)
+agent = builder.compile()
